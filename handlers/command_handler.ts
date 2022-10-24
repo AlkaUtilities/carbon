@@ -1,9 +1,10 @@
 import { Client } from "discord.js";
 import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
-import config from "../config";
 import chalk from 'chalk';
-import { Logger, TryReadString } from "../utilities";
+import config from "../config";
+import { Logger } from "../utilities";
+import {} from '../typings/discord';
 
 /**
  * Loads commands in directory ".\/events\/\*\*\/\*.ts"
@@ -15,7 +16,7 @@ async function load_commands(client:Client) {
     Logger.Info("Loading commands")
     const table = new Table({
         head: ["Command Name", "Type", "Status"],
-        colWidths: [18, 8, 8],
+        colWidths: [26, 8, 8],
         chars: {
             'mid': '', 
             'left-mid': '', 
@@ -32,25 +33,33 @@ async function load_commands(client:Client) {
     }
 
     await client.commands.clear();
+    await client.subCommands.clear();
 
     let globalCommands: any[] = [];
     let devCommands: any[] = [];
 
     const files = await load_file("commands");
 
-    let validCommands = 0;
+    let validCommands   = 0;
     let invalidCommands = 0;
+    let subCommands     = 0;
 
     for (const file of files) {
         const command = require(file);
 
-        if (!('data' in command)) {
+        if (!('data' in command) && !('subCommand' in command)) {
             table.push([(file.split('/').pop() || 'unknown'),'', config.cli.status_bad]);
             invalidCommands++
             Logger.Warn(`Invalid command found: ${file}`);
             continue;
         }
 
+        if (command.subCommand) {
+            client.subCommands.set(command.subCommand, command);
+            table.push([command.subCommand, chalk.blue('SUB'), config.cli.status_ok]);
+            subCommands++;
+            continue;
+        }
         // NOTE: command.data.name is for slash commands using the SlashCommandBuilder()
         client.commands.set(command.data.name, command);
         validCommands++
@@ -61,7 +70,7 @@ async function load_commands(client:Client) {
             Logger.Warn(`[GLOBAL] Command set: ${command.data.name}`);
         } else {
             devCommands.push(command.data.toJSON());
-            table.push([ command.data.name, 'DEV', config.cli.status_ok ])
+            table.push([ command.data.name, chalk.yellow('DEV'), config.cli.status_ok ])
             Logger.Warn(`[DEV]    Command set: ${command.data.name}`);
         }
     }
@@ -69,7 +78,10 @@ async function load_commands(client:Client) {
     // NOTE: Uncomment the line under this comment to enable global slash command
     // client.application?.commands.set(globalCommands) // this is dangerous
 
-    devGuild.commands.set(devCommands);
+    devGuild.commands.set(devCommands).then((commands) => {
+        Logger.Info(`Updated ${commands.size} root commands (exlucdes subcommands)`);
+        console.log(`Updated ${commands.size} ${chalk.bold('root')} commands`);
+    });
 
     console.log(table.toString());
     Logger.Info(`Found ${table.length} commands. valid: ${validCommands}. invalid: ${invalidCommands}.`);

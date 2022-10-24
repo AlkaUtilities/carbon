@@ -1,37 +1,55 @@
 import dotenv from 'dotenv';
 import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
+import { connect } from 'mongoose';
+import chalk from 'chalk';
 import { load_events } from './handlers/event_handler';
 import { Logger } from './utilities';
+import config from './config';
+
+// Typings cause intellisense sucks
 import {} from './typings/discord';
+import {} from './typings/enviroment';
 
-dotenv.config();
+Logger.Info("Configuring enviroment variables");
+dotenv.config({ path: './.env.development.local' });
+Logger.Info("Configured enviroment variables");
 
-const { Guilds, GuildMembers, GuildMessages } = GatewayIntentBits;
+Logger.Info("Configuring client");
+const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } = GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
 
-Logger.Info("Configuring client")
-// NOTE All intents code: 131071
-// using all intents is NOT a good practice.
-// However it can be annoying trying to fix an error caused by not having the right intent
-// because it doesnt tell you that you dont have the right intent to do something 
+// NOTE Dont use all intent
+// It could slow the bot down
+// However if you're debugging and wondering if invalid intent
+// is the problem to your problem:
+// All intents code is 131071
+
 const client = new Client({
     // intents: 131071, // all intents
-    intents:  [ Guilds, GuildMembers, GuildMessages ],
+    intents:  [ Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages ],
     partials: [ User, Message, GuildMember, ThreadMember ]
 });
-Logger.Info("Configured client")
+Logger.Info("Configured client");
 
-Logger.Info("Setting up collections")
+Logger.Info("Configuring collections");
+// Collections (Discord.Collection)
+client.events       = new Collection();
+client.commands     = new Collection();
+client.subCommands  = new Collection();
 
-client.events = new Collection();
-client.commands = new Collection();
-
-Logger.Info("Collections is ready")
+// Configs (objects)
+client.config       = config;
+client.icon         = config.icons;
+Logger.Info("Configured collections");
 
 load_events(client);
 
-const clock = setInterval(() => {
-    Logger.Info("this is a clock");
-}, 500);
-
+Logger.Info("Logging in");
 client.login(process.env.TOKEN);
+
+// Logger.Info("Connecting to database")
+// console.log(chalk.green("[mongoose] Connecting to database..."));
+// connect(process.env.MONGODB_SRV, () => {
+//     Logger.Info("Connected to MongoDB")
+//     console.log(chalk.green("[mongoose] Connected to database."))
+// });

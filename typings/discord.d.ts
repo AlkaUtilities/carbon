@@ -4,7 +4,10 @@ import { Collection } from 'discord.js';
 declare module 'discord.js' {
     interface Client {
         commands: Collection<unknown, any>
+        subCommands: Collection<unknown, any>
         events: Collection<unknown, any>
+        config: Object<unknown, any>,
+        icon: Object<unknown, any>
     }
 }
 

@@ -5,11 +5,13 @@
     "discord.js": "^14.6.0",
     "dotenv": "^16.0.3",
     "glob": "^8.0.3",
+    "mongoose": "^6.6.7",
     "typescript": "^4.8.4"
   },
   "devDependencies": {
     "@types/cli-table": "^0.3.1",
     "@types/glob": "^8.0.0",
+    "@types/ms": "^0.7.31",
     "@types/node": "^18.11.3"
   }
 }
