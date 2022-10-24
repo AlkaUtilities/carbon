@@ -3,6 +3,7 @@ import { Client, Collection, GatewayIntentBits, Partials } from 'discord.js';
 import { connect } from 'mongoose';
 import chalk from 'chalk';
 import { load_events } from './handlers/event_handler';
+import anticrash from './handlers/anticrash';
 import { Logger } from './utilities';
 import config from './config';
 
@@ -30,6 +31,10 @@ const client = new Client({
     partials: [ User, Message, GuildMember, ThreadMember ]
 });
 Logger.Info("Configured client");
+
+Logger.Info("Configuring anticrash");
+anticrash(client);
+Logger.Info("Configured anticrash");
 
 Logger.Info("Configuring collections");
 // Collections (Discord.Collection)

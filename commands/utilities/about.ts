@@ -11,7 +11,7 @@ module.exports = {
             .addUserOption((option) => option.setName('user').setDescription("The user to show information about.").setRequired(true))
             .addBooleanOption((option) => option.setName('ephemeral').setDescription("Reply as a message that only you can see or everyone can see (Default: true)"))
         )
-        .addSubcommand((option) => option // TODO Add functionality to  /about server
+        .addSubcommand((option) => option
             .setName('server')
             .setDescription("Shows information about this server.")
             .addBooleanOption((option) => option.setName('ephemeral').setDescription("Reply as a message that only you can see or everyone can see (Default: true)"))

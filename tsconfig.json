@@ -1,5 +1,4 @@
 {
-    // FIXME Get intellisense to work with definition typescript files (.d.ts)
     "files": [
         "./typings/discord.d.ts",
         "./typings/enviroment.d.ts"
