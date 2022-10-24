@@ -7,7 +7,7 @@ import anticrash from './handlers/anticrash';
 import { Logger } from './utilities';
 import config from './config';
 
-// Typings cause intellisense sucks
+// Import typings cause intellisense sucks
 import {} from './typings/discord';
 import {} from './typings/enviroment';
 
