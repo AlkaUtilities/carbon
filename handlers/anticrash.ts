@@ -1,8 +1,7 @@
 import { EmbedBuilder, WebhookClient, Client } from 'discord.js';
 import { inspect } from 'node:util';
-import config from '../config';
 
-const webhook = new WebhookClient({ url: config.anticrash_webhookURL });
+const webhook = new WebhookClient({ url: process.env.ANTICRASH_WEBHOOKURL });
 
 export default (client:Client) => {
     const embed = new EmbedBuilder()

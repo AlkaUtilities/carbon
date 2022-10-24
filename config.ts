@@ -17,8 +17,6 @@ export default {
     ],
 
     devGuildId: "998487239803813898",
-
-    anticrash_webhookURL: "https://discord.com/api/webhooks/1034096766737465385/DDtoFBJQtlp-7FLzqW7_DBjZ4y8TvdpB-duTaREqZMG-rgp-w7WJ3VeuKXfu5F2lGv5u",
     
     icons: {
         loading: "<a:loading:1013023173635211365>",
