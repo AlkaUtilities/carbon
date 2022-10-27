@@ -5,6 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('purge')
         .setDescription("Delete a specific amount of messages from a target/channel")
+        .setDMPermission(false)
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageMessages)
         .addSubcommand((option) => option
             .setName('all')

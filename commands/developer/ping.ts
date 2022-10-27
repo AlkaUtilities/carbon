@@ -3,7 +3,8 @@ import { SlashCommandBuilder, ChatInputCommandInteraction, Client } from "discor
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription("Replies with \"pong!\""),
+        .setDescription("Replies with \"pong!\"")
+        .setDMPermission(false),
     developer: true,
     execute(interaction:ChatInputCommandInteraction, client:Client) {
         interaction.reply({ content: "pong!", ephemeral:true });

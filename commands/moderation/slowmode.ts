@@ -1,4 +1,4 @@
-import { SlashCommandBuilder } from 'discord.js';
+import { SlashCommandBuilder, PermissionFlagsBits } from 'discord.js';
 import ms from 'ms';
 module.exports = {
     name: 'slowmode',
@@ -9,12 +9,14 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('slowmode')
         .setDescription("Slowmode")
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+        .setDMPermission(false)
         .addSubcommand((option) => option
             .setName('set')
             .setDescription("Sets the slowmode for current channel")
             .addStringOption(string => string
                 .setName("rate")
-                .setDescription("The rate at which the user can send a new message, e.g 5s, 1m, 30m, etc.")
+                .setDescription("The rate at which the user can send a new message (5s, 1m, 30m, etc.)")
                 .setRequired(true)
             )
             .addStringOption(string => string
@@ -23,7 +25,7 @@ module.exports = {
             )
             .addStringOption(string => string
                 .setName("duration")
-                .setDescription("Duration for the slowmode, e.g 5s, 1m, 30m, etc., after which it will disable itself.")
+                .setDescription("Duration for the slowmode (5s, 1m, 30m, etc.), after which it will disable itself.")
             )
         )
         .addSubcommand((option) => option
@@ -35,7 +37,7 @@ module.exports = {
             )
             .addStringOption(string => string
                 .setName("duration")
-                .setDescription("Duration for the disabled slowmode, e.g 5s, 1m, 30m, etc., after which it will enable itself.")
+                .setDescription("Duration for the disabled slowmode (5s, 1m, 30m, etc.), after which it will enable itself.")
             )
         )
     ,

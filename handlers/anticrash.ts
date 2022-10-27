@@ -1,9 +1,9 @@
+import chalk from 'chalk';
 import { EmbedBuilder, WebhookClient, Client } from 'discord.js';
 import { inspect } from 'node:util';
 
-const webhook = new WebhookClient({ url: process.env.ANTICRASH_WEBHOOKURL });
-
-export default (client:Client) => {
+export default (client:Client, URL:string) => {
+    const webhook = new WebhookClient({ url: URL });
     const embed = new EmbedBuilder()
         .setColor("Red");
 
@@ -77,4 +77,6 @@ export default (client:Client) => {
 
         return webhook.send({ embeds: [embed] });
     });
+
+    console.log(chalk.green(`[ANTICRASH] Initialized anticrash.`))
 };

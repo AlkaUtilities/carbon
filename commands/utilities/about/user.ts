@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, EmbedBuilder, Client } from 'discord.js';
+import UserBlacklist from '../../../schemas/userBlacklist';
 
 module.exports = {
     subCommand: "about.user",
@@ -7,12 +8,12 @@ module.exports = {
         const user = options.getUser('user', true);
         const member = interaction.guild?.members.cache.get(user.id)
         const ephemeral = options.getBoolean('ephemeral') === null ? true : options.getBoolean('ephemeral', true);
-        if (!member) return interaction.reply({ content: `Unable to find member.`, ephemeral: true });
+        if (!member) return interaction.followUp({ content: `Unable to find member.`, ephemeral: true });
 
-        let userData:any;
+        let UserBlacklistData:any;
 
         try {
-            // userData = await userModel.findOne({ userId: user.id });
+            UserBlacklistData = await UserBlacklist.findOne({ UserID: user.id });
         } catch (err) {
             console.log(err)
         }
@@ -81,28 +82,17 @@ module.exports = {
             }
         }
 
-
-
-        /**Check the userStauts
-         * undefined    : unregistered
-         * 0            : normal
-         * 1            : blacklisted
-         * 2            : whitelisted */
-
-        if (!userData) {
-            userf.status = `${client.icon.db.unregistered} Unknown`
-        } else if (userData?.status === 0) {
-            userf.status = `${client.icon.db.normal} Normal`
-        } else if (userData?.status === 1) {
+        if (!UserBlacklistData) {
+            userf.status = `${client.icon.db.normal} Not blacklisted`
+        } else {
             userf.status = `${client.icon.db.blacklisted} Blacklisted`
-        } else if (userData?.status === 2) {
-            userf.status = `${client.icon.db.normal} Whitelisted`
-        };
+        }
 
         /* Constructs the name prefix */
-        if (userData?.namePrefix) { // check if 'namePrefix' is declared in userData, if yes set userf.namePrefix to it.
-            userf.namePrefix = userf.namePrefix + ' ' + userData.namePrefix;
-        }; 
+        // if (userData?.namePrefix) { // check if 'namePrefix' is declared in userData, if yes set userf.namePrefix to it.
+        //     userf.namePrefix = userf.namePrefix + ' ' + userData.namePrefix;
+        // }; 
+
         if (client.config.developersId.includes(user.id) && !userf.namePrefix.includes(client.icon.bot.developer)) { // check if developersId includes user.id, if true check if it doesnt have the badge on the prefix already, if not add one.
             userf.namePrefix = userf.namePrefix + ' ' + client.icon.bot.developer;
         }; 
@@ -114,9 +104,9 @@ module.exports = {
         }; 
 
         /* Constructs the name suffix */
-        if (userData?.nameSuffix) {
-            userf.nameSuffix = userf.nameSuffix + userData.nameSuffix; 
-        };
+        // if (userData?.nameSuffix) {
+        //     userf.nameSuffix = userf.nameSuffix + userData.nameSuffix; 
+        // };
 
         const embed = new EmbedBuilder()
             .setTitle(`${userf.namePrefix.length ? `${userf.namePrefix} `:''}${user.username}#${user.discriminator}${userf.nameSuffix.length ? ` ${userf.nameSuffix}`:''}`)
@@ -128,35 +118,35 @@ module.exports = {
                 {
                     name: `User`,
                     value: 
-                        `Username : \`${user.username}\`\n` +
+                        `Username : ${user.username}\n` +
                         `Discriminator : ${user.discriminator}\n` +
-                        `ID : ${user.id}\n` +
-                        `Time Created: <t:${user.createdTimestamp?.toString().slice(0, 10)}:f> (${user.createdTimestamp?.toString().slice(0, 10)})\n` +
+                        `ID : \`${user.id}\`\n` +
+                        `Time Created : <t:${user.createdTimestamp?.toString().slice(0, 10)}:f>\n` +
                         `Avatar: [\[Display avatar\]](${user.displayAvatarURL()}) [\[Default avatar\]](${user.defaultAvatarURL})\n` +
-                        `Bot: ${user.bot ? `${client.icon.true} True`: `${client.icon.false} False`}\n` +
-                        `Flags: ${userf.flags.length ? userf.flags.map(flag => (formatting.flags as any)[flag] ? (formatting.flags as any)[flag] + " " : (formatting.flagsCode as any)[flag]).join(", ") : "None"}\n` +
-                        `Status: ${userf.presence ? (formatting.userStatus as any)[userf.presence.status] : `Unable to fetch user presence`}\n` +
-                        `Platform: ${userf.presence ? (userf.presence.clientStatus ? (userf.presence.clientStatus.desktop ? (formatting.platformIcon as any)['desktop'] : userf.presence.clientStatus.web ? (formatting.platformIcon as any)['web'] : userf.presence.clientStatus.mobile ? (formatting.platformIcon as any)['mobile'] : `Unknown`) : `Unable to fetch user platform`) : `Unable to fetch user presence` }\n` +
+                        `Bot : ${user.bot ? `${client.icon.true} True`: `${client.icon.false} False`}\n` +
+                        `Flags : ${userf.flags.length ? userf.flags.map(flag => (formatting.flags as any)[flag] ? (formatting.flags as any)[flag] + " " : (formatting.flagsCode as any)[flag]).join(", ") : "None"}\n` +
+                        `Status : ${userf.presence ? (formatting.userStatus as any)[userf.presence.status] : `Unable to fetch user presence`}\n` +
+                        `Platform : ${userf.presence ? (userf.presence.clientStatus ? (userf.presence.clientStatus.desktop ? (formatting.platformIcon as any)['desktop'] : userf.presence.clientStatus.web ? (formatting.platformIcon as any)['web'] : userf.presence.clientStatus.mobile ? (formatting.platformIcon as any)['mobile'] : `Unknown`) : `Unable to fetch user platform`) : `Unable to fetch user presence` }\n` +
                         `Activity : ${userf.presence ? (userf.presence?.activities.length ? userf.presence?.activities.map(activity => formatting.userActivityType[activity.type] + " " + activity.name + (activity.url ? ` [\[URL\]](${activity.url})` : "")).join(", ") : "None") : "Unable to fetch user presence"}`
                 },
                 {
                     name: 'Member',
                     value:
-                        `Nickname: ${member.nickname ? `\`${member.nickname}\`` : "Same as username"}\n` +
-                        `Server Join Date: <t:${member.joinedTimestamp?.toString().slice(0, 10)}:f> (${member.joinedTimestamp})\n` +
-                        `Server Owner: ${(user.id === interaction.guild?.ownerId) ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
-                        `Pending: ${member.pending ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
-                        `Managable: ${member.manageable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
-                        `Moderatable: ${member.moderatable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
-                        `Kickable: ${member.kickable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
-                        `Bannable: ${member.bannable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
-                        `Hoist role: ${userf.roles ? (member.roles.hoist ? `${member.roles.hoist} (#${member.roles.hoist.hexColor})` : "None") : "Member has no role" }\n` +
-                        `Roles (${userf.roles.length}) : \n${userf.roles.length ? userf.roles.join("\n") : "Member has no role"}`
+                        `Nickname : ${member.nickname ? `\`${member.nickname}\`` : "Same as username"}\n` +
+                        `Server Join Date : <t:${member.joinedTimestamp?.toString().slice(0, 10)}:f>\n` +
+                        `Server Owner :  ${(user.id === interaction.guild?.ownerId) ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
+                        `Pending : ${member.pending ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
+                        `Managable : ${member.manageable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
+                        `Moderatable : ${member.moderatable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
+                        `Kickable : ${member.kickable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
+                        `Bannable : ${member.bannable ? `${client.icon.true} True` : `${client.icon.false} False`}\n` +
+                        `Hoist role : ${userf.roles ? (member.roles.hoist ? `${member.roles.hoist} (#${member.roles.hoist.hexColor})` : "None") : "Member has no role" }\n` +
+                        `Roles (${userf.roles.length}) : \n${userf.roles.length ? userf.roles.join("\n") : "None"}`
                 },
                 {
                     name: 'Alka Utilities',
                     value:
-                        `Database: ${userData ? `${client.icon.true} Registered` : `${client.icon.false} Not registered`}\n` +
+                        // `Database: ${userData ? `${client.icon.true} Registered` : `${client.icon.false} Not registered`}\n` +
                         `Status: ${userf.status}`
                 }
             );

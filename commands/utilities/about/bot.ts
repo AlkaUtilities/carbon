@@ -30,15 +30,16 @@ module.exports = {
                 {
                     name: 'Overview',
                     value:
-                        `Developer(s) : ${developers.map((dev) => `<@${dev}> `)}\n` +
+                        `${developers.length > 1 ? "Developers": "Developer"} : ${developers.map((dev) => `<@${dev}> `)}\n` +
                         `Language : <:typescript:1018125528789680139>\n` +
                         `Links : [\[Avatar\]](${client.user?.displayAvatarURL()}) [\[Invite\]](https://discord.com/api/oauth2/authorize?client_id=${client.user?.id}&permissions=8&scope=bot%20applications.commands)\n`
                 },
                 {
                     name: 'Details',
                     value:
-                        `Uptime: ${client?.uptime ? ms(client.uptime) : `There was an error trying to get the uptime of the bot.`}\n` +
-                        `Servers: ${client.guilds.cache.size} server(s)\n`
+                        `Uptime : ${client?.uptime ? ms(client.uptime) : `There was an error trying to get the uptime of the bot.`}\n` +
+                        `Servers : ${client.guilds.cache.size} ${client.guilds.cache.size > 1 ? 'servers' : 'server'}\n` +
+                        `Users : ${client.users.cache.size} ${client.users.cache.size > 1 ? 'users' : 'user'}\n`
                 },
                 // {
                 //     name: 'Dependencies',
@@ -47,18 +48,15 @@ module.exports = {
                 {
                     name: 'Credits',
                     value:
-                        `Database: [MongoDB](https://www.mongodb.com/)\n` +
-                        `Hosting: [Replit](https://replit.com/), [Freshping](https://app.freshping.io/)\n` +
-                        `Status page: [Instatus](https://instatus.com/)\n` +
-                        `Icons: [Icons8](https://icons8.com/), [Emoji.gg](https://emoji.gg/)\n` +
-                        `Special thanks to: [Lyxcode](https://www.youtube.com/c/Lyxcode)`
+                        `Database : [MongoDB](https://www.mongodb.com/)\n` +
+                        `Icons : [Icons8](https://icons8.com/), [Emoji.gg](https://emoji.gg/)\n`
                 }
             )
 
         const dependenciesEmbed = new EmbedBuilder()
                 .setTitle(`Dependencies (${dependencies.length})`)
                 .setFooter({ text: interaction.user.tag, iconURL: interaction.user.displayAvatarURL() })
-                .setThumbnail('https://avatars.githubusercontent.com/u/6078720')
+                .setThumbnail('https://github.com/npm/logos/raw/master/npm%20square/n-64.png')
                 .setTimestamp()
                 .setColor('#0390fc')
                 .setDescription(`${dependencies.map((key) => `[${key.name}](${key.url})`).join(', ')}`)

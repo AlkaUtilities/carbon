@@ -31,7 +31,7 @@ export default {
         db: {
             "unregistered": "<:undefined_shield:1013060055949651969>",
             "normal": "<:checked_shield:1013060053688913991>",
-            "blacklisted": "<:checked_shield:1013060053688913991>",
+            "blacklisted": "<:denied_shield:1034339946938503231>",
             "whitelisted": "<:checked_shield:1013060053688913991>",
             "warning": "<:warning_shield:1013060051268800602>"
         },
@@ -44,7 +44,7 @@ export default {
     
         alka: {
             "bot": "<:alka_bot:1010540470109225061>",
-            "owner": ":alka_owner:"
+            "owner": "<:alka_owner:1010540473988943912>"
         }
     },
 

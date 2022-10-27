@@ -5,6 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('about')
         .setDescription("Shows information about something.")
+        .setDMPermission(false)
         .addSubcommand((option) => option
             .setName('user')
             .setDescription("Shows information about mentioned user.")

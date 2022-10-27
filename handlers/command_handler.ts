@@ -3,7 +3,7 @@ import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from 'chalk';
 import config from "../config";
-import { Logger } from "../utilities";
+// import { Logger } from "../utilities";
 import {} from '../typings/discord';
 
 /**
@@ -13,7 +13,7 @@ import {} from '../typings/discord';
  * @param client 
  */
 async function load_commands(client:Client) {
-    Logger.Info("Loading commands")
+    // Logger.Info("Loading commands")
     const table = new Table({
         head: ["Command Name", "Type", "Status"],
         colWidths: [26, 8, 8],
@@ -28,7 +28,7 @@ async function load_commands(client:Client) {
     const devGuild = client.guilds.cache.get(config.devGuildId);
 
     if (!devGuild) {
-        Logger.Error(`Developer guild not found. Guild id ${config.devGuildId}`);
+        // Logger.Error(`Developer guild not found. Guild id ${config.devGuildId}`);
         return;
     }
 
@@ -44,18 +44,21 @@ async function load_commands(client:Client) {
     let invalidCommands = 0;
     let subCommands     = 0;
 
+    let i = 0;
     for (const file of files) {
+        i++
+        process.stdout.write(chalk.green(`[HANDLER] Loading command files: `) + chalk.yellow(`${i}/${files.length}`) + '\r');
         const command = require(file);
 
         if (command.ignore) {
-            Logger.Info(`Ignored ${file} because it had an 'ignore' property with value true`)
+            // Logger.Info(`Ignored ${file} because it had an 'ignore' property with value true`)
             continue;
         }
 
         if (!('data' in command) && !('subCommand' in command)) {
             table.push([(chalk.red(file.split('/').pop() || 'unknown')),'', config.cli.status_bad]);
             invalidCommands++
-            Logger.Warn(`Invalid command found: ${file}`);
+            // Logger.Warn(`Invalid command found: ${file}`);
             continue;
         }
 
@@ -72,24 +75,25 @@ async function load_commands(client:Client) {
         if (command.global) {
             globalCommands.push(command.data.toJSON());
             table.push([ command.data.name, chalk.blue('GLOBAL'), config.cli.status_ok ])
-            Logger.Info(`[GLOBAL] Command set: ${command.data.name}`);
+            // Logger.Info(`[GLOBAL] Command set: ${command.data.name}`);
         } else {
             devCommands.push(command.data.toJSON());
             table.push([ command.data.name, chalk.yellow('DEV'), config.cli.status_ok ])
-            Logger.Info(`[DEV]    Command set: ${command.data.name}`);
+            // Logger.Info(`[DEV]    Command set: ${command.data.name}`);
         }
     }
 
-    // NOTE: Uncomment the line under this comment to enable global slash command
-    // client.application?.commands.set(globalCommands) // this is dangerous
+    console.log(table.toString());
 
-    devGuild.commands.set(devCommands).then((commands) => {
-        Logger.Info(`Updated ${commands.size} root commands (excludes subcommands)`);
+    // NOTE: Uncomment the line under this comment to enable global slash command
+    // await client.application?.commands.set(globalCommands) // this is dangerous
+
+    await devGuild.commands.set(devCommands).then((commands) => {
+        // Logger.Info(`Updated ${commands.size} root commands (excludes subcommands)`);
         console.log(`Updated ${commands.size} ${chalk.bold('root')} commands`);
     });
 
-    console.log(table.toString());
-    Logger.Info(`Found ${table.length} commands. valid: ${validCommands}. invalid: ${invalidCommands}.`);
+    // Logger.Info(`Found ${table.length} commands. valid: ${validCommands}. invalid: ${invalidCommands}.`);
 }
 
 export { load_commands };
