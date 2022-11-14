@@ -27,6 +27,7 @@ module.exports = {
                 .setDescription("Reason for banning the user")
         ),
     initialReply: true,
+    global: true,
     async execute(interaction: ChatInputCommandInteraction) {
         const target = interaction.options.getUser("user", true);
         const targetMember = interaction.guild?.members.cache.get(target.id);

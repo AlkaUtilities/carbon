@@ -30,6 +30,7 @@ module.exports = {
         )
         .setDMPermission(false),
     initialReply: true,
+    global: true,
     async execute(interaction: ChatInputCommandInteraction) {
         // no need to check if the user id passed in was a valid id
         // thanks to discord

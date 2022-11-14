@@ -28,6 +28,7 @@ module.exports = {
                 .setMaxLength(512)
         ),
     initialReply: true,
+    global: true,
     async execute(interaction: ChatInputCommandInteraction) {
         const target = interaction.options.getUser("user");
         if (target === null)
@@ -89,14 +90,12 @@ module.exports = {
                     text: `Moderator: ${interaction.user.tag}`,
                     iconURL: interaction.user.displayAvatarURL(),
                 });
-            await targetMember
-                .send({ embeds: [embed] })
-                .catch((err) =>
-                    interaction.followUp({
-                        content:
-                            "Unable to send ban message to user's direct message",
-                    })
-                );
+            await targetMember.send({ embeds: [embed] }).catch((err) =>
+                interaction.followUp({
+                    content:
+                        "Unable to send ban message to user's direct message",
+                })
+            );
         } catch (err) {
             if (err)
                 interaction.followUp({

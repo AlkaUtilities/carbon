@@ -38,6 +38,7 @@ module.exports = {
                 .setDescription("Reason for timeout-ing the user")
                 .setMaxLength(512)
         ),
+    global: true,
     execute(interaction: ChatInputCommandInteraction, client: Client) {
         const { options, member } = interaction;
         const target = options.getMember("user") as GuildMember;

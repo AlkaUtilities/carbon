@@ -6,6 +6,7 @@ module.exports = {
     hasESub: true, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
     developer: false, // is command developer only?
+    global: true,
     data: new SlashCommandBuilder()
         .setName("slowmode")
         .setDescription("Slowmode")
