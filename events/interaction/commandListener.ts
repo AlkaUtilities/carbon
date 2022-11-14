@@ -10,10 +10,10 @@ module.exports = {
         if (!interaction.isChatInputCommand) return;
 
         const command = client.commands.get(interaction.commandName);
-        const UserData = await UserBlacklist.findOne({
+        const UserBlacklistData = await UserBlacklist.findOne({
             UserID: interaction.user.id,
         }).catch((err) => {});
-        const GuildData = await GuildBlacklist.findOne({
+        const GuildBlacklistData = await GuildBlacklist.findOne({
             GuildID: interaction.guildId,
         }).catch((err) => {});
 
@@ -32,19 +32,21 @@ module.exports = {
             });
 
         // Blacklist checks
-        if (GuildData)
+        if (GuildBlacklistData)
             return await interaction.reply({
-                content: `This server blacklisted from using this bot on <t:${GuildData.Time.toString().slice(
+                content: `This server has been blacklisted from using this bot on <t:${GuildBlacklistData.Time.toString().slice(
                     0,
                     10
-                )}:f>\nReason: ${GuildData.Reason}`,
+                )}:f>\nReason: ${GuildBlacklistData.Reason}`,
+                ephemeral: true,
             });
-        if (UserData)
+        if (UserBlacklistData)
             return await interaction.reply({
-                content: `You have been blacklisted from using this bot on <t:${UserData.Time.toString().slice(
+                content: `You have been blacklisted from using this bot on <t:${UserBlacklistData.Time.toString().slice(
                     0,
                     10
-                )}:f>\nReason: ${UserData.Reason}`,
+                )}:f>\nReason: ${UserBlacklistData.Reason}`,
+                ephemeral: true,
             });
 
         if (command.initialReply)

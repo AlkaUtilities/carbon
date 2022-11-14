@@ -35,7 +35,7 @@ module.exports = {
                         });
                         newData.save();
                         interaction.followUp({
-                            content: `Blacklisted user with id \`${id}\`\nReason: ${reason}\nTIme: ${time}\nDocument ID: \`${newData._id}\``,
+                            content: `Blacklisted user with id \`${id}\`\nReason: ${reason}\nTime: ${time}\nDocument ID: \`${newData._id}\``,
                         });
                     } catch (err) {
                         return interaction.followUp({

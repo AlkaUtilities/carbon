@@ -101,10 +101,13 @@ module.exports = {
             },
         };
 
+        // Check if user is in blacklist
         if (!UserBlacklistData) {
-            userf.status = `${client.icon.db.normal} Not blacklisted`;
+            // userf.status = `${client.icon.db.normal} Not blacklisted`;
+            userf.status = `${client.icon.db.normal} Not found`;
         } else {
-            userf.status = `${client.icon.db.blacklisted} Blacklisted`;
+            // userf.status = `${client.icon.db.blacklisted} Blacklisted`;
+            userf.status = `${client.icon.db.blacklisted} Found`;
         }
 
         /* Constructs the name prefix */
@@ -295,7 +298,7 @@ module.exports = {
                     name: "Alka Utilities",
                     value:
                         // `Database: ${userData ? `${client.icon.true} Registered` : `${client.icon.false} Not registered`}\n` +
-                        `Status: ${userf.status}`,
+                        `Blacklist: ${userf.status}`,
                 }
             );
 
