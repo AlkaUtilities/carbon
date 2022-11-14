@@ -9,7 +9,8 @@ module.exports = {
         .setName("ping")
         .setDescription('Replies with "pong!"')
         .setDMPermission(false),
-    developer: true,
+    developer: false,
+    global: true,
     execute(interaction: ChatInputCommandInteraction, client: Client) {
         interaction.reply({ content: "pong!", ephemeral: true });
     },

@@ -1,10 +1,19 @@
-import { ChatInputCommandInteraction, EmbedBuilder, Client } from "discord.js";
+import {
+    ChatInputCommandInteraction,
+    EmbedBuilder,
+    Client,
+    version,
+} from "discord.js";
+import { connection } from "mongoose";
+import os from "node:os";
 import ms from "ms";
 
 interface dependency {
     name: string;
     url: string;
 }
+
+const status = ["Disconnected", "Connected", "Connecting", "Disconnecting"];
 
 module.exports = {
     subCommand: "about.bot",
@@ -45,7 +54,7 @@ module.exports = {
             .setColor("#0390fc")
             .setFields(
                 {
-                    name: "Overview",
+                    name: "General",
                     value:
                         `${
                             developers.length > 1 ? "Developers" : "Developer"
@@ -53,35 +62,45 @@ module.exports = {
                         `Language : <:typescript:1018125528789680139>\n` +
                         `Links : [\[Avatar\]](${client.user?.displayAvatarURL()}) [\[Invite\]](https://discord.com/api/oauth2/authorize?client_id=${
                             client.user?.id
-                        }&permissions=8&scope=bot%20applications.commands)\n`,
+                        }&permissions=8&scope=bot%20applications.commands) [\[GitHub\]](https://github.com/alkautilities/nadc)\n` +
+                        `Database Status : ${status[connection.readyState]}`,
                 },
                 {
-                    name: "Details",
+                    name: "System",
                     value:
                         `Uptime : ${
                             client?.uptime
                                 ? ms(client.uptime)
                                 : `There was an error trying to get the uptime of the bot.`
                         }\n` +
-                        `Servers : ${client.guilds.cache.size} ${
-                            client.guilds.cache.size > 1 ? "servers" : "server"
-                        }\n` +
-                        `Users : ${client.users.cache.size} ${
-                            client.users.cache.size > 1 ? "users" : "user"
-                        }\n`,
+                        `Node.js Version : ${process.version.slice(
+                            1 /* hides the 'v' in 'v1.2.3' */
+                        )}\n` +
+                        `Discord.js Version : ${version}\n` +
+                        `Memory Usage : ${Math.round(
+                            process.memoryUsage().heapUsed / (1024 * 1024)
+                        )} MB\n`,
                 },
+                {
+                    name: "Statistics",
+                    value:
+                        `Servers : ${client.guilds.cache.size}\n` +
+                        `Users : ${client.users.cache.size}\n` +
+                        `Commands : ${client.commands.size}\n`,
+                }
                 // {
                 //     name: 'Dependencies',
                 //     value: `${dependencies.map((key) => `[${key.name}](${key.url})`).join(', ')}`
                 // },
-                {
-                    name: "Credits",
-                    value:
-                        `Database : [MongoDB](https://www.mongodb.com/)\n` +
-                        `Icons : [Icons8](https://icons8.com/), [Emoji.gg](https://emoji.gg/)\n`,
-                }
+                // {
+                //     name: "Other 3rd parties",
+                //     value:
+                //         `Database : [MongoDB](https://www.mongodb.com/)\n` +
+                //         `Icons : [Icons8](https://icons8.com/), [Emoji.gg](https://emoji.gg/)\n`,
+                // }
             );
 
+        // FIXME Will cause error if dependencies exceeds maximum description length
         const dependenciesEmbed = new EmbedBuilder()
             .setTitle(`Dependencies (${dependencies.length})`)
             .setFooter({

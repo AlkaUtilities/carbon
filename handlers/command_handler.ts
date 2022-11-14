@@ -106,11 +106,20 @@ async function load_commands(client: Client) {
     console.log(table.toString());
 
     // NOTE: Uncomment the line under this comment to enable global slash command
-    // await client.application?.commands.set(globalCommands) // this is dangerous
+    await client.application?.commands.set(globalCommands).then((commands) => {
+        console.log(
+            `Updated ${commands.size} ${chalk.bold(
+                chalk.blue("global")
+            )} commands`
+        );
+    }); // this is dangerous
 
     await devGuild.commands.set(devCommands).then((commands) => {
-        // Logger.Info(`Updated ${commands.size} root commands (excludes subcommands)`);
-        console.log(`Updated ${commands.size} ${chalk.bold("root")} commands`);
+        console.log(
+            `Updated ${commands.size} ${chalk.bold(
+                chalk.yellow("guild")
+            )} commands`
+        );
     });
 
     // Logger.Info(`Found ${table.length} commands. valid: ${validCommands}. invalid: ${invalidCommands}.`);

@@ -40,6 +40,8 @@ module.exports = {
             presence: member.presence,
         };
 
+        console.log(userf.flags);
+
         const formatting = {
             flagsCode: {
                 BugHunterLevel1: "Bug Hunter Level 1",
@@ -63,7 +65,7 @@ module.exports = {
                 BugHunterLevel1: "<:bughunter_lvl1:1010556670281265152>",
                 BugHunterLevel2: "<:bughunter_lvl2:1010556662232383548>",
                 CertifiedModerator:
-                    " <:certified_moderator:1010556793304395847>",
+                    "<:certified_moderator:1010556793304395847>",
                 HypeSquadOnlineHouse1:
                     "<:hypesquad_bravery:1010556438063616142>",
                 HypeSquadOnlineHouse2:
@@ -252,6 +254,21 @@ module.exports = {
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
                         }\n` +
+                        `Hoist role : ${
+                            userf.roles
+                                ? member.roles.hoist
+                                    ? `${member.roles.hoist} (#${member.roles.hoist.hexColor})`
+                                    : "None"
+                                : "Member has no role"
+                        }\n` +
+                        `Roles (${userf.roles.length}) : \n${
+                            userf.roles.length ? userf.roles.join("\n") : "None"
+                        }`,
+                    inline: true,
+                },
+                {
+                    name: "Moderation",
+                    value:
                         `Managable : ${
                             member.manageable
                                 ? `${client.icon.true} True`
@@ -271,17 +288,8 @@ module.exports = {
                             member.bannable
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Hoist role : ${
-                            userf.roles
-                                ? member.roles.hoist
-                                    ? `${member.roles.hoist} (#${member.roles.hoist.hexColor})`
-                                    : "None"
-                                : "Member has no role"
-                        }\n` +
-                        `Roles (${userf.roles.length}) : \n${
-                            userf.roles.length ? userf.roles.join("\n") : "None"
-                        }`,
+                        }\n`,
+                    inline: true,
                 },
                 {
                     name: "Alka Utilities",
