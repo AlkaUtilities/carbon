@@ -4,6 +4,7 @@ import {
     Client,
 } from "discord.js";
 import UserLeveling from "../../schemas/userLeveling";
+import GuildLevelingSetting from "../../schemas/guildLevelingSetting";
 
 module.exports = {
     name: "level",
@@ -33,8 +34,19 @@ module.exports = {
                 )
         ),
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
-        await interaction.deferReply();
         const { options, guild, guildId } = interaction;
+        await interaction.deferReply();
+
+        const GuildLevelingSettingData = await GuildLevelingSetting.findOne({
+            GuildID: guildId,
+        });
+
+        if (!GuildLevelingSettingData || !GuildLevelingSettingData.Enabled) {
+            return interaction.editReply({
+                content: `**Error**: Leveling is not enabled in this server. Enable it by using \`/leveling toggle\``,
+            });
+        }
+
         switch (options.getSubcommand()) {
             case "set": {
                 const user = options.getUser("member", true);

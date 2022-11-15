@@ -3,6 +3,7 @@ import {
     ChatInputCommandInteraction,
     Client,
 } from "discord.js";
+
 module.exports = {
     name: "xp",
     disabled: false, // is the command disabled?

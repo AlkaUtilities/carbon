@@ -57,8 +57,8 @@ export default {
     },
 
     userLeveling: {
-        min: 2,
-        max: 10,
+        min: 15,
+        max: 25,
         required: 100, // levelupGoal: level * required
     },
 };

@@ -7,7 +7,7 @@ import {
 import { Document, Types } from "mongoose";
 import ProgressBar from "string-progressbar";
 import UserLeveling from "../../schemas/userLeveling";
-import GuildSettings from "../../schemas/guildSettings";
+import GuildLevelingSetting from "../../schemas/guildLevelingSetting";
 
 function getRankPosition(
     LeaderboardData: (Document<
@@ -111,9 +111,15 @@ module.exports = {
             return b.Level * 100 + b.XP - (a.Level * 100 + a.XP);
         });
 
-        const GuildSettingsData = await GuildSettings.findOne({
+        const GuildLevelingSettingData = await GuildLevelingSetting.findOne({
             GuildID: interaction.guildId,
         });
+
+        if (!GuildLevelingSettingData || !GuildLevelingSettingData.Enabled) {
+            return interaction.editReply({
+                content: `**Error**: Leveling is not enabled in this server. Enable it by using \`/leveling toggle\``,
+            });
+        }
 
         if (!UserLevelingData)
             return interaction.editReply({
@@ -151,8 +157,10 @@ module.exports = {
                         (UserLevelingData.XP / levelGoal) *
                         100
                     ).toFixed(1)}%)\n` +
-                    `**Server XP Rate** : ${GuildSettingsData?.LevelingXPMultiplier}x\n` +
-                    `\n${progressBar}`
+                    `**Server XP Rate** : ${GuildLevelingSettingData?.XPMultiplier}x\n` +
+                    `**Server XP Increment Interval** : ${GuildLevelingSettingData?.XPIncrementInterval} seconds\n` +
+                    `\n${progressBar}\n`
+                // `You can get ${client.config.userLeveling.min} to ${client.config.userLeveling.max} XP **every ${GuildSettingsData?.LevelingXPIncrementInterval} seconds**. This setting can be changed using the settings command\n`
             )
             // .setTimestamp()
             .setColor("#4cbd49");

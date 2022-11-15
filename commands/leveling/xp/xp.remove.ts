@@ -1,11 +1,21 @@
 import { ChatInputCommandInteraction, Client } from "discord.js";
 import UserLeveling from "../../../schemas/userLeveling";
+import GuildLevelingSetting from "../../../schemas/guildLevelingSetting";
 
 module.exports = {
     subCommand: "xp.remove",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         await interaction.deferReply();
         const { options, guild, guildId } = interaction;
+
+        const GuildLevelingSettingData = await GuildLevelingSetting.findOne({
+            GuildID: guildId,
+        });
+        if (!GuildLevelingSettingData || !GuildLevelingSettingData.Enabled) {
+            return interaction.editReply({
+                content: `**Error**: Leveling is not enabled in this server. Enable it by using \`/leveling toggle\``,
+            });
+        }
 
         const user = options.getUser("member", true);
         if (user.bot)
