@@ -35,7 +35,6 @@ module.exports = {
                 GuildID: message.guildId,
                 Enabled: false,
             });
-            GuildLevelingSettingData.save();
             return;
         } else if (GuildLevelingSettingData.Enabled !== true) return;
 
@@ -53,7 +52,6 @@ module.exports = {
                 XP: XPIncreaseAmount,
                 LastXPInc: update,
             });
-            UserLevelingData.save();
             return;
         }
 

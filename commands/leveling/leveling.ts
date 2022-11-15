@@ -74,7 +74,6 @@ module.exports = {
                                 GuildID: guildId,
                                 Enabled: toggle !== null ? toggle : true,
                             });
-                        GuildLevelingSettingData.save();
                         return interaction.editReply({
                             content: "**Enabled leveling system**",
                         });

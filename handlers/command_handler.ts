@@ -3,7 +3,6 @@ import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
 import config from "../config";
-// import { Logger } from "../utilities";
 import {} from "../typings/discord";
 
 /**
@@ -13,7 +12,6 @@ import {} from "../typings/discord";
  * @param client
  */
 async function load_commands(client: Client) {
-    // Logger.Info("Loading commands")
     const table = new Table({
         head: ["Command Name", "Type", "Status"],
         colWidths: [26, 8, 8],
@@ -28,7 +26,6 @@ async function load_commands(client: Client) {
     const devGuild = client.guilds.cache.get(config.devGuildId);
 
     if (!devGuild) {
-        // Logger.Error(`Developer guild not found. Guild id ${config.devGuildId}`);
         return;
     }
 
@@ -55,7 +52,6 @@ async function load_commands(client: Client) {
         const command = require(file);
 
         if (command.ignore) {
-            // Logger.Info(`Ignored ${file} because it had an 'ignore' property with value true`)
             continue;
         }
 
@@ -66,7 +62,6 @@ async function load_commands(client: Client) {
                 config.cli.status_bad,
             ]);
             invalidCommands++;
-            // Logger.Warn(`Invalid command found: ${file}`);
             continue;
         }
 
@@ -91,7 +86,6 @@ async function load_commands(client: Client) {
                 chalk.blue("GLOBAL"),
                 config.cli.status_ok,
             ]);
-            // Logger.Info(`[GLOBAL] Command set: ${command.data.name}`);
         } else {
             devCommands.push(command.data.toJSON());
             table.push([
@@ -99,7 +93,6 @@ async function load_commands(client: Client) {
                 chalk.yellow("DEV"),
                 config.cli.status_ok,
             ]);
-            // Logger.Info(`[DEV]    Command set: ${command.data.name}`);
         }
     }
 
@@ -121,8 +114,6 @@ async function load_commands(client: Client) {
             )} commands`
         );
     });
-
-    // Logger.Info(`Found ${table.length} commands. valid: ${validCommands}. invalid: ${invalidCommands}.`);
 }
 
 export { load_commands };

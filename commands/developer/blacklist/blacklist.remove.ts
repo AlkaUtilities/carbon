@@ -20,7 +20,7 @@ module.exports = {
                             return interaction.followUp({
                                 content: `User with id ${id} is not blacklisted.`,
                             });
-                        await Data.delete();
+                        await Data.deleteOne();
                         interaction.followUp({
                             content: `Unblacklised user with id ${id}`,
                         });
@@ -40,7 +40,7 @@ module.exports = {
                             return interaction.followUp({
                                 content: `User with id ${id} is not blacklisted.`,
                             });
-                        await Data.delete();
+                        await Data.deleteOne();
                         interaction.followUp({
                             content: `Unblacklised user with id ${id}`,
                         });

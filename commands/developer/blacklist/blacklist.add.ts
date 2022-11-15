@@ -28,12 +28,11 @@ module.exports = {
                                 content: `User with id ${id} is already blacklisted. Document ID: \`${Data._id}\``,
                             });
                         const time = Date.now();
-                        let newData = new UserBlacklist({
+                        let newData = await UserBlacklist.create({
                             UserID: id,
                             Reason: reason,
                             Time: time,
                         });
-                        newData.save();
                         interaction.followUp({
                             content: `Blacklisted user with id \`${id}\`\nReason: ${reason}\nTime: ${time}\nDocument ID: \`${newData._id}\``,
                         });
@@ -56,12 +55,11 @@ module.exports = {
                                 content: `Guild with id ${id} is already blacklisted. Document ID: \`${Data._id}\``,
                             });
                         const time = Date.now();
-                        let newData = new GuildBlacklist({
+                        let newData = await GuildBlacklist.create({
                             GuildID: id,
                             Reason: reason,
                             Time: time,
                         });
-                        newData.save();
                         interaction.followUp({
                             content: `Blacklisted guild with id \`${id}\`\nReason: ${reason}\nTIme: ${time}\nDocument ID: \`${newData._id}\``,
                         });

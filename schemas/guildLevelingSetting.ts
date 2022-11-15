@@ -11,5 +11,6 @@ export default model(
             required: true,
             default: 60,
         }, // Delay between xp increase (in seconds)
+        LevelupAnnouncementChannel: { type: Number, required: false },
     })
 );

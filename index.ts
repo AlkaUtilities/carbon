@@ -4,18 +4,12 @@ import { connect } from "mongoose";
 import chalk from "chalk";
 import { load_events } from "./handlers/event_handler";
 import anticrash from "./handlers/anticrash";
-// import { Logger } from './utilities';
 import config from "./config";
 
-// Import typings cause intellisense sucks
 import {} from "./typings/discord";
 import {} from "./typings/enviroment";
 
-// Logger.Info("Configuring enviroment variables");
 dotenv.config({ path: __dirname + "/.env" });
-// Logger.Info("Configured enviroment variables");
-
-// Logger.Info("Configuring client");
 const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } =
     GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
@@ -36,13 +30,7 @@ const client = new Client({
     ],
     partials: [User, Message, GuildMember, ThreadMember],
 });
-// Logger.Info("Configured client");
-
-// Logger.Info("Configuring anticrash");
 anticrash(client, process.env.ANTICRASH_WEBHOOKURL);
-// Logger.Info("Configured anticrash");
-
-// Logger.Info("Configuring collections");
 
 // Configs (objects)
 client.config = config;
@@ -53,16 +41,11 @@ client.events = new Collection();
 client.commands = new Collection();
 client.subCommands = new Collection();
 
-// Logger.Info("Configured collections");
-
 load_events(client);
 
-// Logger.Info("Logging in");
 client.login(process.env.TOKEN);
 
-// Logger.Info("Connecting to database")
 console.log(chalk.green("[MONGOOSE] Connecting to database..."));
 connect(process.env.MONGODB_SRV, () => {
-    // Logger.Info("Connected to MongoDB")
     console.log(chalk.green("[MONGOOSE] Connected to database."));
 });

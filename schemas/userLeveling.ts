@@ -7,6 +7,6 @@ export default model(
         GuildID: { type: String, required: true, unique: false },
         Level: { type: Number, required: true, default: 1 },
         XP: { type: Number, required: true, default: 0 },
-        LastXPInc: { type: Number, required: true },
+        LastXPInc: { type: Number, required: true, default: 0 },
     })
 );
