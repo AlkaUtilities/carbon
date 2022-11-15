@@ -5,7 +5,7 @@ import GuildBlacklist from "../../schemas/guildBlacklist";
 
 module.exports = {
     name: "interactionCreate",
-    friendlyName: "commandListener",
+    friendlyName: "CommandListener",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         if (!interaction.isChatInputCommand) return;
 

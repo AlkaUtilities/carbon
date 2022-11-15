@@ -40,8 +40,6 @@ module.exports = {
             presence: member.presence,
         };
 
-        console.log(userf.flags);
-
         const formatting = {
             flagsCode: {
                 BugHunterLevel1: "Bug Hunter Level 1",
@@ -104,10 +102,10 @@ module.exports = {
         // Check if user is in blacklist
         if (!UserBlacklistData) {
             // userf.status = `${client.icon.db.normal} Not blacklisted`;
-            userf.status = `${client.icon.db.normal} Not found`;
+            userf.status = `${client.icon.blacklist.notfound} Not found`;
         } else {
             // userf.status = `${client.icon.db.blacklisted} Blacklisted`;
-            userf.status = `${client.icon.db.blacklisted} Found`;
+            userf.status = `${client.icon.blacklist.found} Found`;
         }
 
         /* Constructs the name prefix */

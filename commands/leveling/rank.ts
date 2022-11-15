@@ -157,8 +157,19 @@ module.exports = {
                         (UserLevelingData.XP / levelGoal) *
                         100
                     ).toFixed(1)}%)\n` +
+                    `**Score** : ${
+                        (UserLevelingData.Level - 1) * LevelGoalMultiplier +
+                        UserLevelingData.XP
+                    }\n` +
                     `**Server XP Rate** : ${GuildLevelingSettingData?.XPMultiplier}x\n` +
-                    `**Server XP Increment Interval** : ${GuildLevelingSettingData?.XPIncrementInterval} seconds\n` +
+                    // `**Server XP Increment Interval** : ${GuildLevelingSettingData?.XPIncrementInterval} seconds\n` +
+                    `**Server XP Increment Interval** : ${
+                        GuildLevelingSettingData?.XPIncrementInterval === 0
+                            ? "Disabled"
+                            : GuildLevelingSettingData?.XPIncrementInterval > 1
+                            ? `${GuildLevelingSettingData?.XPIncrementInterval} seconds`
+                            : `${GuildLevelingSettingData?.XPIncrementInterval} second`
+                    }\n` +
                     `\n${progressBar}\n`
                 // `You can get ${client.config.userLeveling.min} to ${client.config.userLeveling.max} XP **every ${GuildSettingsData?.LevelingXPIncrementInterval} seconds**. This setting can be changed using the settings command\n`
             )

@@ -13,11 +13,15 @@ interface dependency {
     url: string;
 }
 
-const status = ["Disconnected", "Connected", "Connecting", "Disconnecting"];
-
 module.exports = {
     subCommand: "about.bot",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
+        const status = [
+            `${client.icon.false} Disconnected`,
+            `${client.icon.true} Connected`,
+            `${client.icon.sync} Connecting`,
+            `${client.icon.sync} Disconnecting`,
+        ];
         const options = interaction.options;
         const developers: Array<string> = client.config.developersId;
         const ephemeral =

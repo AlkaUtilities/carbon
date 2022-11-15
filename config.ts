@@ -18,20 +18,13 @@ export default {
 
     icons: {
         loading: "<a:loading:1013023173635211365>",
+        sync: "<:sync:1042093144369537074>",
 
         true: "<:true:1010479956909891614>",
         false: "<:false:1010479954372349993>",
 
         bot: {
             developer: "<a:developer:1010538744803233822>",
-        },
-
-        db: {
-            unregistered: "<:undefined_shield:1013060055949651969>",
-            normal: "<:checked_shield:1013060053688913991>",
-            blacklisted: "<:denied_shield:1034339946938503231>",
-            whitelisted: "<:checked_shield:1013060053688913991>",
-            warning: "<:warning_shield:1013060051268800602>",
         },
 
         server: {
@@ -43,6 +36,11 @@ export default {
         alka: {
             bot: "<:alka_bot:1010540470109225061>",
             owner: "<:alka_owner:1010540473988943912>",
+        },
+
+        blacklist: {
+            found: "<:blacklist_found:1042095758402396230>",
+            notfound: "<:blacklist_notfound:1042095690068807761>",
         },
     },
 

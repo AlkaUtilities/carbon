@@ -64,7 +64,7 @@ module.exports = {
         )
             return;
 
-        const LevelupGoal = UserLevelingData.Level * amount.required; // if level is 1, goal is 1 * 100
+        const LevelupGoal = UserLevelingData.Level * amount.required; // if level is 2, goal is 2 * 100
 
         // if (UserLevelingData.XP >= LevelupGoal) {
         //     await UserLevelingData.updateOne({

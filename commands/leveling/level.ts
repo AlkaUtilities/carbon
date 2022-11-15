@@ -62,9 +62,9 @@ module.exports = {
                         content: `Error: Specified user is not in server\nSpecified user: ${user.id}`,
                     });
 
-                if (level < 0)
+                if (level < 1)
                     return interaction.editReply({
-                        content: `Error: Level cannot be less than 0\nSpecified level: \`${level}\``,
+                        content: `Error: Level cannot be less than 1\nSpecified level: \`${level}\``,
                     });
 
                 const UserLevelingData = UserLeveling.findOne({
