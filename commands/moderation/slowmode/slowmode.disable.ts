@@ -43,9 +43,9 @@ module.exports = {
         if (duration && previousRate > 0)
             setTimeout(async () => {
                 channel.setRateLimitPerUser(previousRate);
-                interaction.followUp({
+                interaction.editReply({
                     content: `Slowmode has been enabled with a rate of ${previousRate} per message`,
-                    fetchReply: true,
+                    // fetchReply: true,
                 });
             }, duration);
     },

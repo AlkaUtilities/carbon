@@ -86,7 +86,8 @@ module.exports = {
                     value:
                         `Servers : ${client.guilds.cache.size}\n` +
                         `Users : ${client.users.cache.size}\n` +
-                        `Commands : ${client.commands.size}\n`,
+                        `Commands : ${client.commands.size}\n` +
+                        `Dependencies: ${dependencies.length}\n`,
                 }
                 // {
                 //     name: 'Dependencies',

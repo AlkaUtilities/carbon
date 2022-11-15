@@ -14,7 +14,7 @@ module.exports = {
             limit: amount,
         });
         if (!fetch)
-            return interaction.reply({ content: `Messages not found.` }); // get rids of undefined in fetch type
+            return interaction.editReply({ content: `Messages not found.` }); // get rids of undefined in fetch type
 
         const filtered = fetch.filter((m) => m.author.id == user.id);
 
@@ -23,7 +23,7 @@ module.exports = {
             true
         );
         if (!deletedMessages)
-            return interaction.reply({
+            return interaction.editReply({
                 content: `Deleted messages not found.`,
             }); // get rids of undefined in fetch type
         results(deletedMessages, interaction);

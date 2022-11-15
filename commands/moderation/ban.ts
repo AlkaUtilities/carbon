@@ -26,9 +26,10 @@ module.exports = {
                 .setName("reason")
                 .setDescription("Reason for banning the user")
         ),
-    initialReply: true,
+    // initialReply: true,
     global: true,
     async execute(interaction: ChatInputCommandInteraction) {
+        await interaction.deferReply();
         const target = interaction.options.getUser("user", true);
         const targetMember = interaction.guild?.members.cache.get(target.id);
         const reason = interaction.options.getString("reason")
@@ -49,24 +50,24 @@ module.exports = {
                 memberRoles.cache.size === 0 &&
                 interaction.guild?.ownerId === interaction.user.id
             ) {
-                return await interaction.followUp({
+                return await interaction.editReply({
                     content:
                         "You can't take action on this user as your role isn't higher than theirs",
-                    ephemeral: true,
+                    // ephemeral: true,
                 });
             } else if (
                 targetRoles.highest.position >= me.roles.highest.position
             )
-                return await interaction.followUp({
+                return await interaction.editReply({
                     content:
                         "I can't take action on this user as my role isn't higher than theirs",
-                    ephemeral: true,
+                    // ephemeral: true,
                 });
             else if (!targetMember?.bannable)
-                return await interaction.followUp({
+                return await interaction.editReply({
                     content:
                         "Unable to take action on this user as user isn't bannable.",
-                    ephemeral: true,
+                    // ephemeral: true,
                 });
 
             await targetMember
@@ -111,7 +112,7 @@ module.exports = {
                             text: `Moderator: ${interaction.user.tag}`,
                             iconURL: interaction.user.displayAvatarURL(),
                         });
-                    await interaction.followUp({ embeds: [embed] });
+                    await interaction.editReply({ embeds: [embed] });
                 });
 
             return;
@@ -119,7 +120,7 @@ module.exports = {
             const guild = interaction.guild;
             const bans = await guild?.bans.fetch();
             if (bans?.find((m) => m.user.id === target.id))
-                return interaction.followUp({
+                return interaction.editReply({
                     content: `**${target.tag}** is already banned.`,
                 });
             await guild?.members
@@ -139,7 +140,7 @@ module.exports = {
                             text: `Moderator: ${interaction.user.tag}`,
                             iconURL: interaction.user.displayAvatarURL(),
                         });
-                    await interaction.followUp({ embeds: [embed] });
+                    await interaction.editReply({ embeds: [embed] });
                 });
         }
     },

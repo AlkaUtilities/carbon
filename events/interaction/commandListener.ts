@@ -10,11 +10,11 @@ module.exports = {
         if (!interaction.isChatInputCommand) return;
 
         const command = client.commands.get(interaction.commandName);
-        const UserBlacklistData = await UserBlacklist.findOne({
-            UserID: interaction.user.id,
-        }).catch((err) => {});
         const GuildBlacklistData = await GuildBlacklist.findOne({
             GuildID: interaction.guildId,
+        }).catch((err) => {});
+        const UserBlacklistData = await UserBlacklist.findOne({
+            UserID: interaction.user.id,
         }).catch((err) => {});
 
         if (

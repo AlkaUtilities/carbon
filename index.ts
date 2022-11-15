@@ -43,14 +43,16 @@ anticrash(client, process.env.ANTICRASH_WEBHOOKURL);
 // Logger.Info("Configured anticrash");
 
 // Logger.Info("Configuring collections");
+
+// Configs (objects)
+client.config = config;
+client.icon = config.icons;
+
 // Collections (Discord.Collection)
 client.events = new Collection();
 client.commands = new Collection();
 client.subCommands = new Collection();
 
-// Configs (objects)
-client.config = config;
-client.icon = config.icons;
 // Logger.Info("Configured collections");
 
 load_events(client);

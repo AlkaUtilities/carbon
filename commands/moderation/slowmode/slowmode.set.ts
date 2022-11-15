@@ -46,37 +46,40 @@ module.exports = {
         // }
 
         if (rate < minRate || rate > maxRate) {
-            return interaction.reply({
+            return interaction.editReply({
                 content: `Rate must be between ${ms(minRate, {
                     long: true,
                 })} and ${ms(maxRate, {
                     long: true,
                 })}. The rate can be supplied like so: *10s, 1m, 2h*, etc., or alternatively in milliseconds.`,
-                fetchReply: true,
-                ephemeral: true,
+                // fetchReply: true,
+                // ephemeral: true,
             });
         }
 
         if (duration && duration < minDuration) {
-            return interaction.reply({
+            return interaction.editReply({
                 content: `Duration must be at least ${ms(minDuration, {
                     long: true,
                 })}. The duration can be supplied like so: *10s, 1m, 2h*, etc., or alternatively in milliseconds.`,
-                fetchReply: true,
-                ephemeral: true,
+                // fetchReply: true,
+                // ephemeral: true,
             });
         }
 
         channel.setRateLimitPerUser(rate / 1000, reason);
-        await interaction.reply({ content: response, fetchReply: true });
+        await interaction.editReply({
+            content: response,
+            // fetchReply: true
+        });
         // setTimeout(() => message.delete().catch(() => { }), 10000);
 
         if (duration)
             setTimeout(async () => {
                 channel.setRateLimitPerUser(0);
-                interaction.followUp({
+                interaction.editReply({
                     content: "Slowmode disabled.",
-                    fetchReply: true,
+                    // fetchReply: true,
                 });
             }, duration);
     },

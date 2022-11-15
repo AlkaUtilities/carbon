@@ -4,7 +4,7 @@ module.exports = {
     name: "slowmode",
     disabled: false, // is the command disabled?
     hasESub: true, // does the command has an external sub command?
-    initialReply: false, // does command execute with an initial reply?
+    // initialReply: false, // does command execute with an initial reply?
     developer: false, // is command developer only?
     global: true,
     data: new SlashCommandBuilder()

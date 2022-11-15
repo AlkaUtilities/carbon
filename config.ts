@@ -55,4 +55,10 @@ export default {
             "888023934207934505",
         ],
     },
+
+    userLeveling: {
+        min: 2,
+        max: 10,
+        required: 100, // levelupGoal: level * required
+    },
 };

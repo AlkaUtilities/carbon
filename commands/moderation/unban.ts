@@ -29,9 +29,10 @@ module.exports = {
                 .setMaxLength(512)
         )
         .setDMPermission(false),
-    initialReply: true,
+    // initialReply: true,
     global: true,
     async execute(interaction: ChatInputCommandInteraction) {
+        await interaction.deferReply();
         // no need to check if the user id passed in was a valid id
         // thanks to discord
         const target = interaction.options.getUser("user", true);
@@ -59,7 +60,7 @@ module.exports = {
         const targetBan = bans?.find((ban) => ban.user.id === target.id);
 
         if (!targetBan)
-            return interaction.followUp({
+            return interaction.editReply({
                 content: "This user is not banned from the guild.",
             });
 
@@ -78,10 +79,10 @@ module.exports = {
                         text: `Moderator: ${interaction.user.tag}`,
                         iconURL: interaction.user.displayAvatarURL(),
                     });
-                await interaction.followUp({ embeds: [embed] });
+                await interaction.editReply({ embeds: [embed] });
             })
             .catch((err) => {
-                interaction.followUp({
+                interaction.editReply({
                     content: `Unable to unban ${target.tag} from the server.\nPlease check the console.`,
                 });
                 console.log(err);
