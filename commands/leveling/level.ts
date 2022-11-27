@@ -67,15 +67,27 @@ module.exports = {
                         content: `Error: Level cannot be less than 1\nSpecified level: \`${level}\``,
                     });
 
-                const UserLevelingData = UserLeveling.findOne({
+                let UserLevelingData = await UserLeveling.findOne({
                     UserID: user.id,
                     GuildID: guildId,
                 });
 
-                if (!UserLevelingData)
-                    return interaction.editReply({
-                        content: `${member.user.username} has not sent any message`,
+                if (!UserLevelingData) {
+                    // returns target has not sent any message if not available
+                    // return interaction.editReply({
+                    //     content: `${member.user.username} has not sent any message`,
+                    // });
+
+                    // creates a new document for target if not available
+                    UserLevelingData = await UserLeveling.create({
+                        UserID: user.id,
+                        GuildID: guildId,
+                        Level: level,
                     });
+                }
+
+                // FIXME when setting a user's level down, xp might be higher than the set level's goal
+                // therefore causing the user to have more xp than the goal
 
                 UserLevelingData.updateOne({
                     $set: {

@@ -14,11 +14,7 @@ const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } =
     GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
 
-// NOTE Dont use all intent
-// It could slow the bot down
-// However if you're debugging and is wondering
-// if invalid intent is the problem
-// All intents code is 131071
+// all intent: 131071
 
 const client = new Client({
     intents: [

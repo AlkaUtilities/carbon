@@ -3,7 +3,6 @@ import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
 import config from "../config";
-import {} from "../typings/discord";
 
 /**
  * Loads commands in directory ".\/events\/\*\*\/\*.ts"
@@ -26,7 +25,7 @@ async function load_commands(client: Client) {
     const devGuild = client.guilds.cache.get(config.devGuildId);
 
     if (!devGuild) {
-        return;
+        return console.log(chalk.red(`[HANDLER] Dev guild not found!`));
     }
 
     await client.commands.clear();
@@ -105,7 +104,7 @@ async function load_commands(client: Client) {
                 chalk.bold("global")
             )} commands`
         );
-    }); // this is dangerous
+    });
 
     await devGuild.commands.set(devCommands).then((commands) => {
         console.log(

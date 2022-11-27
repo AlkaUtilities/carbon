@@ -35,31 +35,84 @@ module.exports = {
                 content: `Error: Amount cannot be less than 0\nSpecified amount: \`${amount}\``,
             });
 
-        const UserLevelingData = await UserLeveling.findOne({
+        let UserLevelingData = await UserLeveling.findOne({
             UserID: user.id,
             GuildID: guildId,
         });
 
-        if (!UserLevelingData)
-            return interaction.editReply({
-                content: `${member.user.username} has not sent any message`,
+        if (!UserLevelingData) {
+            // return interaction.editReply({
+            //     content: `${member.user.username} has not sent any message`,
+            // });
+
+            UserLevelingData = await UserLeveling.create({
+                UserID: user.id,
+                GuildID: guildId,
+                XP: amount,
             });
 
-        UserLevelingData.updateOne({
-            $inc: {
-                XP: amount,
-            },
-        })
-            .then(() => {
-                return interaction.editReply({
-                    content: `Gave **${amount}** XP to **${member.user.username}**`,
-                });
+            // FIXME do checking here aswell
+            return;
+        }
+
+        const LevelGoalMultiplier = client.config.userLeveling.required;
+        const levelGoal = UserLevelingData.Level * LevelGoalMultiplier;
+
+        if (UserLevelingData.XP + amount >= levelGoal) {
+            // FIXME if level goal is 100, when calculating after that level goal, the goal would stay on 100
+            // e.x. level 1 user given 600, it should levelup the player to level 3, but instead levels it up
+            // to 7. Expected: 600 - 100 (lvl 1) = 500 - 200 (lvl 2) = 300 - 300 (lvl 3) = 0;
+            // Received: 600 - 100 (lvl 1) = 500 - 100 (lvl 2) = 400 - 100 (lvl 3) = 300 - 100 (lvl 4) = 200
+            // - 100 (lvl 5) = 100 - 100 (lvl 6) = 0 - 100??? (lvl 7)
+
+            const levelupAmount = Math.floor(
+                (UserLevelingData.XP + amount) / levelGoal
+            );
+            const remainingXP =
+                UserLevelingData.XP + amount - levelupAmount * levelGoal;
+
+            UserLevelingData.updateOne({
+                $inc: {
+                    Level: levelupAmount,
+                },
+                $set: {
+                    XP: remainingXP,
+                },
             })
-            .catch((err) => {
-                console.log(err);
-                return interaction.editReply({
-                    content: `There was an error trying to update **${member.user.username}**'s XP`,
+                .then(() => {
+                    return interaction.editReply({
+                        content: `Set **${
+                            member.user.username
+                        }**'s level to **${
+                            UserLevelingData?.Level
+                                ? UserLevelingData?.Level + levelupAmount
+                                : "err"
+                        }** and XP to **${remainingXP}**`,
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return interaction.editReply({
+                        content: `There was an error trying to update **${member.user.username}**'s XP`,
+                    });
                 });
-            });
+        } else {
+            UserLevelingData.updateOne({
+                $inc: {
+                    XP: amount,
+                },
+            })
+                .then(() => {
+                    return interaction.editReply({
+                        content: `Gave **${amount}** XP to **${member.user.username}**`,
+                    });
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return interaction.editReply({
+                        content: `There was an error trying to update **${member.user.username}**'s XP`,
+                    });
+                });
+        }
     },
 };

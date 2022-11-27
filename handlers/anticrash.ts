@@ -127,5 +127,9 @@ export default (client: Client, URL: string) => {
         return webhook.send({ embeds: [embed] });
     });
 
+    process.on("exit", (code) => {
+        console.log(`[process exited with code ${code}]`);
+    });
+
     console.log(chalk.green(`[ANTICRASH] Initialized anticrash.`));
 };

@@ -2,7 +2,6 @@ import { Client } from "discord.js";
 import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
 import config from "../config";
-import {} from "../typings/discord";
 import chalk from "chalk";
 
 /**
@@ -14,7 +13,7 @@ import chalk from "chalk";
 async function load_events(client: Client) {
     const table = new Table({
         head: ["Event Name", "Status"],
-        colWidths: [26, 8],
+        colWidths: [26, 11],
         chars: {
             mid: "",
             "left-mid": "",
@@ -43,7 +42,9 @@ async function load_events(client: Client) {
             // check if file has property "name"
             table.push([
                 event.friendlyName
-                    ? chalk.blue(event.friendlyName)
+                    ? event.friendlyName.length > 18
+                        ? chalk.blue(event.friendlyName.slice(0, 18) + "...")
+                        : chalk.blue(event.friendlyName)
                     : event.name
                     ? event.name
                     : file.split("/").pop(),
@@ -67,7 +68,9 @@ async function load_events(client: Client) {
 
         table.push([
             event.friendlyName
-                ? chalk.blue(event.friendlyName)
+                ? event.friendlyName.length > 18
+                    ? chalk.blue(event.friendlyName.slice(0, 18) + "...")
+                    : chalk.blue(event.friendlyName)
                 : event.name
                 ? event.name
                 : file.split("/").pop(),

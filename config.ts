@@ -14,6 +14,7 @@ export default {
     ownerId: "529424782438170679",
     developersId: ["529424782438170679"],
 
+    // devGuildId: "998487239803813898",
     devGuildId: "998487239803813898",
 
     icons: {

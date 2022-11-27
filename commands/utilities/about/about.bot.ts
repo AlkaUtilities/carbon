@@ -105,7 +105,7 @@ module.exports = {
                 // }
             );
 
-        // FIXME Will cause error if dependencies exceeds maximum description length
+        // FIXME will cause error if dependencies exceeds maximum description length
         const dependenciesEmbed = new EmbedBuilder()
             .setTitle(`Dependencies (${dependencies.length})`)
             .setFooter({
