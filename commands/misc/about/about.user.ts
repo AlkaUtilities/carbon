@@ -1,20 +1,26 @@
-import { ChatInputCommandInteraction, EmbedBuilder, Client } from "discord.js";
+import {
+    ChatInputCommandInteraction,
+    EmbedBuilder,
+    Client,
+    Role,
+    ActivityType,
+} from "discord.js";
 import UserBlacklist from "../../../schemas/userBlacklist";
 
 module.exports = {
     subCommand: "about.user",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;
-        const user = options.getUser("user", true);
-        const member = interaction.guild?.members.cache.get(user.id);
         const ephemeral =
             options.getBoolean("ephemeral") === null
                 ? true
                 : options.getBoolean("ephemeral", true);
+        await interaction.deferReply({ ephemeral: ephemeral });
+        const user = options.getUser("user", true);
+        const member = interaction.guild?.members.cache.get(user.id);
         if (!member)
-            return interaction.followUp({
+            return interaction.editReply({
                 content: `Unable to find member.`,
-                ephemeral: true,
             });
 
         let UserBlacklistData: any;
@@ -33,11 +39,20 @@ module.exports = {
             namePrefix: "",
             nameSuffix: "",
             roles: member.roles.cache
+                .map((role) => role) //role.toString())
                 .sort((a, b) => b.position - a.position)
-                .map((role) => role.toString())
-                .slice(0, -1),
+                .slice(0, member.roles.cache.size - 1),
             flags: (user.flags || (await user.fetchFlags())).toArray(),
             presence: member.presence,
+            activity: member.presence?.activities
+                .filter((activity) => activity.type !== ActivityType.Custom) // ignore custom
+                .map(
+                    (activity) =>
+                        `${formatting.userActivityType[activity.type]} ${
+                            activity.name
+                        }${activity.url ? ` [\[URL\]](${activity.url})` : ""}`
+                )
+                .join("\n"),
         };
 
         const formatting = {
@@ -85,18 +100,34 @@ module.exports = {
                 invisible: "<:offline:1010472611987333180>Offline",
             },
             userActivityType: {
-                0: "**PLAYING**",
-                1: "**STREAMING**",
-                2: "**LISTENING**",
-                3: "**WATCHING**",
-                4: "**CUSTOM**",
-                5: "**COMPETING**",
+                0: "**Playing**",
+                1: "**Streaming**",
+                2: "**Listening to**",
+                3: "**Watching**",
+                4: "**Custom**",
+                5: "**Competing in**",
             },
             platformIcon: {
                 desktop: "<:platform_desktop:1012667505405345822> Desktop",
                 mobile: "<:platform_mobile:1012667508328767518> Mobile",
                 web: "<:platform_web:1012667510212018189> Web",
             },
+        };
+
+        const maxDisplayRoles = (roles: Role[], maxFieldLength = 1024) => {
+            let totalLength = 0;
+            const result = [];
+
+            for (const role of roles) {
+                const roleString = `<@&${role.id}>`;
+
+                if (roleString.length + totalLength > maxFieldLength) break;
+
+                totalLength += roleString.length + 1; // +1 as it's likely we want to display them with a space between each role, which counts towards the limit.
+                result.push(roleString);
+            }
+
+            return result.length;
         };
 
         // Check if user is in blacklist
@@ -154,7 +185,9 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL(),
             })
             .setTimestamp()
-            .setColor(member.roles.hoist?.hexColor || "#0390fc")
+            .setColor(
+                member.roles.hoist?.hexColor || user.hexAccentColor || "#0390fc"
+            )
             .setFields(
                 {
                     name: `User`,
@@ -168,6 +201,7 @@ module.exports = {
                         `Avatar: [\[Display avatar\]](${user.displayAvatarURL()}) [\[Default avatar\]](${
                             user.defaultAvatarURL
                         })\n` +
+                        `User Color : ${user.hexAccentColor || "None"}\n` +
                         `Bot : ${
                             user.bot
                                 ? `${client.icon.true} True`
@@ -214,25 +248,7 @@ module.exports = {
                                     : `Unable to fetch user platform`
                                 : `Unable to fetch user presence`
                         }\n` +
-                        `Activity : ${
-                            userf.presence
-                                ? userf.presence?.activities.length
-                                    ? userf.presence?.activities
-                                          .map(
-                                              (activity) =>
-                                                  formatting.userActivityType[
-                                                      activity.type
-                                                  ] +
-                                                  " " +
-                                                  activity.name +
-                                                  (activity.url
-                                                      ? ` [\[URL\]](${activity.url})`
-                                                      : "")
-                                          )
-                                          .join(", ")
-                                    : "None"
-                                : "Unable to fetch user presence"
-                        }`,
+                        `Activity : \n${userf.activity}`,
                 },
                 {
                     name: "Member",
@@ -258,12 +274,23 @@ module.exports = {
                         `Hoist role : ${
                             userf.roles
                                 ? member.roles.hoist
-                                    ? `${member.roles.hoist} (#${member.roles.hoist.hexColor})`
+                                    ? `${member.roles.hoist} (${member.roles.hoist.hexColor})`
                                     : "None"
                                 : "Member has no role"
                         }\n` +
-                        `Roles (${userf.roles.length}) : \n${
-                            userf.roles.length ? userf.roles.join("\n") : "None"
+                        `Roles (showing ${
+                            userf.roles.length > 1
+                                ? maxDisplayRoles(userf.roles) +
+                                  " of " +
+                                  userf.roles.length
+                                : userf.roles.length
+                        }) : \n${
+                            // userf.roles.length ? userf.roles.join("\n") : "None"
+                            userf.roles.length
+                                ? userf.roles
+                                      .slice(0, maxDisplayRoles(userf.roles))
+                                      .join("\n")
+                                : "None"
                         }`,
                     inline: true,
                 },
@@ -299,7 +326,6 @@ module.exports = {
                         `Blacklist: ${userf.status}`,
                 }
             );
-
-        return interaction.followUp({ embeds: [embed], ephemeral: ephemeral });
+        return interaction.editReply({ embeds: [embed] });
     },
 };

@@ -48,5 +48,5 @@ module.exports = {
                         )
                 )
         ),
-    initialReply: true,
+    initialReply: false,
 };

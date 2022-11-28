@@ -3,6 +3,7 @@
         "@discordjs/opus": "^0.8.0",
         "@discordjs/voice": "^0.13.0",
         "@napi-rs/canvas": "^0.1.30",
+        "axios": "^1.2.0",
         "canvas-constructor": "^7.0.0",
         "chalk": "^4.1.2",
         "cli-table": "^0.3.11",

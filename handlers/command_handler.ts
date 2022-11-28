@@ -10,7 +10,7 @@ import config from "../config";
  * Must be called **after** defining client.commands
  * @param client
  */
-async function load_commands(client: Client) {
+async function load_commands(client: Client, global: Boolean = false) {
     const table = new Table({
         head: ["Command Name", "Type", "Status"],
         colWidths: [26, 8, 8],
@@ -85,6 +85,8 @@ async function load_commands(client: Client) {
                 chalk.blue("GLOBAL"),
                 config.cli.status_ok,
             ]);
+        } else if (command.global && global === false) {
+            continue; // if command is global but global is false
         } else {
             devCommands.push(command.data.toJSON());
             table.push([
@@ -98,13 +100,22 @@ async function load_commands(client: Client) {
     console.log(table.toString());
 
     // NOTE: Uncomment the line under this comment to enable global slash command
-    await client.application?.commands.set(globalCommands).then((commands) => {
+    if (global) {
+        await client.application?.commands
+            .set(globalCommands)
+            .then((commands) => {
+                console.log(
+                    `Updated ${commands.size} ${chalk.blue(
+                        chalk.bold("global")
+                    )} commands`
+                );
+            });
+    } else
         console.log(
-            `Updated ${commands.size} ${chalk.blue(
-                chalk.bold("global")
-            )} commands`
+            `Global commands were ${chalk.red(
+                `not updated`
+            )} as 'global' parameter is false`
         );
-    });
 
     await devGuild.commands.set(devCommands).then((commands) => {
         console.log(

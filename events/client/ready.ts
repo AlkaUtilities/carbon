@@ -12,6 +12,8 @@ module.exports = {
             )
         );
 
-        load_commands(client);
+        const global = process.argv[2] === "global" ? true : false;
+
+        load_commands(client, global);
     },
 };

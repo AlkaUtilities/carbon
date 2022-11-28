@@ -2,16 +2,28 @@ import {
     SlashCommandBuilder,
     ChatInputCommandInteraction,
     Client,
+    EmbedBuilder,
 } from "discord.js";
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName("ping")
-        .setDescription('Replies with "pong!"')
-        .setDMPermission(false),
-    developer: false,
+        .setDescription("Check bot's latency")
+        .setDMPermission(true),
     global: true,
     execute(interaction: ChatInputCommandInteraction, client: Client) {
-        interaction.reply({ content: "pong!", ephemeral: true });
+        interaction.reply({
+            embeds: [
+                new EmbedBuilder()
+                    .setTitle("Pong!")
+                    .setDescription(
+                        `Latency: ${
+                            Date.now() - interaction.createdTimestamp
+                        } ms\n` + `API Latency: ${client.ws.ping} ms\n`
+                    )
+                    .setColor("#2f3136"),
+            ],
+            ephemeral: true,
+        });
     },
 };

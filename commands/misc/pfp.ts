@@ -28,7 +28,7 @@ module.exports = {
             .setTitle(`${user.username}`)
             .setDescription(`[Display Avatar](${avatarURL})`)
             .setThumbnail(avatarURL)
-            .setColor(`#4cbd49`);
+            .setColor(user.hexAccentColor || `#4cbd49`);
 
         interaction.reply({ embeds: [embed], ephemeral: true });
     },

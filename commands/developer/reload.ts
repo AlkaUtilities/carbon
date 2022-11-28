@@ -15,6 +15,11 @@ module.exports = {
             o
                 .setName("commands")
                 .setDescription("Reloads all commands and subcommands")
+                .addBooleanOption((boolean) =>
+                    boolean
+                        .setName("global")
+                        .setDescription("Reload global commamds?")
+                )
         )
         .addSubcommand((o) =>
             o.setName("events").setDescription("Reloads all events")
@@ -26,7 +31,9 @@ module.exports = {
             // TODO Reload events
             case "commands":
                 {
-                    await load_commands(client).then(async () => {
+                    const global =
+                        interaction.options.getBoolean("global") || false;
+                    await load_commands(client, global).then(async () => {
                         await interaction.followUp(
                             "Reloaded commands and subcommands."
                         );

@@ -10,7 +10,8 @@ import { Document, Types } from "mongoose";
 import UserLeveling from "../../schemas/userLeveling";
 import GuildLevelingSetting from "../../schemas/guildLevelingSetting";
 import { Canvas, loadImage } from "canvas-constructor/napi-rs";
-import { request } from "undici";
+// import { request } from "undici";
+import axios from "axios";
 
 function getRankPosition(
     LeaderboardData: (Document<
@@ -254,11 +255,18 @@ module.exports = {
         ctx.clip();
 
         // draw avatar
-        const avatar = await request(
-            target.displayAvatarURL({ extension: "jpg" })
-        );
+        // const avatar = await request(
+        //     target.displayAvatarURL({ extension: "jpg" })
+        // );
+
+        const avatar = await axios.request({
+            url: target.displayAvatarURL({ extension: "jpg" }),
+        }); // request(
+        //     target.displayAvatarURL({ extension: "jpg" })
+        // );
         ctx.drawImage(
-            await loadImage(await avatar.body.arrayBuffer()),
+            // await loadImage(await avatar.body.arrayBuffer()),
+            await loadImage(await avatar.data),
             settings.avatar_x,
             settings.avatar_y,
             150,
