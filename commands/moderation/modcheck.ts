@@ -3,6 +3,7 @@ import {
     ChatInputCommandInteraction,
     Client,
     EmbedBuilder,
+    PermissionFlagsBits,
 } from "discord.js";
 module.exports = {
     name: "modcheck",
@@ -15,6 +16,8 @@ module.exports = {
         .setDescription(
             "Check if a member is bannable, kickable, moderatable, and managable"
         )
+        .setDMPermission(false)
+        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
         .addUserOption((option) =>
             option
                 .setName("member")
