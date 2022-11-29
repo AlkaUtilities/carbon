@@ -17,10 +17,7 @@ module.exports = {
     subCommand: "about.bot",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;
-        const ephemeral =
-            options.getBoolean("ephemeral") === null
-                ? true
-                : options.getBoolean("ephemeral", true);
+        const ephemeral = options.getBoolean("ephemeral") ?? true;
         await interaction.deferReply({ ephemeral: ephemeral });
         const status = [
             `${client.icon.false} Disconnected`,

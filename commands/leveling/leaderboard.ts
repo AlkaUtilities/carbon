@@ -80,10 +80,7 @@ module.exports = {
                 )
         ),
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
-        const ephemeral =
-            interaction.options.getBoolean("ephemeral") === null
-                ? true
-                : interaction.options.getBoolean("ephemeral", true);
+        const ephemeral = interaction.options.getBoolean("ephemeral") ?? true;
         await interaction.deferReply({ ephemeral: ephemeral });
         if (!interaction.guildId) return;
 

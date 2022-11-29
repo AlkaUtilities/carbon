@@ -11,10 +11,7 @@ module.exports = {
     subCommand: "about.user",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;
-        const ephemeral =
-            options.getBoolean("ephemeral") === null
-                ? true
-                : options.getBoolean("ephemeral", true);
+        const ephemeral = options.getBoolean("ephemeral") ?? true;
         await interaction.deferReply({ ephemeral: ephemeral });
         const user = options.getUser("user", true);
         const member = interaction.guild?.members.cache.get(user.id);
@@ -296,32 +293,32 @@ module.exports = {
                     ].join("\n"),
                     inline: true,
                 },
-                {
-                    name: "Moderation",
-                    value: [
-                        `**Managable**: ${
-                            member.manageable
-                                ? `${client.icon.true} True`
-                                : `${client.icon.false} False`
-                        }`,
-                        `**Moderatable**: ${
-                            member.moderatable
-                                ? `${client.icon.true} True`
-                                : `${client.icon.false} False`
-                        }`,
-                        `**Kickable**: ${
-                            member.kickable
-                                ? `${client.icon.true} True`
-                                : `${client.icon.false} False`
-                        }`,
-                        `**Bannable**: ${
-                            member.bannable
-                                ? `${client.icon.true} True`
-                                : `${client.icon.false} False`
-                        }\n`,
-                    ].join("\n"),
-                    inline: true,
-                },
+                // {
+                //     name: "Moderation",
+                //     value: [
+                //         `**Managable**: ${
+                //             member.manageable
+                //                 ? `${client.icon.true} True`
+                //                 : `${client.icon.false} False`
+                //         }`,
+                //         `**Moderatable**: ${
+                //             member.moderatable
+                //                 ? `${client.icon.true} True`
+                //                 : `${client.icon.false} False`
+                //         }`,
+                //         `**Kickable**: ${
+                //             member.kickable
+                //                 ? `${client.icon.true} True`
+                //                 : `${client.icon.false} False`
+                //         }`,
+                //         `**Bannable**: ${
+                //             member.bannable
+                //                 ? `${client.icon.true} True`
+                //                 : `${client.icon.false} False`
+                //         }\n`,
+                //     ].join("\n"),
+                //     inline: true,
+                // },
                 {
                     name: `Roles (showing ${
                         userf.roles.length > 1

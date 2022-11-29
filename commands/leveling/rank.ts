@@ -85,10 +85,7 @@ module.exports = {
         )
         .setDMPermission(false),
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
-        const ephemeral =
-            interaction.options.getBoolean("ephemeral") === null
-                ? true
-                : interaction.options.getBoolean("ephemeral", true);
+        const ephemeral = interaction.options.getBoolean("ephemeral") ?? true;
         await interaction.deferReply({ ephemeral: ephemeral });
         let target = interaction.options.getUser("member");
         if (!target || !interaction.guild?.members.cache.has(target.id)) {

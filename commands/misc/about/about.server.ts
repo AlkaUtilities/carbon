@@ -90,10 +90,7 @@ module.exports = {
     subCommand: "about.server",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;
-        const ephemeral =
-            options.getBoolean("ephemeral") === null
-                ? true
-                : options.getBoolean("ephemeral", true);
+        const ephemeral = options.getBoolean("ephemeral") ?? true;
         await interaction.deferReply({ ephemeral: ephemeral });
         let guild: Guild;
         if (interaction.guild) guild = interaction.guild;
