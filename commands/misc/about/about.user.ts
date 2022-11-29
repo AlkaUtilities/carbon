@@ -191,23 +191,23 @@ module.exports = {
             .setFields(
                 {
                     name: `User`,
-                    value:
-                        `Username : ${user.username}\n` +
-                        `Discriminator : ${user.discriminator}\n` +
-                        `ID : \`${user.id}\`\n` +
-                        `Time Created : <t:${user.createdTimestamp
+                    value: [
+                        `**Username**: ${user.username}`,
+                        `**Discriminator**: ${user.discriminator}`,
+                        `**ID**: \`${user.id}\``,
+                        `**Time Created**: <t:${user.createdTimestamp
                             ?.toString()
-                            .slice(0, 10)}:f>\n` +
-                        `Avatar: [\[Display avatar\]](${user.displayAvatarURL()}) [\[Default avatar\]](${
+                            .slice(0, 10)}:f>`,
+                        `**Avatar**: [\[Display avatar\]](${user.displayAvatarURL()}) [\[Default avatar\]](${
                             user.defaultAvatarURL
-                        })\n` +
-                        `User Color : ${user.hexAccentColor || "None"}\n` +
-                        `Bot : ${
+                        })`,
+                        `**User Color**: ${user.hexAccentColor || "None"}`,
+                        `**Bot**: ${
                             user.bot
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Flags : ${
+                        }`,
+                        `**Flags**: ${
                             userf.flags.length
                                 ? userf.flags
                                       .map((flag) =>
@@ -221,15 +221,15 @@ module.exports = {
                                       )
                                       .join(", ")
                                 : "None"
-                        }\n` +
-                        `Status : ${
+                        }`,
+                        `**Status**: ${
                             userf.presence
                                 ? (formatting.userStatus as any)[
                                       userf.presence.status
                                   ]
                                 : `Unable to fetch user presence`
-                        }\n` +
-                        `Platform : ${
+                        }`,
+                        `**Platform**: ${
                             userf.presence
                                 ? userf.presence.clientStatus
                                     ? userf.presence.clientStatus.desktop
@@ -247,83 +247,100 @@ module.exports = {
                                         : `Unknown`
                                     : `Unable to fetch user platform`
                                 : `Unable to fetch user presence`
-                        }\n` +
-                        `Activity : \n${userf.activity}`,
+                        }`,
+                        `**Activity**: \n${userf.activity || "None"}`,
+                    ].join("\n"),
                 },
                 {
                     name: "Member",
-                    value:
-                        `Nickname : ${
+                    value: [
+                        `**Nickname**: ${
                             member.nickname
                                 ? `\`${member.nickname}\``
                                 : "Same as username"
-                        }\n` +
-                        `Server Join Date : <t:${member.joinedTimestamp
+                        }`,
+                        `**Server Join Date**: <t:${member.joinedTimestamp
                             ?.toString()
-                            .slice(0, 10)}:f>\n` +
-                        `Server Owner :  ${
+                            .slice(0, 10)}:f>`,
+                        `**Server Owner**:  ${
                             user.id === interaction.guild?.ownerId
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Pending : ${
+                        }`,
+                        `**Pending**: ${
                             member.pending
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Hoist role : ${
+                        }`,
+                        `**Hoist role**: ${
                             userf.roles
                                 ? member.roles.hoist
                                     ? `${member.roles.hoist} (${member.roles.hoist.hexColor})`
                                     : "None"
                                 : "Member has no role"
-                        }\n` +
-                        `Roles (showing ${
-                            userf.roles.length > 1
-                                ? maxDisplayRoles(userf.roles) +
-                                  " of " +
-                                  userf.roles.length
-                                : userf.roles.length
-                        }) : \n${
-                            // userf.roles.length ? userf.roles.join("\n") : "None"
-                            userf.roles.length
-                                ? userf.roles
-                                      .slice(0, maxDisplayRoles(userf.roles))
-                                      .join("\n")
-                                : "None"
                         }`,
+                        // `**Roles** (showing ${
+                        //     userf.roles.length > 1
+                        //         ? maxDisplayRoles(userf.roles) +
+                        //           " of " +
+                        //           userf.roles.length
+                        //         : userf.roles.length
+                        // }): \n${
+                        //     // userf.roles.length ? userf.roles.join("\n") : "None"
+                        //     userf.roles.length
+                        //         ? userf.roles
+                        //               .slice(0, maxDisplayRoles(userf.roles))
+                        //               .join("\n")
+                        //         : "None"
+                        // }`,
+                    ].join("\n"),
                     inline: true,
                 },
                 {
                     name: "Moderation",
-                    value:
-                        `Managable : ${
+                    value: [
+                        `**Managable**: ${
                             member.manageable
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Moderatable : ${
+                        }`,
+                        `**Moderatable**: ${
                             member.moderatable
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Kickable : ${
+                        }`,
+                        `**Kickable**: ${
                             member.kickable
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
-                        }\n` +
-                        `Bannable : ${
+                        }`,
+                        `**Bannable**: ${
                             member.bannable
                                 ? `${client.icon.true} True`
                                 : `${client.icon.false} False`
                         }\n`,
+                    ].join("\n"),
                     inline: true,
+                },
+                {
+                    name: `Roles (showing ${
+                        userf.roles.length > 1
+                            ? maxDisplayRoles(userf.roles) +
+                              " of " +
+                              userf.roles.length
+                            : userf.roles.length
+                    })`,
+                    value: userf.roles.length
+                        ? userf.roles
+                              .slice(0, maxDisplayRoles(userf.roles))
+                              .join(" ")
+                        : "None",
                 },
                 {
                     name: "Alka Utilities",
                     value:
-                        // `Database: ${userData ? `${client.icon.true} Registered` : `${client.icon.false} Not registered`}\n` +
-                        `Blacklist: ${userf.status}`,
+                        // `Database: ${userData ? `${client.icon.true} Registered` : `${client.icon.false} Not registered`}`,
+                        `**Blacklist**: ${userf.status}`,
                 }
             );
         return interaction.editReply({ embeds: [embed] });

@@ -110,12 +110,7 @@ async function load_commands(client: Client, global: Boolean = false) {
                     )} commands`
                 );
             });
-    } else
-        console.log(
-            `Global commands were ${chalk.red(
-                `not updated`
-            )} as 'global' parameter is false`
-        );
+    } else console.log(`Global commands were ${chalk.red(`not updated`)}`);
 
     await devGuild.commands.set(devCommands).then((commands) => {
         console.log(

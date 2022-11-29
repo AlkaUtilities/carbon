@@ -17,9 +17,9 @@ module.exports = {
                 new EmbedBuilder()
                     .setTitle("Pong!")
                     .setDescription(
-                        `Latency: ${
+                        `**Latency**: ${
                             Date.now() - interaction.createdTimestamp
-                        } ms\n` + `API Latency: ${client.ws.ping} ms\n`
+                        } ms\n` + `**API Latency**: ${client.ws.ping} ms\n`
                     )
                     .setColor("#2f3136"),
             ],
