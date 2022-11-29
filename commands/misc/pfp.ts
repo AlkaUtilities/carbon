@@ -1,3 +1,5 @@
+// thanks kyhri (https://github.com/kyhrii) for the idea
+
 import {
     SlashCommandBuilder,
     ChatInputCommandInteraction,

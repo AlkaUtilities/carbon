@@ -1,3 +1,5 @@
+// credit goes to Static (https://stackoverflow.com/users/11321411/static)
+
 import {
     SlashCommandBuilder,
     ChatInputCommandInteraction,

@@ -1,3 +1,5 @@
+// credit goes to whois-MidNight (https://github.com/whois-MidNight)
+
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 
 module.exports = {

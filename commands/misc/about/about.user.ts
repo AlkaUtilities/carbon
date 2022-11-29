@@ -7,6 +7,61 @@ import {
 } from "discord.js";
 import UserBlacklist from "../../../schemas/userBlacklist";
 
+const formatting = {
+    flagsCode: {
+        BugHunterLevel1: "Bug Hunter Level 1",
+        BugHunterLevel2: "Bug Hunter Level 2",
+        CertifiedModerator: "Certified Moderator",
+        HypeSquadOnlineHouse1: "House Bravery Member",
+        HypeSquadOnlineHouse2: "House Brilliance Member",
+        HypeSquadOnlineHouse3: "House Balance Member",
+        Hypesquad: "HypeSquad Events Member",
+        Partner: "Partnered Server Owner",
+        PremiumEarlySupporter: "Early Nitro Supporter",
+        Staff: "Discord Employee",
+        TeamPseudoUser: "Team Pseudo",
+        VerifiedBot: "Verified Bot",
+        VerifiedDeveloper: "Verified Developer",
+        // unstable
+        Quarantined: "Quarantined",
+        Spammer: "Spammer",
+    },
+    flags: {
+        BugHunterLevel1: "<:bughunter_lvl1:1010556670281265152>",
+        BugHunterLevel2: "<:bughunter_lvl2:1010556662232383548>",
+        CertifiedModerator: "<:certified_moderator:1010556793304395847>",
+        HypeSquadOnlineHouse1: "<:hypesquad_bravery:1010556438063616142>",
+        HypeSquadOnlineHouse2: "<:hypesquad_brilliance:1010556402097471559>",
+        HypeSquadOnlineHouse3: "<:hypesquad_balance:1010556399350194196>",
+        Hypesquad: "<:hypesquad_event:1010556421970079905> ",
+        Partner: "<:partnered_server_owner:1010556779450613810>",
+        PremiumEarlySupporter: "<:early_supporter:1010556776573317173>",
+        Staff: "<:employee:1010558705898627125>",
+        VerifiedDeveloper:
+            "<:early_verified_bot_developer:1010557509938982933>",
+    },
+    userStatus: {
+        online: "<:online:1010472659743670283>Online",
+        idle: "<:idle:1010472641020305448>Idle",
+        dnd: "<:dnd:1010472622322090076>Do Not Disturb",
+        offline: "<:offline:1010472611987333180>Offline",
+        invisible: "<:offline:1010472611987333180>Offline",
+    },
+    userActivityType: {
+        0: "**Playing**",
+        1: "**Streaming**",
+        2: "**Listening to**",
+        3: "**Watching**",
+        4: "**Custom**",
+        5: "**Competing in**",
+    },
+    platformIcon: {
+        desktop: "<:platform_desktop:1012667505405345822> Desktop",
+        mobile: "<:platform_mobile:1012667508328767518> Mobile",
+        web: "<:platform_web:1012667510212018189> Web",
+    },
+};
+
 module.exports = {
     subCommand: "about.user",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
@@ -50,65 +105,6 @@ module.exports = {
                         }${activity.url ? ` [\[URL\]](${activity.url})` : ""}`
                 )
                 .join("\n"),
-        };
-
-        const formatting = {
-            flagsCode: {
-                BugHunterLevel1: "Bug Hunter Level 1",
-                BugHunterLevel2: "Bug Hunter Level 2",
-                CertifiedModerator: "Certified Moderator",
-                HypeSquadOnlineHouse1: "House Bravery Member",
-                HypeSquadOnlineHouse2: "House Brilliance Member",
-                HypeSquadOnlineHouse3: "House Balance Member",
-                Hypesquad: "HypeSquad Events Member",
-                Partner: "Partnered Server Owner",
-                PremiumEarlySupporter: "Early Nitro Supporter",
-                Staff: "Discord Employee",
-                TeamPseudoUser: "Team Pseudo",
-                VerifiedBot: "Verified Bot",
-                VerifiedDeveloper: "Verified Developer",
-                // unstable
-                Quarantined: "Quarantined",
-                Spammer: "Spammer",
-            },
-            flags: {
-                BugHunterLevel1: "<:bughunter_lvl1:1010556670281265152>",
-                BugHunterLevel2: "<:bughunter_lvl2:1010556662232383548>",
-                CertifiedModerator:
-                    "<:certified_moderator:1010556793304395847>",
-                HypeSquadOnlineHouse1:
-                    "<:hypesquad_bravery:1010556438063616142>",
-                HypeSquadOnlineHouse2:
-                    "<:hypesquad_brilliance:1010556402097471559>",
-                HypeSquadOnlineHouse3:
-                    "<:hypesquad_balance:1010556399350194196>",
-                Hypesquad: "<:hypesquad_event:1010556421970079905> ",
-                Partner: "<:partnered_server_owner:1010556779450613810>",
-                PremiumEarlySupporter: "<:early_supporter:1010556776573317173>",
-                Staff: "<:employee:1010558705898627125>",
-                VerifiedDeveloper:
-                    "<:early_verified_bot_developer:1010557509938982933>",
-            },
-            userStatus: {
-                online: "<:online:1010472659743670283>Online",
-                idle: "<:idle:1010472641020305448>Idle",
-                dnd: "<:dnd:1010472622322090076>Do Not Disturb",
-                offline: "<:offline:1010472611987333180>Offline",
-                invisible: "<:offline:1010472611987333180>Offline",
-            },
-            userActivityType: {
-                0: "**Playing**",
-                1: "**Streaming**",
-                2: "**Listening to**",
-                3: "**Watching**",
-                4: "**Custom**",
-                5: "**Competing in**",
-            },
-            platformIcon: {
-                desktop: "<:platform_desktop:1012667505405345822> Desktop",
-                mobile: "<:platform_mobile:1012667508328767518> Mobile",
-                web: "<:platform_web:1012667510212018189> Web",
-            },
         };
 
         const maxDisplayRoles = (roles: Role[], maxFieldLength = 1024) => {

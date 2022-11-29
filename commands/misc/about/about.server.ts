@@ -1,4 +1,6 @@
-// some part of this code was taken from Kevin Foged (https://github.com/KevinFoged)
+// credits to Kevin Foged (https://github.com/KevinFoged) for the embeds field layout
+// GNU General Public License v3.0 - https://www.gnu.org/licenses/gpl-3.0.en.html
+// Developed by Kevin Foged, 29th of September 2022 - https://github.com/KevinFoged
 
 import {
     ChannelType,
