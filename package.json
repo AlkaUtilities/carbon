@@ -1,4 +1,7 @@
 {
+    "scripts": {
+        "build": ""
+    },
     "dependencies": {
         "@discordjs/opus": "^0.8.0",
         "@discordjs/voice": "^0.13.0",
@@ -14,7 +17,6 @@
         "mongoose": "^6.6.7",
         "sodium-native": "^3.4.1",
         "string-progressbar": "^1.0.4",
-        "typescript": "^4.8.4",
         "undici": "^5.12.0"
     },
     "devDependencies": {
@@ -22,6 +24,7 @@
         "@types/glob": "^8.0.0",
         "@types/mongoose": "^5.11.97",
         "@types/ms": "^0.7.31",
-        "@types/node": "^18.11.3"
+        "@types/node": "^18.11.3",
+        "typescript": "^5.1.6"
     }
 }

@@ -34,18 +34,19 @@ module.exports = {
         // Blacklist checks
         if (GuildBlacklistData)
             return await interaction.reply({
-                content: `This server has been blacklisted from using this bot on <t:${GuildBlacklistData.Time.toString().slice(
+                content: `This server has been blacklisted from using this bot on <t:${GuildBlacklistData?.Time?.toString().slice(
                     0,
                     10
-                )}:f>\nReason: ${GuildBlacklistData.Reason}`,
+                )}:f>\nReason: ${GuildBlacklistData?.Reason}`,
                 ephemeral: true,
             });
+
         if (UserBlacklistData)
             return await interaction.reply({
-                content: `You have been blacklisted from using this bot on <t:${UserBlacklistData.Time.toString().slice(
+                content: `You have been blacklisted from using this bot on <t:${UserBlacklistData?.Time?.toString().slice(
                     0,
                     10
-                )}:f>\nReason: ${UserBlacklistData.Reason}`,
+                )}:f>\nReason: ${UserBlacklistData?.Reason}`,
                 ephemeral: true,
             });
 

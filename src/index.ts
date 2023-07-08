@@ -9,7 +9,8 @@ import config from "./config";
 import {} from "./typings/discord";
 import {} from "./typings/enviroment";
 
-dotenv.config({ path: __dirname + "/.env" });
+dotenv.config({ path: __dirname + "\\.env" });
+
 const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } =
     GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
@@ -26,7 +27,7 @@ const client = new Client({
     ],
     partials: [User, Message, GuildMember, ThreadMember],
 });
-anticrash(client, process.env.ANTICRASH_WEBHOOKURL);
+anticrash(client, process.env.ANTICRASH);
 
 // Configs (objects)
 client.config = config;

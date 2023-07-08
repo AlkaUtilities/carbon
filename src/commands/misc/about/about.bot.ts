@@ -5,7 +5,6 @@ import {
     version,
 } from "discord.js";
 import { connection } from "mongoose";
-import os from "node:os";
 import ms from "ms";
 
 interface dependency {
@@ -58,15 +57,15 @@ module.exports = {
                 {
                     name: "General",
                     value: [
-                        `${
-                            developers.length > 1
-                                ? "**Developers**"
-                                : "**Developer**"
-                        }: ${developers.map((dev) => `<@${dev}> `)}`,
-                        `**Language**: <:typescript:1018125528789680139>`,
-                        `**Links**: [\[Avatar\]](${client.user?.displayAvatarURL()}) [\[Invite\]](https://discord.com/api/oauth2/authorize?client_id=${
-                            client.user?.id
-                        }&permissions=8&scope=bot%20applications.commands) [\[GitHub\]](https://github.com/alkautilities/nadc)`,
+                        // `${
+                        //     developers.length > 1
+                        //         ? "**Developers**"
+                        //         : "**Developer**"
+                        // }: ${developers.map((dev) => `<@${dev}> `)}`,
+                        // `**Language**: <:typescript:1018125528789680139>`,
+                        // `**Links**: [\[Avatar\]](${client.user?.displayAvatarURL()}) [\[Invite\]](https://discord.com/api/oauth2/authorize?client_id=${
+                        //     client.user?.id
+                        // }&permissions=8&scope=bot%20applications.commands) [\[GitHub\]](https://github.com/alkautilities/nadc)`,
                         `Database Status : ${status[connection.readyState]}`,
                     ].join("\n"),
                 },
