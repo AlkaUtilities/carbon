@@ -12,8 +12,8 @@ import chalk from "chalk";
  */
 async function load_events(client: Client) {
     const table = new Table({
-        head: ["Event Name", "Status"],
-        colWidths: [26, 11],
+        head: ["#", "Event Name", "Status"],
+        colWidths: [4, 26, 11],
         chars: {
             mid: "",
             "left-mid": "",
@@ -32,15 +32,20 @@ async function load_events(client: Client) {
     let i = 0;
     for (const file of files) {
         i++;
-        process.stdout.write(
+        // process.stdout.write(
+        //     chalk.green(`[HANDLER] Loading event files: `) +
+        //         chalk.yellow(`${i}/${files.length}`) +
+        //         "\r"
+        // );
+        console.log(
             chalk.green(`[HANDLER] Loading event files: `) +
-                chalk.yellow(`${i}/${files.length}`) +
-                "\r"
+                chalk.yellow(`${i.toString()}/${files.length}`)
         );
         const event = require(file);
         if (!event.name) {
             // check if file has property "name"
             table.push([
+                i.toString(),
                 event.friendlyName
                     ? event.friendlyName.length > 18
                         ? chalk.blue(event.friendlyName.slice(0, 18) + "...")
@@ -67,6 +72,7 @@ async function load_events(client: Client) {
         }
 
         table.push([
+            i.toString(),
             event.friendlyName
                 ? event.friendlyName.length > 18
                     ? chalk.blue(event.friendlyName.slice(0, 18) + "...")

@@ -168,7 +168,7 @@ module.exports = {
             .setTitle(
                 `${userf.namePrefix.length ? `${userf.namePrefix} ` : ""}${
                     user.username
-                }#${user.discriminator}${
+                }${user.discriminator !== "0" ? `#${user.discriminator}` : ""}${
                     userf.nameSuffix.length ? ` ${userf.nameSuffix}` : ""
                 }`
             )

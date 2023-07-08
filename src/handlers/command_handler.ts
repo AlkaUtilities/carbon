@@ -12,8 +12,8 @@ import config from "../config";
  */
 async function load_commands(client: Client, global: Boolean = false) {
     const table = new Table({
-        head: ["Command Name", "Type", "Status"],
-        colWidths: [26, 8, 8],
+        head: ["#", "Command Name", "Type", "Status"],
+        colWidths: [4, 26, 8, 8],
         chars: {
             mid: "",
             "left-mid": "",
@@ -43,10 +43,14 @@ async function load_commands(client: Client, global: Boolean = false) {
     let i = 0;
     for (const file of files) {
         i++;
-        process.stdout.write(
+        // process.stdout.write(
+        //     chalk.green(`[HANDLER] Loading command files: `) +
+        //         chalk.yellow(`${i}/${files.length}`) +
+        //         "\r"
+        // );
+        console.log(
             chalk.green(`[HANDLER] Loading command files: `) +
-                chalk.yellow(`${i}/${files.length}`) +
-                "\r"
+                chalk.yellow(`${i.toString()}/${files.length}`)
         );
         const command = require(file);
 
@@ -56,6 +60,7 @@ async function load_commands(client: Client, global: Boolean = false) {
 
         if (!("data" in command) && !("subCommand" in command)) {
             table.push([
+                i.toString(),
                 chalk.red(file.split("/").pop() || "unknown"),
                 "",
                 config.cli.status_bad,
@@ -67,6 +72,7 @@ async function load_commands(client: Client, global: Boolean = false) {
         if (command.subCommand) {
             client.subCommands.set(command.subCommand, command);
             table.push([
+                i.toString(),
                 command.subCommand,
                 chalk.magenta("SUB"),
                 config.cli.status_ok,
@@ -81,6 +87,7 @@ async function load_commands(client: Client, global: Boolean = false) {
         if (command.global) {
             globalCommands.push(command.data.toJSON());
             table.push([
+                i.toString(),
                 command.data.name,
                 chalk.blue("GLOBAL"),
                 config.cli.status_ok,
@@ -90,6 +97,7 @@ async function load_commands(client: Client, global: Boolean = false) {
         } else {
             devCommands.push(command.data.toJSON());
             table.push([
+                i.toString(),
                 command.data.name,
                 chalk.yellow("DEV"),
                 config.cli.status_ok,

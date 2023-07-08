@@ -3,8 +3,6 @@ import { EmbedBuilder, WebhookClient, Client } from "discord.js";
 import { inspect } from "node:util";
 
 export default (client: Client, URL: string) => {
-    console.log(URL);
-    return;
     const webhook = new WebhookClient({ url: URL });
     const embed = new EmbedBuilder().setColor("Red");
 

@@ -1,0 +1,8 @@
+services:
+    carbon:
+        build: .
+        container_name: client
+        ports:
+            - 3000
+        env_file:
+            - .env

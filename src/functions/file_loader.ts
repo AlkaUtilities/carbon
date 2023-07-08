@@ -12,7 +12,7 @@ const proGlob = promisify(glob);
  */
 async function load_file(directory_name: string) {
     const files = await proGlob(
-        `${process.cwd().replace(/\\/g, "/")}/${directory_name}/**/*.ts`
+        `${process.cwd().replace(/\\/g, "/")}/${directory_name}/**/*.+(ts|js)`
     );
     files.forEach((file) => delete require.cache[require.resolve(file)]); // removes all cached imports of files
     return files;

@@ -1,6 +1,9 @@
 {
     "scripts": {
-        "build": ""
+        "js": "npx tsc --outDir dist\\ && cd dist\\ && node index.js && cd ..",
+        "js:global": "npx tsc --outDir dist\\ && cd dist\\ && node index.js global && cd ..",
+        "ts": "cd src\\ && ts-node . && cd ..",
+        "ts:global": "cd src\\ && ts-node . global && cd .."
     },
     "dependencies": {
         "@discordjs/opus": "^0.8.0",
@@ -22,7 +25,6 @@
     "devDependencies": {
         "@types/cli-table": "^0.3.1",
         "@types/glob": "^8.0.0",
-        "@types/mongoose": "^5.11.97",
         "@types/ms": "^0.7.31",
         "@types/node": "^18.11.3",
         "typescript": "^5.1.6"

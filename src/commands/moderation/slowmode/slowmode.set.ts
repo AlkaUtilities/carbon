@@ -9,6 +9,7 @@ import ms from "ms";
 module.exports = {
     subCommand: "slowmode.set",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
+        await interaction.deferReply();
         const { channel, options } = interaction;
         if (!channel || channel.type === ChannelType.DM) return;
         const minRate = ms("1s");

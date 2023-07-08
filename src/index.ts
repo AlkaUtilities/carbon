@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+// import "dotenv/config";
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
 import { connect } from "mongoose";
 import chalk from "chalk";
@@ -9,7 +10,7 @@ import config from "./config";
 import {} from "./typings/discord";
 import {} from "./typings/enviroment";
 
-dotenv.config({ path: __dirname + "\\.env" });
+dotenv.config({ path: __dirname + "\\..\\.env" });
 
 const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } =
     GatewayIntentBits;

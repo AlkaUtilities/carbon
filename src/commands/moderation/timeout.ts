@@ -48,7 +48,7 @@ module.exports = {
             : "No reason provided.";
 
         if (!target)
-            return interaction.followUp({
+            return interaction.reply({
                 content: `Unable to find the member. Make sure the member is in the guild.`,
                 ephemeral: true,
             });
@@ -57,12 +57,12 @@ module.exports = {
             ms(duration) < ms("1s") ||
             ms(duration) > ms("28d")
         )
-            return interaction.followUp({
+            return interaction.reply({
                 content: `Duration provided is invalid, less than 1 second, or over the 28 days limit.\nProvided duration: \`${duration}\``,
                 ephemeral: true,
             });
         if (!target.manageable || !target.moderatable)
-            return interaction.followUp({
+            return interaction.reply({
                 content:
                     "Unable to take action on this user as this user isn't moderatable.",
             });
@@ -70,7 +70,7 @@ module.exports = {
             (member?.roles as GuildMemberRoleManager).highest.position <
             target.roles.highest.position
         )
-            return interaction.followUp({
+            return interaction.reply({
                 content:
                     "You can't take action on this user as your role isn't higher than theirs",
                 ephemeral: true,
@@ -93,7 +93,7 @@ module.exports = {
                         text: `Moderator: ${interaction.user.tag}`,
                         iconURL: interaction.user.displayAvatarURL(),
                     });
-                await interaction.followUp({ embeds: [embed] });
+                await interaction.reply({ embeds: [embed] });
             })
             .catch((err) => console.log(err));
     },
