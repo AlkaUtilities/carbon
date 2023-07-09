@@ -1,57 +1,57 @@
 # Documentation
 
-## Moderation Tools [[moderation]](commands/moderation/)
+## Moderation Tools [[moderation]](moderation/)
 A list of moderation tools
 
-### Ban [[ban.ts]](commands/moderation/ban.ts)
+### Ban [[ban.ts]](moderation/ban.ts)
 
 **Description:** Bans a user from the server.
 
 **Usage:** `/ban <user*: User> <reason: String>`
 
 
-### Unban [[unban.ts]](commands/moderation/unban.ts)
+### Unban [[unban.ts]](moderation/unban.ts)
 
 **Description:** Unbans a user from the server.
 
 **Usage:** `/unban <user*: User> <reason: String>`
 
-### Kick [[kick.ts]](commands/moderation/kick.ts)
+### Kick [[kick.ts]](moderation/kick.ts)
 
 **Description:** Kicks a user from the server.
 
 **Usage:** `/kick <user*: User> <reason: String>`
 
-### Purge [[purge.ts]](commands/moderation/purge.ts)
+### Purge [[purge.ts]](moderation/purge.ts)
 
 **Description:** Delete a specific amount of messages from a target/channel
 
 **Usage:** `/purge <all|user|bot>` 
-- All: `/purge all <amount*: Number>` [[purge.all.ts]](commands/moderation/purge/purge.all.ts)
-- User: `/purge user <amount*: Number> <user*: User>` [[purge.user.ts]](commands/moderation/purge/purge.user.ts)
-- Bot: `/purge bot <amount*: Number>` [[purge.bot.ts]](commands/moderation/purge/purge.bot.ts)
+- All: `/purge all <amount*: Number>` [[purge.all.ts]](moderation/purge/purge.all.ts)
+- User: `/purge user <amount*: Number> <user*: User>` [[purge.user.ts]](moderation/purge/purge.user.ts)
+- Bot: `/purge bot <amount*: Number>` [[purge.bot.ts]](moderation/purge/purge.bot.ts)
 
-### Timeout [[timeout.ts]](commands/moderation/timeout.ts)
+### Timeout [[timeout.ts]](moderation/timeout.ts)
 
 **Description:** Restricts a member's ability to communicate.
 
 **Usage:** `/timeout <user*: User> <duration*: Number> <reason: String>`
 
-### Slowmode [[slowmode.ts]](commands/moderation/slowmode.ts)
+### Slowmode [[slowmode.ts]](moderation/slowmode.ts)
 
 **Description:** Sets the slowmode for a specific channel
 
 **Usage:** `/slowmode <set|disable>`
-- Set: `/slowmode set <rate*: String> <reason: String> <duration: String>` [[slowmode.set.ts]](commands/moderation/slowmode/slowmode.set.ts)
-- Disable: `/slowmode disable <reason: String> <duration: String>` [[slowmode.disable.ts]](commands/moderation/slowmode/slowmode.disable.ts)
+- Set: `/slowmode set <rate*: String> <reason: String> <duration: String>` [[slowmode.set.ts]](moderation/slowmode/slowmode.set.ts)
+- Disable: `/slowmode disable <reason: String> <duration: String>` [[slowmode.disable.ts]](moderation/slowmode/slowmode.disable.ts)
 
-### Modcheck [[modcheck.ts]](commands/moderation/modcheck.ts)
+### Modcheck [[modcheck.ts]](moderation/modcheck.ts)
 
 **Description:** Check if a member is bannable, kickable, moderatable, and managable
 
 **Usage:** `/modcheck <member: User> <ephemeral: Boolean>`
 
-## Miscellaneous [[misc]](commands/misc/)
+## Miscellaneous [[misc]](misc/)
 A list of miscellaneous stuff
 
 ### Pfp
@@ -60,18 +60,18 @@ A list of miscellaneous stuff
 
 **Usage:** `/pfp <user: User>`
 
-## Developer [[developer]](commands/developer/)
+## Developer [[developer]](developer/)
 
-### Ping [[ping.ts]](commands/developer/ping.ts)
+### Ping [[ping.ts]](developer/ping.ts)
 
 **Description:** Check the bot's latency
 
 **Usage:** `/ping`
 
-### Reload [[reload]](commands/developer/reload.ts)
+### Reload [[reload]](developer/reload.ts)
 
-**Description:** Reloads commands/events
+**Description:** Reloads events
 
-**Usage:** `/reload <commands|events>`
-- Commands: `/reload commands <global: Boolean>`
-- Commands: `/reload events`
+**Usage:** `/reload <src/commands|events>`
+- src/commands: `/reload src/commands <global: Boolean>`
+- src/commands: `/reload events`

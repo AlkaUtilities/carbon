@@ -18,7 +18,7 @@ module.exports = {
                 .addBooleanOption((boolean) =>
                     boolean
                         .setName("global")
-                        .setDescription("Reload global commamds?")
+                        .setDescription("Reload global commands?")
                 )
         )
         .addSubcommand((o) =>
