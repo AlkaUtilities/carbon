@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-buildPath=".\dist"
-srcPath=".\src"
+buildPath="dist"
+srcPath="src"
 
 set -e
 
