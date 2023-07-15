@@ -12,8 +12,8 @@ module.exports = {
             )
         );
 
-        const global = process.argv[2] === "global" ? true : false;
-
-        load_commands(client, global);
+        load_commands(client, true).then(() => {
+            if (process.argv[2] === "--test") process.exit(0);
+        });
     },
 };

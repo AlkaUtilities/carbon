@@ -1,6 +1,9 @@
-Steals a user's pfp
+- Description: Steals a user's pfp
 
-Usage: /pfp <user*: [[User]]>
+- Usage: `/pfp <user*: User>`
 
-Parameters:
-	user: User to steal profile picture
+- Parameters:
+	- **user**:
+		- **Type**:  [User](../../Types/User.md)
+		- **Description**: User to steal profile picture
+		- **Required**: Yes

@@ -1,0 +1,29 @@
+name: build and run
+
+on: [push, pull_request]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js 16
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "16"
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Compile to JavaScript using esbuild
+              run: npm run test:compile
+
+            - name: Run
+              run: npm run test:run
+              env:
+                  TOKEN: ${{ secrets.TOKEN }}
+                  MONGODB: ${{ secrets.MONGODB }}
+                  ANTICRASH: ${{ secrets.ANTICRASH }}

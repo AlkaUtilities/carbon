@@ -1,3 +1,3 @@
-Check bot's latency
+- Description: Check bot's latency
 
-Usage: /ping
+- Usage: `/ping`

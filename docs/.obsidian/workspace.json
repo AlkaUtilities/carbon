@@ -4,15 +4,19 @@
     "type": "split",
     "children": [
       {
-        "id": "d300eaf9f484b2ba",
+        "id": "53a30be12c06c33e",
         "type": "tabs",
         "children": [
           {
-            "id": "c8ed204ff4ecbb07",
+            "id": "f9cc84604eb45f14",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "Commands/Developer/Blacklist.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Commands/Developer/Blacklist.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "Commands/Developer/Blacklist.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "Commands/Developer/Blacklist.md"
+              }
             }
           }
         ]
@@ -138,31 +146,33 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c8ed204ff4ecbb07",
+  "active": "f9cc84604eb45f14",
   "lastOpenFiles": [
-    "Commands/Developer/Ping.md",
+    "Commands/Moderation/Unban.md",
     "Commands.md",
-    "Types/User.md",
+    "README.md",
+    "Commands/Moderation/Ban.md",
     "Commands/Developer/Blacklist.md",
+    "Commands/Developer/Ping.md",
+    "Commands/Developer/Reload.md",
+    "Commands/Miscellaneous/About.md",
     "Commands/Miscellaneous/Pfp.md",
+    "Commands/Moderation/Kick.md",
+    "Commands/Moderation/Modcheck.md",
     "Commands/Moderation/Purge.md",
     "Commands/Moderation/Slowmode.md",
-    "Commands/Moderation/Unban.md",
     "Commands/Moderation/Timeout.md",
-    "Commands/Moderation/Modcheck.md",
-    "Commands/Moderation/Kick.md",
-    "Commands/Moderation/Ban.md",
-    "Commands/Miscellaneous/About.md",
-    "Commands/Developer/Reload.md",
+    "Types/User.md",
+    "Types/String.md",
     "Types/Custom/Blacklist.Options.md",
+    "Types/Boolean.md",
+    "Types/Number.md",
+    "Untitled.canvas",
     "Types/Custom",
     "Types/Developer/Blacklist",
     "Types/Developer",
     "Commands/Developer/Untitled",
     "Commands/Developer",
-    "Types/Number.md",
-    "Types/String.md",
-    "Types/Boolean.md",
     "mdn web docs.md",
     "Commands/Moderation.md",
     "Commands/Miscellaneous/Untitled",

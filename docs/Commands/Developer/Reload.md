@@ -1,11 +1,14 @@
-Reloads the bot
+- Description: Reloads the bot
 
-Usage: /reload <commands|events>
+- Usage: `/reload <commands|events>`
 
-Commands
-	Usage: /reload commands <global: [[Boolean]]>
-	Parameters:
-		global: Reload global commands?
+- Commands
+	- **Usage**: `/reload commands <global: Boolean>`
+	- **Parameters**:
+		- **global**: 
+			- **Type**: [Boolean](../../Types/Boolean.md)
+			- **Description**: Reload global commands?
+			- **Required**: No
 
-Events
-	Usage: /reload events
+- Events
+	- **Usage**: `/reload events`

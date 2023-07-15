@@ -1,18 +1,33 @@
-Sets the slowmode for current channel
+- Description: Sets the slowmode for current channel
 
-Usage: /slowmode <set|disable>
+- Usage: `/slowmode <set|disable>`
 
-Set
-	Description: Sets the slowmode for current channel
-	Usage: /slowmode set <rate*: [[String]]> <reason: [[String]]> <duration: [[String]]>
-	Parameters:
-		**rate**: The rate at which the user can send a new message (5s, 1m, 30m, etc.) (required)
-		**reason**: Reason for enabling slowmode
-		**duration**: Duration for the slowmode (5s, 1m, 30m, etc.), after which it will disable itself.
+- Set
+	- **Description**: Sets the slowmode for current channel
+	- **Usage**: /slowmode set <rate*: [String](../../Types/String.md)> <reason: [String](../../Types/String.md)> <duration: [String](../../Types/String.md)>
+	- **Parameters**:
+		- **rate**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: The rate at which the user can send a new message (5s, 1m, 30m, etc.)
+			- **Required**: Yes
+		- **reason**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: Reason for enabling slowmode
+			- **Required**: No
+		- **duration**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: Duration for the slowmode (5s, 1m, 30m, etc.), after which it will disable itself.
+			- **Required**: No
 
-Disable
-	Description: Disables the slowmode for current channel
-	Usage: /slowmode disable <reason: [[String]]> <duration: [[String]]>
-	Parameters:
-		**reason**: Reason for disabling slowmode
-		**duration**: Duration for the disabled slowmode (5s, 1m, 30m, etc.), after which it will enable itself.
+- Disable
+	- **Description**: Disables the slowmode for current channel
+	- **Usage**: /slowmode disable <reason: [String](../../Types/String.md)> <duration: [String](../../Types/String.md)>
+	- **Parameters**:
+		- **reason**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: Reason for disabling slowmode
+			- **Required**: No
+		- **duration**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: Duration for the disabled slowmode (5s, 1m, 30m, etc.), after which it will enable itself.
+			- **Required**: No

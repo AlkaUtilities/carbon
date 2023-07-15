@@ -1,8 +1,8 @@
 export default {
     // General stuff
     cli: {
-        status_ok: "🟩 OK",
-        status_bad: "🟥 BAD",
+        status_ok: "OK",
+        status_bad: "BAD",
     },
 
     log: {

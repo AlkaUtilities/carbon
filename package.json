@@ -1,9 +1,9 @@
 {
     "scripts": {
-        "js": "npx tsc --outDir dist\\ && cd dist\\ && node index.js && cd ..",
-        "js:global": "npx tsc --outDir dist\\ && cd dist\\ && node index.js global && cd ..",
+        "js": "powershell -noexit \"&\"\".\\scripts\\build.ps1\\\"\"; cd dist; node --enable-source-maps index.js; cd ..\"",
         "ts": "cd src\\ && ts-node . && cd ..",
-        "ts:global": "cd src\\ && ts-node . global && cd .."
+        "test:compile": "./scripts/build.sh",
+        "test:run": "cd dist/ && node --enable-source-maps index.js --test"
     },
     "dependencies": {
         "@discordjs/opus": "^0.8.0",

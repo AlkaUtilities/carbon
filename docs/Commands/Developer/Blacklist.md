@@ -1,16 +1,31 @@
-Blacklists a user/guild
+- Description: Blacklists a user/guild
 
-Usage: /blacklist <add|remove>
+- Usage: `/blacklist <add|remove>`
 
-Add
-	Usage: /blacklist add <options*: [[Blacklist.Options]]> <id*: [[String]]> <reason: [[String]]>
-	Parameters:
-		**options**: User/Guild (required)
-		**id**: ID of User/Guild
-		**reason**: Reason for blacklisting the user/guild
+- Add
+	- **Usage:** `/blacklist add <options*: Blacklist.Options> <id*: String> <reason: String>`
+	- **Parameters**:
+		- **options**:
+			- **Type**: [Blacklist.Options](../../Types/Custom/Blacklist.Options.md)
+			- **Description**: User/Guild
+			- **Required**: Yes
+		- **id**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: ID of User/Guild
+			- **Required**: Yes
+		- **reason**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: Reason for blacklisting the user/guild
+			- **Required**: No
 
-Remove
-	Usage: /blacklist remove <options*: [[Blacklist.Options]]> <id*: [[String]]> <reason: [[String]]>
-	Parameters:
-		**options**: User/Guild
-		**id**: ID of User/Guild
+- **Remove**
+	- **Usage**: `/blacklist remove <options*: Blacklist.Options> <id*: String> <reason: String>`
+	- **Parameters**:
+		- **options**:
+			- **Type**: [Blacklist.Options](../../Types/Custom/Blacklist.Options.md)
+			- **Description**: User/Guild
+			- **Required**: Yes
+		- **id**:
+			- **Type**: [String](../../Types/String.md)
+			- **Description**: ID of User/Guild
+			- **Required**: Yes

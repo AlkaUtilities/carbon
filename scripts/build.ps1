@@ -1,7 +1,6 @@
 # Does the same thing as build.sh except in Powershell (for Windows)
-
 $buildPath = "dist"
-$srcPath = 'src'
+$srcPath = "src"
 
 if (Test-Path -Path $buildPath -PathType Container) {
     Remove-Item -Path $buildPath -Recurse -Force

@@ -1,6 +1,6 @@
 import { Collection } from "discord.js";
 
-// SUMMARY: Extends the client to show "client.commands" and "client.events" as valid properties from Client
+// SUMMARY: Extends the client to show "client.commands", "client.events", and some other as valid properties from Client
 declare module "discord.js" {
     interface Client {
         commands: Collection<unknown, any>;

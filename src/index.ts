@@ -1,22 +1,16 @@
 import dotenv from "dotenv";
-// import "dotenv/config";
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
-import { connect } from "mongoose";
+import { connect, connection } from "mongoose";
 import chalk from "chalk";
 import { load_events } from "./handlers/event_handler";
 import anticrash from "./handlers/anticrash";
 import config from "./config";
-
-import {} from "./typings/discord";
-import {} from "./typings/enviroment";
 
 dotenv.config({ path: __dirname + "\\..\\.env" });
 
 const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } =
     GatewayIntentBits;
 const { User, Message, GuildMember, ThreadMember } = Partials;
-
-// all intent: 131071
 
 const client = new Client({
     intents: [
@@ -28,7 +22,8 @@ const client = new Client({
     ],
     partials: [User, Message, GuildMember, ThreadMember],
 });
-anticrash(client, process.env.ANTICRASH);
+
+if (process.env.ANTICRASH) anticrash(client, process.env.ANTICRASH);
 
 // Configs (objects)
 client.config = config;
@@ -44,6 +39,8 @@ load_events(client);
 client.login(process.env.TOKEN);
 
 console.log(chalk.green("[MONGOOSE] Connecting to database..."));
-connect(process.env.MONGODB_SRV, () => {
-    console.log(chalk.green("[MONGOOSE] Connected to database."));
-});
+connect(process.env.MONGODB)
+    .then(() => {
+        console.log(chalk.green("[MONGOOSE] Connected to database."));
+    })
+    .catch((err) => console.log(err));
