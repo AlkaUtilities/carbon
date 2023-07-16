@@ -1,11 +1,9 @@
-<h1 align="center">
+<div align="center">
     <img src="./docs/Images/readme-dark.png#gh-light-mode-only" width="400px">
     <img src="./docs/Images/readme-light.png#gh-dark-mode-only" width="400px">
-</h1>
-
-
-<h4 align="center">A Moderation Discord Bot</h4>
-<h6 align="center">⚠ This bot is not intended for public use, so you will need to configure it according to your specific needs ⚠<h6>
+    <h4>A Moderation Discord Bot</h4>
+    <h6>This bot is not intended for public use, so you will need to configure it according to your specific needs.<h6>
+</div>
 
 
 ## About
