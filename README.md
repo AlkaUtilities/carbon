@@ -1,6 +1,15 @@
 <div align="center">
 
-<h1>Carbon</h1>
+<!-- <h1>Carbon</h1> -->
+
+<a href="#gh-light-mode-only">
+  <img src="./docs/Images/readme-dark.png" width="400px">
+</a>
+
+<a href="#gh-dark-mode-only">
+  <img src="./docs/Images/readme-light.png" width="400px">
+</a>
+
 <h4>A moderation Discord bot</h4>
 <h6>This bot is not intended for public use, so you will need to configure it according to your specific needs.<h6>
 
