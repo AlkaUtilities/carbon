@@ -1,19 +1,12 @@
-<div align="center">
+<h1 align="center">
+    <img src="./docs/Images/readme-dark.png#gh-light-mode-only" width="400px">
+    <img src="./docs/Images/readme-light.png#gh-dark-mode-only" width="400px">
+</h1>
 
-<!-- <h1>Carbon</h1> -->
 
-<a href="#gh-light-mode-only">
-  <img src="./docs/Images/readme-dark.png" width="400px">
-</a>
+<h4 align="center">A Moderation Discord Bot</h4>
+<h6 align="center">⚠ This bot is not intended for public use, so you will need to configure it according to your specific needs ⚠<h6>
 
-<a href="#gh-dark-mode-only">
-  <img src="./docs/Images/readme-light.png" width="400px">
-</a>
-
-<h4>A moderation Discord bot</h4>
-<h6>This bot is not intended for public use, so you will need to configure it according to your specific needs.<h6>
-
-</div>
 
 ## About
 Carbon is a Discord bot for the Alka Hangout [Discord server](https://discord.com/invite/9h8QHAj2a5). The bot is currently in development and not actively in use on the server yet.
