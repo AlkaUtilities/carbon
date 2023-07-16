@@ -1,12 +1,13 @@
 <div align="center">
 
-# Carbon
-#### A moderation Discord bot
+<h1>Carbon</h1>
+<h4>A moderation Discord bot</h4>
+<h6>This bot is not intended for public use, so you will need to configure it according to your specific needs.<h6>
 
 </div>
 
 ## About
-Carbon is a Discord bot for the Alka Hangout [Discord server](https://discord.com/invite/9h8QHAj2a5). The bot is currently in development and not actively in use on the server yet. Please note that this bot was not meant for public use meaning you'll need to configure the bot to your need.
+Carbon is a Discord bot for the Alka Hangout [Discord server](https://discord.com/invite/9h8QHAj2a5). The bot is currently in development and not actively in use on the server yet.
 
 ## Setup
 
