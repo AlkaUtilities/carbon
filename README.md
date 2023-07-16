@@ -71,7 +71,7 @@ All configuration are stored in the [config file](src/config.ts)
 
 
 ## Commands Documentation
-Go to [docs](docs/)
+Go to [docs](docs/Commands/)
 
 ## Known Issues
 
