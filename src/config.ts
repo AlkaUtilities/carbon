@@ -25,6 +25,7 @@ export default {
         false: "<:false:1010479954372349993>",
 
         bot: {
+            // developer: "<a:developer:1010538744803233822>",
             developer: "<a:developer:1010538744803233822>",
         },
 

@@ -30,11 +30,12 @@ const nsfwLevel = {
     3: "Age restricted",
 };
 const regions = {
-    "en-US": "English US",
-    "en-GB": "English GB",
+    id: "Indonesian",
+    "en-US": "EnglishUS",
+    "en-GB": "EnglishGB",
     bg: "Bulgarian",
-    "zh-CN": "Chinese CN",
-    "zh-TW": "Chinese TW",
+    "zh-CN": "ChineseCN",
+    "zh-TW": "ChineseTW",
     hr: "Croatian",
     cs: "Czech",
     da: "Danish",
@@ -294,7 +295,11 @@ module.exports = {
                         `**Time Created**: <t:${guild.createdTimestamp
                             ?.toString()
                             .slice(0, 10)}:f>`,
-                        `**Avatar**: [\[Link to avatar\]](${guild.iconURL()})`,
+                        `**Icon**: ${
+                            guild.iconURL()
+                                ? `[\[Link to icon\]](${guild.iconURL()})`
+                                : "None"
+                        }`,
                         `**Region**: ${regions[guild.preferredLocale]}`,
                         `**Vanity URL**: ${guild.vanityURLCode || "None"}`,
                     ].join("\n"),
@@ -304,7 +309,7 @@ module.exports = {
                     inline: true,
                     value:
                         guild.features
-                            .map((f) => `- ${toPascalCase(f, " ")}`)
+                            .map((f) => `\- ${toPascalCase(f, " ")}`)
                             .join("\n") || "Nones",
                 },
                 {
