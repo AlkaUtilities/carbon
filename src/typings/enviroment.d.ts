@@ -4,6 +4,8 @@ declare global {
             TOKEN: string;
             MONGODB: string;
             ANTICRASH: string;
+            CLIENT_SECRET: string;
+            SESSION_SECRET: string;
         }
     }
 }

@@ -2,12 +2,15 @@
 $buildPath = "dist"
 $srcPath = "src"
 
-if (Test-Path -Path $buildPath -PathType Container) {
-    Remove-Item -Path $buildPath -Recurse -Force
-}
+# if (Test-Path -Path $buildPath -PathType Container) {
+#     Remove-Item -Path $buildPath -Recurse -Force
+# }
 
 New-Item -ItemType Directory -Path $buildPath
 
 $ENTRYPOINTS = Get-ChildItem -Path $srcPath -Recurse -File -Include "*.ts", "*.js" | Where-Object { $_.FullName -notlike "*\node_modules\*" }
 
 node node_modules\esbuild\bin\esbuild $ENTRYPOINTS --log-level=warning --outdir=$buildPath --outbase=$srcPath --sourcemap --target='node16' --platform='node' --format='cjs'
+
+Copy-Item -Path "$srcPath\views\" -Destination "$buildPath\views\" -Recurse
+Copy-Item -Path "$srcPath\public\" -Destination "$buildPath\public\" -Recurse

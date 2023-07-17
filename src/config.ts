@@ -58,4 +58,11 @@ export default {
         max: 25,
         required: 100, // levelupGoal: level * required
     },
+
+    oauth2: {
+        clientId: "1120640044689006633",
+        redirect: "/auth/redirect",
+    },
+
+    expressPort: 3000,
 };

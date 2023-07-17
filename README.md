@@ -67,6 +67,9 @@ All configuration are stored in the [config file](src/config.ts)
   - `min` : Minimum amount of XP
   - `max` : Maximum amount of XP
   - `required` : XP required to levlup 
+- `oauth2` : OAuth2 settings
+  - `redirect` : OAuth2 redirect url
+- `expressPort` : Express server port
 
 
 
