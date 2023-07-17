@@ -1,4 +1,5 @@
-require("dotenv").config({ path: __dirname + "\\..\\..\\.env" });
+import { config as dotenv } from "dotenv";
+dotenv({ path: __dirname + "\\..\\.env" });
 import { Router } from "express";
 import passport from "passport";
 
@@ -16,5 +17,16 @@ router.get(
         res.send(req.user);
     }
 );
+
+router.get("/logout", (req, res) => {
+    if (req.user) {
+        req.session.destroy((err) => {
+            if (err) console.log(err);
+            res.redirect("/"); //Inside a callback… bulletproof!
+        });
+    }
+
+    res.redirect("/");
+});
 
 export { router };

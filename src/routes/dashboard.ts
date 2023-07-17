@@ -3,7 +3,7 @@ import { Router, Request, Response } from "express";
 const router = Router();
 
 router.get("/", isAuthorized, (req, res) => {
-    res.send(200);
+    res.status(200).render("dashboard");
 });
 
 /**

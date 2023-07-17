@@ -1,4 +1,5 @@
-require("dotenv").config({ path: __dirname + "\\..\\.env" });
+import { config as dotenv } from "dotenv";
+dotenv({ path: __dirname + "\\..\\.env" });
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
 import { connect, connection } from "mongoose";
 import chalk from "chalk";
@@ -38,6 +39,7 @@ app.use(
         },
         saveUninitialized: false,
         name: "discord.oauth2",
+        resave: true,
     })
 );
 
@@ -47,15 +49,33 @@ app.use(passport.session());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Middleware Routes
 app.use("/auth", authRouter);
 app.use("/dashboard", dashboardRouter);
 
 // Routes
-app.get("/", (req, res) => {
-    res.render("home");
+app.get("/", isAuthorized, (req, res) => {
+    res.status(200).render("home");
 });
+
+/**
+ * Middleware to check if user is logged in
+ */
+function isAuthorized(
+    req: express.Request,
+    res: express.Response,
+    next: CallableFunction
+) {
+    if (req.user) {
+        // If user is logged in, go to dashboard
+        res.redirect("/dashboard");
+    } else {
+        // If user isn't logged in, continue
+        next();
+    }
+}
 
 app.get("/ping", (req, res) => {
     res.sendStatus(200);
