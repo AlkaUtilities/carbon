@@ -20,13 +20,12 @@ router.get(
 
 router.get("/logout", (req, res) => {
     if (req.user) {
-        req.session.destroy((err) => {
+        req.logout((err) => {
             if (err) console.log(err);
-            res.redirect("/"); //Inside a callback… bulletproof!
         });
+    } else {
+        res.redirect("/");
     }
-
-    res.redirect("/");
 });
 
 export { router };

@@ -8,7 +8,13 @@
         "strict": true,
         "skipLibCheck": true,
         "outDir": "./dist",
-        "typeRoots": ["./node_modules/@types", "./src/typings"]
+        "typeRoots": ["./node_modules/@types", "./src/typings"],
+        "baseUrl": "./",
+        "paths": {
+            // typescript would get mad at index ln 52 because
+            // there are 2 different mongodb type declaration files
+            "mongodb": ["node_modules/mongodb"]
+        }
     },
     "exclude": ["disabled"]
 }

@@ -7,6 +7,7 @@ import express from "express";
 import session from "express-session";
 import passport from "passport";
 import path from "path";
+import MongoStore from "connect-mongo";
 import { load_events } from "./handlers/event_handler";
 import anticrash from "./handlers/anticrash";
 import config from "./config";
@@ -31,6 +32,13 @@ const client = new Client({
 
 const app = express();
 
+console.log(chalk.green("[MONGOOSE] Connecting to database..."));
+const db = connect(process.env.MONGODB)
+    .then(() => {
+        console.log(chalk.green("[MONGOOSE] Connected to database."));
+    })
+    .catch((err) => console.log(err));
+
 app.use(
     session({
         secret: process.env.SESSION_SECRET,
@@ -39,7 +47,10 @@ app.use(
         },
         saveUninitialized: false,
         name: "discord.oauth2",
-        resave: true,
+        resave: false,
+        store: MongoStore.create({
+            client: connection.getClient(),
+        }),
     })
 );
 
@@ -95,13 +106,6 @@ client.subCommands = new Collection();
 load_events(client);
 
 client.login(process.env.TOKEN);
-
-console.log(chalk.green("[MONGOOSE] Connecting to database..."));
-connect(process.env.MONGODB)
-    .then(() => {
-        console.log(chalk.green("[MONGOOSE] Connected to database."));
-    })
-    .catch((err) => console.log(err));
 
 app.listen(config.expressPort, () => {
     console.log(

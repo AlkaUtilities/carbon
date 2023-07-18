@@ -36,7 +36,7 @@ passport.use(
                         UserID: profile.id,
                     });
 
-                    const savedUser = newUser.save();
+                    const savedUser = await newUser.save();
 
                     done(null, savedUser);
                 }

@@ -6,7 +6,9 @@ $srcPath = "src"
 #     Remove-Item -Path $buildPath -Recurse -Force
 # }
 
-New-Item -ItemType Directory -Path $buildPath
+if (-Not (Test-Path -Path $folderPath -PathType Container)) {
+    New-Item -ItemType Directory -Path $buildPath
+}
 
 $ENTRYPOINTS = Get-ChildItem -Path $srcPath -Recurse -File -Include "*.ts", "*.js" | Where-Object { $_.FullName -notlike "*\node_modules\*" }
 
