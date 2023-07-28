@@ -1,5 +1,10 @@
-import config from "./config";
+import yaml from "js-yaml";
 import fs from "fs";
+import { Config } from "./typings/config";
+
+const config: Config = yaml.load(
+    fs.readFileSync("./config.yml", "utf-8")
+) as Config;
 
 const dateFilename =
     new Date().toISOString().replace(/[/\\?%*:|"<>]/g, "-") + " ";

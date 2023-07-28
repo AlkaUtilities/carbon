@@ -51,7 +51,7 @@ module.exports = {
                 XP: amount,
             });
 
-            // FIXME do checking here aswell
+            // do checking here aswell
             return;
         }
 
@@ -59,7 +59,7 @@ module.exports = {
         const levelGoal = UserLevelingData.Level * LevelGoalMultiplier;
 
         if (UserLevelingData.XP + amount >= levelGoal) {
-            // FIXME if level goal is 100, when calculating after that level goal, the goal would stay on 100
+            // if level goal is 100, when calculating after that level goal, the goal would stay on 100
             // e.x. level 1 user given 600, it should levelup the player to level 3, but instead levels it up
             // to 7. Expected: 600 - 100 (lvl 1) = 500 - 200 (lvl 2) = 300 - 300 (lvl 3) = 0;
             // Received: 600 - 100 (lvl 1) = 500 - 100 (lvl 2) = 400 - 100 (lvl 3) = 300 - 100 (lvl 4) = 200

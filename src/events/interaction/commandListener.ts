@@ -1,5 +1,4 @@
 import { ChatInputCommandInteraction, Client } from "discord.js";
-import config from "../../config";
 import UserBlacklist from "../../schemas/userBlacklist";
 import GuildBlacklist from "../../schemas/guildBlacklist";
 
@@ -19,7 +18,7 @@ module.exports = {
 
         if (
             command.developer &&
-            !config.developersId.includes(interaction.user.id)
+            !client.config.developersId.includes(interaction.user.id)
         )
             return await interaction.reply({
                 content: "You don't have access to this command.",

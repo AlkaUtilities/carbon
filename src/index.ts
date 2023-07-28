@@ -8,12 +8,13 @@ import session from "express-session";
 import passport from "passport";
 import path from "path";
 import MongoStore from "connect-mongo";
-import { load_events } from "./handlers/event_handler";
+import { Server } from "socket.io";
+import http from "http";
+import Config from "./config";
 import anticrash from "./handlers/anticrash";
-import config from "./config";
-import { router as authRouter } from "./routes/auth";
+import { load_events } from "./handlers/event_handler";
+import { router as authRouter, isUnauthorized } from "./routes/auth";
 import { router as dashboardRouter } from "./routes/dashboard";
-import "./strategies/discordStrategy";
 
 const { Guilds, GuildMembers, GuildMessages, GuildPresences, DirectMessages } =
     GatewayIntentBits;
@@ -30,10 +31,26 @@ const client = new Client({
     partials: [User, Message, GuildMember, ThreadMember],
 });
 
+// Configs (objects)
+const config = Config.load();
+
+client.config = config;
+client.icon = config.icons;
+
+import "./strategies/discordStrategy";
+
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: {
+        origin: ["http://localhost:8080"],
+    },
+});
+
+io.sockets.setMaxListeners(0);
 
 console.log(chalk.green("[MONGOOSE] Connecting to database..."));
-const db = connect(process.env.MONGODB)
+connect(process.env.MONGODB)
     .then(() => {
         console.log(chalk.green("[MONGOOSE] Connected to database."));
     })
@@ -53,68 +70,69 @@ app.use(
         }),
     })
 );
-
-// Passport
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+console.log(
+    chalk.green(`[EXPRESS] Using ${path.join(__dirname, "public")} as public`)
+);
+
+/** Middleware to pass the socket.io instance to the route handlers */
+app.use((req, res, next) => {
+    req.io = io;
+    next();
+});
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.join(__dirname, "public")));
+console.log(
+    chalk.green(`[EXPRESS] Using ${path.join(__dirname, "views")} as views`)
+);
 
-// Middleware Routes
 app.use("/auth", authRouter);
 app.use("/dashboard", dashboardRouter);
 
-// Routes
-app.get("/", isAuthorized, (req, res) => {
+app.get("/", isUnauthorized, (req, res) => {
     res.status(200).render("home");
 });
-
-/**
- * Middleware to check if user is logged in
- */
-function isAuthorized(
-    req: express.Request,
-    res: express.Response,
-    next: CallableFunction
-) {
-    if (req.user) {
-        // If user is logged in, go to dashboard
-        res.redirect("/dashboard");
-    } else {
-        // If user isn't logged in, continue
-        next();
-    }
-}
 
 app.get("/ping", (req, res) => {
     res.sendStatus(200);
 });
 
-if (process.env.ANTICRASH) anticrash(client, process.env.ANTICRASH);
+app.use((req, res, next) => {
+    res.status(404).render("error", {
+        name: "Not found",
+        code: 404,
+        description: `The requested URL ${req.url} does not exist.`,
+    });
+});
 
-// Configs (objects)
-client.config = config;
-client.icon = config.icons;
+if (process.env.ANTICRASH) anticrash(client, process.env.ANTICRASH);
 
 // Collections (Discord.Collection)
 client.events = new Collection();
 client.commands = new Collection();
 client.subCommands = new Collection();
 
-load_events(client);
+// load_events(client);
 
 client.login(process.env.TOKEN);
 
-app.listen(config.expressPort, () => {
+app.listen(parseInt(process.env.EXPRESS_PORT), () => {
     console.log(
         chalk.green(
-            "[EXPRESS] Listening on port " + chalk.yellow(config.expressPort)
+            "[EXPRESS] Listening on port " +
+                chalk.yellow(process.env.EXPRESS_PORT)
         )
     );
 });
 
+io.listen(parseInt(process.env.SOCKETIO_PORT));
+
 process.on("SIGINT", () => {
     process.exit();
 });
+
+export { client };

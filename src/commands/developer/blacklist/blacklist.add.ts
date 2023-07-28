@@ -1,7 +1,6 @@
 import { ChatInputCommandInteraction, Client } from "discord.js";
 import UserBlacklist from "../../../schemas/userBlacklist";
 import GuildBlacklist from "../../../schemas/guildBlacklist";
-import config from "../../../config";
 
 module.exports = {
     subCommand: "blacklist.add",
@@ -10,6 +9,8 @@ module.exports = {
         let id: any = interaction.options.getString("id", true);
         const reason =
             interaction.options.getString("reason") || "No reason provided.";
+
+        const config = client.config;
 
         if (Number.isNaN(Number(id)))
             return interaction.followUp({ content: "ID is not a number." });

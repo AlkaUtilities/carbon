@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="darkreader-lock">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs - Carbon</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <!-- JavaScripts -->
+    <script src="https://kit.fontawesome.com/e524614bb5.js" crossorigin="anonymous"></script>
+    <script src="/javascripts/logs.js"></script>
+</head>
+
+<body>
+    <%- include('../partials/sidenav') %>
+    <main>
+        <section class="container logs-parent-container">
+            <div class="logs-container">
+                <% logs.forEach((i) => { %>
+                    <div class="panel log-item" id="log">
+                        <div class="summary noselect">
+                            <div class="left">
+                                <img src="<%- i.avatarURL %>" alt="Avatar">
+                                <div>
+                                    <p class="title"><%- i.title %></p>
+                                    <p class="date"><%- i.date %></p>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <!-- <p class="id"><%#- i.id %></p> -->
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g>
+                                        <path fill="none" d="M0 0h24v24H0z"/>
+                                        <path d="M13.172 12l-4.95-4.95 1.414-1.414L16 12l-6.364 6.364-1.414-1.414z"/>
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <div>
+                                <div>
+                                    <p>User ID</p>
+                                    <p><%- i.raw.UserID %></p>
+                                </div>
+                                <div>
+                                    <p>Time</p>
+                                    <p><%- i.raw.Time.getTime() %></p>
+                                </div>
+                                <div>
+                                    <p>Operation</p>
+                                    <p><%- i.raw.Operation %></p>
+                                </div>
+                                <div>
+                                    <p>Description</p>
+                                    <p><%- i.raw.Description %></p>
+                                </div>
+                                <div>
+                                    <p>Document ID</p>
+                                    <p><%- i.raw.id %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="darkreader-lock">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Carbon</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <!-- JavaScripts -->
+    <script src="https://kit.fontawesome.com/e524614bb5.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="/javascripts/enviroment.js" crossorigin="anonymous" type=""></script>
+</head>
+
+<body>
+    <%- include('../partials/sidenav') %>
+    <main>
+        <section class="container enviroment-container">
+            <div class="panel resource-monitor">
+                <h1 class="panel-title">Resource Monitor</h1>
+                <div>
+                    <div class="type-container">
+                        <p class="type">Memory</p>
+                    </div>
+                    <div class="meter-container">
+                        <meter id="memory" min="0"></meter>
+                        <p class="percentage" id="memory-percentage">100%</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="type-container">
+                        <p class="type">CPU</p>
+                    </div>
+                    <div class="meter-container">
+                        <meter id="cpu" min="0" low="89" optimum="90"></meter>
+                        <p class="percentage" id="cpu-percentage">100%</p>
+                    </div>
+                </div>
+                <div>
+                    <div class="type-container">
+                        <p class="type">Storage</p>
+                    </div>
+                    <div class="meter-container">
+                        <meter id="storage" min="0"></meter>
+                        <p class="percentage" id="storage-percentage">100%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

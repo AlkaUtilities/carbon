@@ -1,0 +1,48 @@
+<% 
+const urlprefix = "/dashboard";
+
+let navbarStartLinks = [
+    { name: "Home", url: "/", icon: "fa-solid fa-house"},
+    { name: "Enviroment", url: "/enviroment/", icon: "fa-solid fa-rocket"},
+    { name: "Logs", url: "/logs/", icon: "fa-solid fa-bars"},
+];
+
+let navbarEndLinks = [
+    { name: "Preferences", url: "/user", img: userAvatarURL || "https://cdn.discordapp.com/embed/avatars/0.png", alt: "User Avatar" }
+]; 
+
+[navbarStartLinks, navbarEndLinks].forEach((array) => array.forEach((object) => object.url = urlprefix + object.url + (!object.url.endsWith('/') ? '/' : '')))
+%>
+<header>
+    <nav class="sidenav">
+        <ul class="start">
+            <li class="logo">
+                <a href="/" class="Logo">
+                    <img src="/images/logo.webp" alt="Logo">
+                </a>
+            </li>
+            <% navbarStartLinks.forEach(i => { %>
+                <li <% if (typeof currentPage !== "undefined" && currentPage === i.url) { %>class="active"<% } %>>
+                    <a href="<%- i.url %>">
+                        <i class="<%- i.icon %>"></i>
+                        <span><%- i.name %></span>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+        <ul class="end">
+            <% navbarEndLinks.forEach(i => { %>
+                <li <% if (typeof currentPage !== "undefined" && currentPage === i.url) { %>class="active"<% } %>>
+                    <a href="<%- i.url %>">
+                        <% if (i.hasOwnProperty("icon")) { %>
+                            <i class="<%- i.icon %>"></i>
+                        <% } else if (i.hasOwnProperty("img")) { %>
+                            <img src="<%= i.img %>" <% if (i.hasOwnProperty("alt")) {%> alt="<%= i.alt %>" <%} %> >
+                        <% } %>
+                        <span><%- i.name %></span>
+                    </a>
+                </li>
+            <% }) %>
+        </ul>
+    </nav>
+</header>

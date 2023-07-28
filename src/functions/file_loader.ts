@@ -3,7 +3,7 @@ import { promisify } from "node:util";
 
 const proGlob = promisify(glob);
 
-// SUMMARY Loads all file in ./${directory_name}/every-directories/every-file-that-ends-with.ts
+// Loads all file in ./${directory_name}/every-directories/every-file-that-ends-with.ts
 
 /**
  * Loads all typescript file in "{directory_name}/folders/files.ts"

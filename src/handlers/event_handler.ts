@@ -1,7 +1,6 @@
 import { Client } from "discord.js";
 import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
-import config from "../config";
 import chalk from "chalk";
 
 /**
@@ -53,7 +52,7 @@ async function load_events(client: Client) {
                     : event.name
                     ? event.name
                     : file.split("/").pop(),
-                config.cli.status_bad,
+                client.config.cli.status_bad,
             ]);
             invalidEvents++;
             continue;
@@ -80,7 +79,7 @@ async function load_events(client: Client) {
                 : event.name
                 ? event.name
                 : file.split("/").pop(),
-            config.cli.status_ok,
+            client.config.cli.status_ok,
         ]);
     }
     console.log(table.toString());

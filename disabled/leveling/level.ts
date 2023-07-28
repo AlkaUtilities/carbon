@@ -86,7 +86,7 @@ module.exports = {
                     });
                 }
 
-                // FIXME when setting a user's level down, xp might be higher than the set level's goal
+                // when setting a user's level down, xp might be higher than the set level's goal
                 // therefore causing the user to have more xp than the goal
 
                 UserLevelingData.updateOne({

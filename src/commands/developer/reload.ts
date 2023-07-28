@@ -28,7 +28,6 @@ module.exports = {
     developer: true,
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         switch (interaction.options.getSubcommand()) {
-            // TODO Reload events
             case "commands":
                 {
                     const global =

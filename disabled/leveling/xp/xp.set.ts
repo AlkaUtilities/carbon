@@ -51,14 +51,14 @@ module.exports = {
                 XP: amount,
             });
 
-            // FIXME do checking here aswell
+            // do checking here aswell
             return;
         }
 
         const LevelGoalMultiplier = client.config.userLeveling.required;
         const levelGoal = UserLevelingData.Level * LevelGoalMultiplier;
 
-        // FIXME this is called when setting a user's XP down when xp is *somehow*
+        // this is called when setting a user's XP down when xp is *somehow*
         // already above the level goal. This technically shouldn't need a fix
         // since the xp isn't and should never be above the level goal
 

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="darkreader-lock">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Carbon</title>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <!-- JavaScripts -->
+    <script src="https://kit.fontawesome.com/e524614bb5.js" crossorigin="anonymous"></script>
+    <script src="/javascripts/user.js"></script>
+</head>
+
+<body>
+    <%- include('../partials/sidenav') %>
+    <main>
+        <section class="container user-container">
+            <div class="panel" id="form">
+                <h1>Preferences</h1>
+                <form action="PUT" id="preferences">
+                    <div>
+                        <label for="Timezone">Timezone</label>
+                        <select name="timezone" id="Timezone">
+                            <% for (let i = 0; i < timezones.length; i++) { %>
+                                <option value="<%= timezones[i].name %>" <%= timezones[i].name === data.Preferences.Timezone ? "selected" : "" %>>
+                                    <%= timezones[i].label %>
+                                </option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div>
+                        <!-- FIXME Do server-side checking to ensure that only developers are able to enable debug info -->
+                        <% if (data.Role === 'developer') { %>
+                            <label for="ShowDebugInfo">Show Debug Info</label>
+                            <input class="toggle" type="checkbox" name="showdebuginfo" id="ShowDebugInfo" value="true" <%= data.Preferences.ShowDebugInfo === true ? "checked" : "" %>>
+                        <% } %>
+                    </div>
+                    <div class="actions">
+                        <p id="status"></p>
+                        <button class="primary" type="submit" id="save">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="panel">
+                <h1>Account</h1>
+                <div class="actions">
+                    <a class="button" href="/auth/logout">Logout</a>
+                </div>
+            </div>
+            <% if (data.Role === 'developer' && data.Preferences.ShowDebugInfo) { %>
+                <div class="panel debug-panel">
+                    <h1>Current User Document</h1>
+                    <pre><%= util.inspect(data, {showHidden: false, depth: null, colors: false }) %></pre>
+                </div>
+            <% } %>
+        </section>
+    </main>
+</body>
+
+</html>

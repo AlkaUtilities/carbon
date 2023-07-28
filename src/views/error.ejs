@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="darkreader-lock">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%- name ? name : "Error" %> - Carbon</title>
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+</head>
+
+<body>
+    <main class="no-sidenav">
+        <div class="page-error-container">
+            <img src="/images/logo.webp" alt="Logo">
+            <h1>Error</h1>
+            <h2><%- code ? `${code} - ` : '' %><%- name %></h2>
+            <p><%- description %></p>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -7,7 +7,6 @@ import {
     EmbedBuilder,
 } from "discord.js";
 
-// TODO Give server owner the ability to add a custom list of users/roles that can access this command.
 module.exports = {
     // disabled: true,
     data: new SlashCommandBuilder()

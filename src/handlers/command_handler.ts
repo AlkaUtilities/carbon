@@ -2,7 +2,6 @@ import { Client } from "discord.js";
 import { load_file } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
-import config from "../config";
 
 /**
  * Loads commands in directory ".\/events\/\*\*\/\*.ts"
@@ -22,7 +21,7 @@ async function load_commands(client: Client, global: Boolean = false) {
         },
     });
 
-    const devGuild = client.guilds.cache.get(config.devGuildId);
+    const devGuild = client.guilds.cache.get(client.config.devGuildId);
 
     if (!devGuild) {
         return console.log(chalk.red(`[HANDLER] Dev guild not found!`));
@@ -63,7 +62,7 @@ async function load_commands(client: Client, global: Boolean = false) {
                 i.toString(),
                 chalk.red(file.split("/").pop() || "unknown"),
                 "",
-                config.cli.status_bad,
+                client.config.cli.status_bad,
             ]);
             invalidCommands++;
             continue;
@@ -75,12 +74,12 @@ async function load_commands(client: Client, global: Boolean = false) {
                 i.toString(),
                 command.subCommand,
                 chalk.magenta("SUB"),
-                config.cli.status_ok,
+                client.config.cli.status_ok,
             ]);
             subCommands++;
             continue;
         }
-        // NOTE: command.data.name is for slash commands using the SlashCommandBuilder()
+        // command.data.name is for slash commands using the SlashCommandBuilder()
         client.commands.set(command.data.name, command);
         validCommands++;
 
@@ -90,7 +89,7 @@ async function load_commands(client: Client, global: Boolean = false) {
                 i.toString(),
                 command.data.name,
                 chalk.blue("GLOBAL"),
-                config.cli.status_ok,
+                client.config.cli.status_ok,
             ]);
         } else if (command.global && global === false) {
             continue; // if command is global but global is false
@@ -100,14 +99,14 @@ async function load_commands(client: Client, global: Boolean = false) {
                 i.toString(),
                 command.data.name,
                 chalk.yellow("DEV"),
-                config.cli.status_ok,
+                client.config.cli.status_ok,
             ]);
         }
     }
 
     console.log(table.toString());
 
-    // NOTE: Uncomment the line under this comment to enable global slash command
+    // Uncomment the line under this comment to enable global slash command
     if (global) {
         await client.application?.commands
             .set(globalCommands)

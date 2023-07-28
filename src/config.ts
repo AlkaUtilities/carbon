@@ -1,68 +1,46 @@
-export default {
-    // General stuff
-    cli: {
-        status_ok: "OK",
-        status_bad: "BAD",
-    },
+import yaml from "js-yaml";
+import fs from "fs";
+import { Config } from "./typings/config";
+import { Client } from "discord.js";
 
-    log: {
-        enabled: false,
-        filePath: "./logs/",
-    },
+/**
+ * Config file path
+ */
+const filePath = "./config.yaml";
 
-    // Bot releated stuff
-    ownerId: "529424782438170679",
-    developersId: ["529424782438170679"],
+/**
+ * Reloads `client.config` and `client.icon`
+ * @param client Discord.js client
+ */
+function reloadClient(client: Client): void {
+    const config = load();
 
-    // devGuildId: "998487239803813898",
-    devGuildId: "998487239803813898",
+    client.config = config;
+    client.icon = config.icons;
+}
 
-    icons: {
-        loading: "<a:loading:1013023173635211365>",
-        sync: "<:sync:1042093144369537074>",
+/**
+ * Loads config
+ * @param path Path to config (optional)
+ * @returns Config object
+ */
+function load(path: string = filePath): Config {
+    return yaml.load(fs.readFileSync(filePath, "utf-8")) as Config;
+}
 
-        true: "<:true:1010479956909891614>",
-        false: "<:false:1010479954372349993>",
+/**
+ * Saves object to config file.
+ * @param config Config object
+ */
+function save(config: Config, path: string = filePath): void {
+    const yamlString = yaml.dump(config, {
+        forceQuotes: true,
+        indent: 4,
+        quotingType: '"',
+        skipInvalid: true,
+    });
 
-        bot: {
-            // developer: "<a:developer:1010538744803233822>",
-            developer: "<a:developer:1010538744803233822>",
-        },
+    fs.writeFileSync(filePath, yamlString, "utf-8");
+}
 
-        server: {
-            owner: "<:server_owner:1010487201810874470>",
-            verified: "<:server_verified:1010152556405739611>",
-            partnered: "<:server_partnered:1010152578010579006>",
-        },
-
-        alka: {
-            bot: "<:alka_bot:1010540470109225061>",
-        },
-
-        blacklist: {
-            found: "<:blacklist_found:1042095758402396230>",
-            notfound: "<:blacklist_notfound:1042095690068807761>",
-        },
-    },
-
-    alka: {
-        bots: [
-            "1016267923985281024",
-            "798420219005239326",
-            "888023934207934505",
-        ],
-    },
-
-    userLeveling: {
-        min: 15,
-        max: 25,
-        required: 100, // levelupGoal: level * required
-    },
-
-    oauth2: {
-        clientId: "1120640044689006633",
-        redirect: "/auth/redirect",
-    },
-
-    expressPort: 3000,
-};
+export default { save, load, reloadClient };
