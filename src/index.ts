@@ -11,6 +11,7 @@ import MongoStore from "connect-mongo";
 import { Server } from "socket.io";
 import http from "http";
 import Config from "./config";
+import discordStrategy from "./strategies/discordStrategy";
 import anticrash from "./handlers/anticrash";
 import { load_events } from "./handlers/event_handler";
 import { router as authRouter, isUnauthorized } from "./routes/auth";
@@ -37,7 +38,7 @@ const config = Config.load();
 client.config = config;
 client.icon = config.icons;
 
-import "./strategies/discordStrategy";
+discordStrategy(client);
 
 const app = express();
 const server = http.createServer(app);

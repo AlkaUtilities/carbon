@@ -14,5 +14,6 @@ $ENTRYPOINTS = Get-ChildItem -Path $srcPath -Recurse -File -Include "*.ts", "*.j
 
 node node_modules\esbuild\bin\esbuild $ENTRYPOINTS --log-level=warning --outdir=$buildPath --outbase=$srcPath --sourcemap --target='node16' --platform='node' --format='cjs'
 
-Copy-Item -Path "$srcPath\views\" -Destination "$buildPath\" -Recurse
-Copy-Item -Path "$srcPath\public\" -Destination "$buildPath\" -Recurse
+Copy-Item -Path "$srcPath\config.yaml" -Destination $buildPath
+Copy-Item -Path "$srcPath\views"       -Destination $buildPath -Recurse
+Copy-Item -Path "$srcPath\public"      -Destination $buildPath -Recurse -Container
