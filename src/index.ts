@@ -117,7 +117,7 @@ client.events = new Collection();
 client.commands = new Collection();
 client.subCommands = new Collection();
 
-// load_events(client);
+load_events(client);
 
 client.login(process.env.TOKEN);
 

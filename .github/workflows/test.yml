@@ -26,7 +26,7 @@ jobs:
               env:
                   TOKEN: ${{ secrets.TOKEN }}
                   MONGODB: ${{ secrets.MONGODB }}
-                  ANTICRASH: ${{ secrets.ANTICRASH }}
+                  # ANTICRASH: ${{ secrets.ANTICRASH }}
                   CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
                   SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
                   EXPRESS_PORT: 8080
