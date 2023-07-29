@@ -62,12 +62,6 @@ alka:
         - "798420219005239326"
         - "888023934207934505"
 
-# Default settings for leveling
-userLeveling:
-    min: 15
-    max: 25
-    required: 100
-
 # OAuth2 settings
 oauth2:
     # Client ID
