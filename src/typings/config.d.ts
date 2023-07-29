@@ -15,11 +15,6 @@ interface ConfigInterface {
     alka: {
         bots: string[];
     };
-    userLeveling: {
-        min: number;
-        max: number;
-        required: number;
-    };
     oauth2: {
         clientId: string;
         redirect: string;
