@@ -5,7 +5,6 @@ import {
     Role,
     ActivityType,
 } from "discord.js";
-import UserBlacklist from "../../../schemas/userBlacklist";
 
 const formatting = {
     flagsCode: {
@@ -75,16 +74,6 @@ module.exports = {
                 content: `Unable to find member.`,
             });
 
-        let UserBlacklistData: any;
-
-        try {
-            UserBlacklistData = await UserBlacklist.findOne({
-                UserID: user.id,
-            });
-        } catch (err) {
-            console.log(err);
-        }
-
         let userf = {
             status: "",
             failedChecks: [],
@@ -122,15 +111,6 @@ module.exports = {
 
             return result.length;
         };
-
-        // Check if user is in blacklist
-        if (!UserBlacklistData) {
-            // userf.status = `${client.icon.db.normal} Not blacklisted`;
-            userf.status = `${client.icon.blacklist.notfound} Not found`;
-        } else {
-            // userf.status = `${client.icon.db.blacklisted} Blacklisted`;
-            userf.status = `${client.icon.blacklist.found} Found`;
-        }
 
         /* Constructs the name prefix */
         // if (userData?.namePrefix) { // check if 'namePrefix' is declared in userData, if yes set userf.namePrefix to it.
@@ -328,12 +308,6 @@ module.exports = {
                               .slice(0, maxDisplayRoles(userf.roles))
                               .join(" ")
                         : "None",
-                },
-                {
-                    name: "Alka Utilities",
-                    value:
-                        // `Database: ${userData ? `${client.icon.true} Registered` : `${client.icon.false} Not registered`}`,
-                        `**Blacklist**: ${userf.status}`,
                 }
             );
         return interaction.editReply({ embeds: [embed] });

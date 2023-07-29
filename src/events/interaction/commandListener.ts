@@ -1,6 +1,4 @@
 import { ChatInputCommandInteraction, Client } from "discord.js";
-import UserBlacklist from "../../schemas/userBlacklist";
-import GuildBlacklist from "../../schemas/guildBlacklist";
 
 module.exports = {
     name: "interactionCreate",
@@ -9,12 +7,6 @@ module.exports = {
         if (!interaction.isChatInputCommand) return;
 
         const command = client.commands.get(interaction.commandName);
-        const GuildBlacklistData = await GuildBlacklist.findOne({
-            GuildID: interaction.guildId,
-        }).catch((err) => {});
-        const UserBlacklistData = await UserBlacklist.findOne({
-            UserID: interaction.user.id,
-        }).catch((err) => {});
 
         if (
             command.developer &&
@@ -27,25 +19,6 @@ module.exports = {
         if (!command || command.disabled)
             return await interaction.reply({
                 content: "This command is outdated.",
-                ephemeral: true,
-            });
-
-        // Blacklist checks
-        if (GuildBlacklistData)
-            return await interaction.reply({
-                content: `This server has been blacklisted from using this bot on <t:${GuildBlacklistData?.Time?.toString().slice(
-                    0,
-                    10
-                )}:f>\nReason: ${GuildBlacklistData?.Reason}`,
-                ephemeral: true,
-            });
-
-        if (UserBlacklistData)
-            return await interaction.reply({
-                content: `You have been blacklisted from using this bot on <t:${UserBlacklistData?.Time?.toString().slice(
-                    0,
-                    10
-                )}:f>\nReason: ${UserBlacklistData?.Reason}`,
                 ephemeral: true,
             });
 

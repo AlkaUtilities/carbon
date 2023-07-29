@@ -2,10 +2,10 @@
     "scripts": {
         "js": "powershell -noexit \"&\"\".\\scripts\\build.ps1\\\"\"; cd dist; node --enable-source-maps index.js; cd ..\"",
         "ts": "cd src\\ && ts-node --files . && cd ..",
-        "build": "./scripts/build.sh",
+        "build": "bash ./scripts/build.sh",
         "run": "cd dist/ && node --enable-source-maps index.js",
-        "test:compile": "./scripts/build.sh",
-        "test:run": "cd dist/ && node --enable-source-maps index.js --test"
+        "test": "cd dist/ && node --enable-source-maps index.js --test",
+        "start": "npm run build && npm run run"
     },
     "dependencies": {
         "@discordjs/opus": "^0.8.0",

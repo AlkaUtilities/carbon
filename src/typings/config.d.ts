@@ -42,10 +42,6 @@ interface IconsInterface {
     alka: {
         bot: string;
     };
-    blacklist: {
-        found: string;
-        notfound: string;
-    };
 }
 
 export { ConfigInterface, IconsInterface };

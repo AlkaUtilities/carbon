@@ -55,14 +55,6 @@ icons:
         # Used as prefix for the username in in /about user (src/commands/misc/about/about.user.ts) if the user is a custom bot made for Alka Hangout
         bot: "<:alka_bot:1010540470109225061>"
 
-    # Emoji used to display the status of a user's blacklist
-    blacklist:
-        # Emoji to show if the user is found in blacklist
-        found: "<:blacklist_found:1042095758402396230>"
-
-        # Emoji to show if the user is not found in blacklist
-        notfound: "<:blacklist_notfound:1042095690068807761>"
-
 alka:
     # The user ids of bots custom made for Alka Hangout (icons -> alka -> bot will be displayed as a prefix)
     bots:
