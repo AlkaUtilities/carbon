@@ -1,6 +1,6 @@
 import yaml from "js-yaml";
 import fs from "fs";
-import { Config } from "./typings/config";
+import { ConfigInterface } from "./typings/config";
 import { Client } from "discord.js";
 
 /**
@@ -24,15 +24,15 @@ function reloadClient(client: Client): void {
  * @param path Path to config (optional)
  * @returns Config object
  */
-function load(path: string = filePath): Config {
-    return yaml.load(fs.readFileSync(filePath, "utf-8")) as Config;
+function load(path: string = filePath): ConfigInterface {
+    return yaml.load(fs.readFileSync(filePath, "utf-8")) as ConfigInterface;
 }
 
 /**
  * Saves object to config file.
  * @param config Config object
  */
-function save(config: Config, path: string = filePath): void {
+function save(config: ConfigInterface, path: string = filePath): void {
     const yamlString = yaml.dump(config, {
         forceQuotes: true,
         indent: 4,

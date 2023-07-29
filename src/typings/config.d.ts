@@ -1,4 +1,4 @@
-interface Config {
+interface ConfigInterface {
     cli: {
         status_ok: string;
         status_bad: string;
@@ -11,7 +11,7 @@ interface Config {
     developersId: string[];
     devGuildId: string;
     mainGuildId: string;
-    icons: Icons;
+    icons: IconsInterface;
     alka: {
         bots: string[];
     };
@@ -26,7 +26,7 @@ interface Config {
     };
 }
 
-interface Icons {
+interface IconsInterface {
     loading: string;
     sync: string;
     true: string;
@@ -48,4 +48,4 @@ interface Icons {
     };
 }
 
-export { Config, Icons };
+export { ConfigInterface, IconsInterface };
