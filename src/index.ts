@@ -1,8 +1,37 @@
 import { config as dotenv } from "dotenv";
+import chalk from "chalk";
 dotenv({ path: __dirname + "\\..\\.env" });
+
+//* Check for required envs
+[
+    "TOKEN",
+    "MONGODB",
+    "CLIENT_SECRET",
+    "SESSION_SECRET",
+    "EXPRESS_PORT",
+    "SOCKETIO_PORT",
+].forEach((i) => {
+    if (process.env[i] == undefined) {
+        console.error(
+            chalk.red(`[ERROR] Required enviroment variable '${i}' is missing`)
+        );
+        process.exit(1);
+    }
+});
+
+//* Check for optional envs
+["ANTICRASH"].forEach((i) => {
+    if (process.env[i] == undefined) {
+        console.warn(
+            chalk.yellowBright(
+                `[WARN] Optional enviroment variable '${i}' is missing`
+            )
+        );
+    }
+});
+
 import { Client, Collection, GatewayIntentBits, Partials } from "discord.js";
 import { connect, connection } from "mongoose";
-import chalk from "chalk";
 import express from "express";
 import session from "express-session";
 import passport from "passport";
