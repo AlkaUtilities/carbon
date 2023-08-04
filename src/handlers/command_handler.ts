@@ -49,7 +49,8 @@ async function load_commands(client: Client, global: Boolean = false) {
         // );
         console.log(
             chalk.green(`[HANDLER] Loading command files: `) +
-                chalk.yellow(`${i.toString()}/${files.length}`)
+                chalk.yellow(`${i.toString()}/${files.length}`) +
+                chalk.green(` (${file})`)
         );
         const command = require(file);
 

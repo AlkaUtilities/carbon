@@ -49,5 +49,20 @@
             "}"
         ],
         "description": "Root command snippet"
+    },
+
+    "Detail": {
+        "scope": "markdown",
+        "prefix": "detail",
+        "body": [
+            "<details open>",
+            "<summary>",
+            "$1",
+            "</summary>",
+            "",
+            "$0",
+            "",
+            "</details>"
+        ]
     }
 }

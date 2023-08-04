@@ -122,7 +122,8 @@ export default (client: Client, URL: string) => {
                     1000
                 )}\`\`\``,
             })
-            .setTimestamp();
+            .setTimestamp()
+            .setColor("Yellow");
 
         return webhook.send({ embeds: [embed] });
     });

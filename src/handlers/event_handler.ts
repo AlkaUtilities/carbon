@@ -12,7 +12,7 @@ import chalk from "chalk";
 async function load_events(client: Client) {
     const table = new Table({
         head: ["#", "Event Name", "Status"],
-        colWidths: [4, 26, 11],
+        colWidths: [4, 36, 11],
         chars: {
             mid: "",
             "left-mid": "",
@@ -38,7 +38,8 @@ async function load_events(client: Client) {
         // );
         console.log(
             chalk.green(`[HANDLER] Loading event files: `) +
-                chalk.yellow(`${i.toString()}/${files.length}`)
+                chalk.yellow(`${i.toString()}/${files.length}`) +
+                chalk.green(` (${file})`)
         );
         const event = require(file);
         if (!event.name) {
@@ -46,8 +47,8 @@ async function load_events(client: Client) {
             table.push([
                 i.toString(),
                 event.friendlyName
-                    ? event.friendlyName.length > 18
-                        ? chalk.blue(event.friendlyName.slice(0, 18) + "...")
+                    ? event.friendlyName.length > 30
+                        ? chalk.blue(event.friendlyName.slice(0, 30) + "...")
                         : chalk.blue(event.friendlyName)
                     : event.name
                     ? event.name
@@ -73,8 +74,8 @@ async function load_events(client: Client) {
         table.push([
             i.toString(),
             event.friendlyName
-                ? event.friendlyName.length > 18
-                    ? chalk.blue(event.friendlyName.slice(0, 18) + "...")
+                ? event.friendlyName.length > 30
+                    ? chalk.blue(event.friendlyName.slice(0, 30) + "...")
                     : chalk.blue(event.friendlyName)
                 : event.name
                 ? event.name

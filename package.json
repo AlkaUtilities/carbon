@@ -50,6 +50,7 @@
         "@types/ms": "^0.7.31",
         "@types/node": "^18.11.3",
         "@types/passport-discord": "^0.1.6",
+        "prettier": "^3.0.1",
         "typescript": "^5.1.6"
     }
 }

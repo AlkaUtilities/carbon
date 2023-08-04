@@ -16,6 +16,6 @@ ENTRYPOINTS=$(find "$srcPath" -type f \( -name "*.ts" -o -name "*.js" \) ! -path
 
 npx esbuild $ENTRYPOINTS --log-level=warning --outdir="$buildPath" --outbase="$srcPath" --sourcemap --target="node16" --platform="node" --format="cjs"
 
-cp "$srcPath/config.yaml" "$buildPath"
+cp -r "$srcPath/config" "$buildPath"
 cp -r "$srcPath/views" "$buildPath"
 cp -r "$srcPath/public" "$buildPath"
