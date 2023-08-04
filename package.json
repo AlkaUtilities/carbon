@@ -15,6 +15,7 @@
         "@types/os-utils": "^0.0.1",
         "axios": "^1.2.0",
         "canvas-constructor": "^7.0.0",
+        "captcha-canvas": "^3.2.1",
         "chalk": "^4.1.2",
         "cli-table": "^0.3.11",
         "connect-mongo": "^5.0.0",
