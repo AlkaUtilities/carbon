@@ -1,4 +1,9 @@
-import { GuildMember, EmbedBuilder, Client, AttachmentBuilder } from "discord.js";
+import {
+    GuildMember,
+    EmbedBuilder,
+    Client,
+    AttachmentBuilder,
+} from "discord.js";
 import GuildSchema from "../../../schemas/guilds";
 import { CaptchaGenerator } from "captcha-canvas";
 
@@ -19,7 +24,8 @@ async function checkMemberAccountAge(member: GuildMember, guildDocument: any) {
 
     console.log(timeSinceCreated);
 
-    const minimumAccountAge = 1000 * 60 * 60 * 24 * checks.AccountAge.MinimumAccountAge;
+    const minimumAccountAge =
+        1000 * 60 * 60 * 24 * checks.AccountAge.MinimumAccountAge;
 
     if (timeSinceCreated >= minimumAccountAge) return true;
 
@@ -76,7 +82,11 @@ async function checkMemberAccountAge(member: GuildMember, guildDocument: any) {
  * @param guild GuildSchema
  * @returns
  */
-async function captcha(member: GuildMember, client: Client, guildDocument: any) {
+async function captcha(
+    member: GuildMember,
+    client: Client,
+    guildDocument: any
+) {
     if (!guildDocument) return;
 
     const captchaModule = guildDocument.Settings?.Modules?.UserJoin?.Captcha;
@@ -106,7 +116,9 @@ async function captcha(member: GuildMember, client: Client, guildDocument: any) 
     const embed = new EmbedBuilder()
         .setTitle("Verify that you are not a robot")
         .setColor(client.config.colors.theme)
-        .setDescription(`Please type the captcha below to be able to access **${member.guild.name}**.`)
+        .setDescription(
+            `Please type the captcha below to be able to access **${member.guild.name}**.`
+        )
         .setFooter({ text: `Verification Period: 2 minutes` })
         .setImage(`attachment://captcha.png`);
 
@@ -170,7 +182,9 @@ async function captcha(member: GuildMember, client: Client, guildDocument: any) 
                     embeds: [
                         new EmbedBuilder()
                             .setColor(client.config.colors.failed)
-                            .setDescription("Captcha verification failed: Too many attempts"),
+                            .setDescription(
+                                "Captcha verification failed: Too many attempts"
+                            ),
                     ],
                 });
             } else {
@@ -178,7 +192,9 @@ async function captcha(member: GuildMember, client: Client, guildDocument: any) 
                     embeds: [
                         new EmbedBuilder()
                             .setColor(client.config.colors.failed)
-                            .setDescription("Incorrect response, please try again."),
+                            .setDescription(
+                                "Incorrect response, please try again."
+                            ),
                     ],
                 });
             }
@@ -191,7 +207,9 @@ async function captcha(member: GuildMember, client: Client, guildDocument: any) 
                 embeds: [
                     new EmbedBuilder()
                         .setColor(client.config.colors.failed)
-                        .setDescription("Captcha verification failed: Timed out"),
+                        .setDescription(
+                            "Captcha verification failed: Timed out"
+                        ),
                 ],
             });
             await member.kick("Captcha verification failed: Timed out");

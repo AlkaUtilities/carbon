@@ -1,4 +1,9 @@
-import { GuildMember, Client, AttachmentBuilder, EmbedBuilder } from "discord.js";
+import {
+    GuildMember,
+    Client,
+    AttachmentBuilder,
+    EmbedBuilder,
+} from "discord.js";
 import GuildSchema from "../../../schemas/guilds";
 import { CaptchaGenerator } from "captcha-canvas";
 import { checkMemberAccountAge, captcha } from "./checks";
