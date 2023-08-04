@@ -1,12 +1,21 @@
 import yaml from "js-yaml";
 import fs from "fs";
-import { ConfigInterface } from "./typings/config";
+import { ConfigInterface } from "../typings/config";
 import { Client } from "discord.js";
 
 /**
- * Config file path
+ * Config file path (from where node is executed)
  */
-const filePath = "./config.yaml";
+const filePath = "./config/config.yaml";
+
+/**
+ * Loads config
+ * @param path Path to config (optional)
+ * @returns Config object
+ */
+function load(path: string = filePath): ConfigInterface {
+    return yaml.load(fs.readFileSync(filePath, "utf-8")) as ConfigInterface;
+}
 
 /**
  * Reloads `client.config` and `client.icon`
@@ -17,15 +26,6 @@ function reloadClient(client: Client): void {
 
     client.config = config;
     client.icon = config.icons;
-}
-
-/**
- * Loads config
- * @param path Path to config (optional)
- * @returns Config object
- */
-function load(path: string = filePath): ConfigInterface {
-    return yaml.load(fs.readFileSync(filePath, "utf-8")) as ConfigInterface;
 }
 
 /**

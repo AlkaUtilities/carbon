@@ -38,7 +38,7 @@ icons:
     false: "<:false:1010479954372349993>"
 
     bot:
-        #  Used as prefix for the username in `/about user` (src/commands/misc/about/about.user.ts) if the user's id is included in `developersId`
+        #  Used as prefix for the username in /about user (src/commands/misc/about/about.user.ts) if the user's id is included in `developersId`
         developer: "<a:developer:1010538744803233822>"
 
     server:
@@ -61,6 +61,17 @@ alka:
         - "1016267923985281024"
         - "798420219005239326"
         - "888023934207934505"
+
+# Colors used in embeds
+colors:
+    # Bot theme color
+    theme: "#615fd9"
+
+    # Color to represent that something succeded
+    succesful: "#6dd95f"
+
+    # Color to represent that something failed
+    failed: "#d95f5f"
 
 # OAuth2 settings
 oauth2:
