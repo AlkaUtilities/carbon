@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import { load_file } from "../functions/file_loader";
+import { load_files } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
 
@@ -33,13 +33,16 @@ async function load_commands(client: Client, global: Boolean = false) {
     let globalCommands: any[] = [];
     let devCommands: any[] = [];
 
-    const files = await load_file("commands");
+    const files = await load_files("commands");
 
     let validCommands = 0;
     let invalidCommands = 0;
     let subCommands = 0;
 
     let i = 0;
+
+    const cwd = process.cwd().replace(/\\/g, "/") + "/";
+
     for (const file of files) {
         i++;
         // process.stdout.write(
@@ -47,10 +50,11 @@ async function load_commands(client: Client, global: Boolean = false) {
         //         chalk.yellow(`${i}/${files.length}`) +
         //         "\r"
         // );
+
         console.log(
             chalk.green(`[HANDLER] Loading command files: `) +
                 chalk.yellow(`${i.toString()}/${files.length}`) +
-                chalk.green(` (${file})`)
+                chalk.green(` (${file.replace(cwd, "")})`)
         );
         const command = require(file);
 

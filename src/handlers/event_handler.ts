@@ -1,5 +1,5 @@
 import { Client } from "discord.js";
-import { load_file } from "../functions/file_loader";
+import { load_files } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
 
@@ -23,12 +23,15 @@ async function load_events(client: Client) {
 
     await client.events.clear(); // deletes all item in client.events collection
 
-    const files = await load_file("events");
+    const files = await load_files("events");
 
     let validEvents = 0;
     let invalidEvents = 0;
 
     let i = 0;
+
+    const cwd = process.cwd().replace(/\\/g, "/") + "/";
+
     for (const file of files) {
         i++;
         // process.stdout.write(
@@ -39,9 +42,14 @@ async function load_events(client: Client) {
         console.log(
             chalk.green(`[HANDLER] Loading event files: `) +
                 chalk.yellow(`${i.toString()}/${files.length}`) +
-                chalk.green(` (${file})`)
+                chalk.green(` (${file.replace(cwd, "")})`)
         );
         const event = require(file);
+
+        if (event.ignore) {
+            continue;
+        }
+
         if (!event.name) {
             // check if file has property "name"
             table.push([
