@@ -16,7 +16,7 @@ jobs:
                   node-version: "16"
 
             - name: Install dependencies
-              run: npm install
+              run: npm ci
 
             - name: Compile to JavaScript using esbuild
               run: npm run build
