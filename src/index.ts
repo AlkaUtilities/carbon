@@ -43,6 +43,7 @@ import Config from "./config";
 import discordStrategy from "./strategies/discordStrategy";
 import anticrash from "./handlers/anticrash";
 import { load_events } from "./handlers/event_handler";
+import { load_buttons } from "./handlers/button_handler";
 import { router as authRouter, isUnauthorized } from "./routes/auth";
 import { router as dashboardRouter } from "./routes/dashboard";
 
@@ -145,8 +146,10 @@ if (process.env.ANTICRASH) anticrash(client, process.env.ANTICRASH);
 client.events = new Collection();
 client.commands = new Collection();
 client.subCommands = new Collection();
+client.buttons = new Collection();
 
 load_events(client);
+load_buttons(client);
 
 client.login(process.env.TOKEN);
 
