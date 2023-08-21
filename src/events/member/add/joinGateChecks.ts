@@ -7,13 +7,13 @@ import { CheckFile, CheckResultNamed } from "../../../typings/checks";
 module.exports = {
     name: "guildMemberAdd",
     once: false,
-    friendlyName: "MemberAddCheckHandler",
+    friendlyName: "JoinGateChecks",
     async execute(member: GuildMember, client: Client) {
         const guild = await GuildSchema.findOne({ GuildID: member.guild.id });
 
         if (!guild) return;
 
-        const files = await load_files("events/member/add/checks");
+        const files = await load_files("modules/joingate/checks");
 
         let checks: CheckFile[] = [];
 

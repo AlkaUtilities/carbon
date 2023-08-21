@@ -5,12 +5,11 @@ import {
     AttachmentBuilder,
 } from "discord.js";
 import { CaptchaGenerator } from "captcha-canvas";
-import { schema } from "../../../../schemas/guilds";
+import { schema } from "../../../schemas/guilds";
 import { HydratedDocumentFromSchema } from "mongoose";
-import { CheckResult } from "../../../../typings/checks";
+import { CheckResult } from "../../../typings/checks";
 
 module.exports = {
-    ignore: true, // prevent event handler
     name: "captcha",
     order: 1,
     breakOnFail: true,

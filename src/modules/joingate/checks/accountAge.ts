@@ -1,10 +1,9 @@
 import { GuildMember, EmbedBuilder, Client } from "discord.js";
-import { schema } from "../../../../schemas/guilds";
+import { schema } from "../../../schemas/guilds";
 import { HydratedDocumentFromSchema } from "mongoose";
-import { CheckResult } from "../../../../typings/checks";
+import { CheckResult } from "../../../typings/checks";
 
 module.exports = {
-    ignore: true, // prevent event handler
     name: "accountAge",
     order: 0,
     breakOnFail: false,
