@@ -5,7 +5,7 @@ import { CheckResult } from "../../../../typings/checks";
 
 module.exports = {
     ignore: true, // prevent event handler
-    name: "memberAccountAge",
+    name: "accountAge",
     order: 0,
     breakOnFail: false,
     async execute(
