@@ -15,8 +15,12 @@ export const schema = new Schema({
                 AccountAge: {
                     Enabled: { type: Boolean, required: true, default: false },
                     MinimumAccountAge: { type: Number, required: true, default: 7 }, // in days
-                    Action: { type: String, required: true, default: "kick" },
+                    Action: { type: String, required: true, default: "nothing" },
                 },
+                CheckResult: {
+                    Enabled: { type: Boolean, required: true, default: false },
+                    ChannelID: { type: String, required: true, default: "000000000000000000" }
+                }
             },
         },
     },

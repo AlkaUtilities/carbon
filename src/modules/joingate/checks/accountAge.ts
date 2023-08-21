@@ -1,30 +1,37 @@
 import { GuildMember, EmbedBuilder, Client } from "discord.js";
 import { schema } from "../../../schemas/guilds";
 import { HydratedDocumentFromSchema } from "mongoose";
-import { CheckResult } from "../../../typings/checks";
+import { CheckResult } from "../../../typings/checks.d";
 
 module.exports = {
     name: "accountAge",
+    friendlyName: "Account age",
     order: 0,
     breakOnFail: false,
     async execute(
         member: GuildMember,
         client: Client,
-        guildDocument: HydratedDocumentFromSchema<typeof schema>
+        guildDocument: HydratedDocumentFromSchema<typeof schema>,
+        args: any[]
     ): Promise<CheckResult> {
         if (!guildDocument)
-            return { passed: null, reason: "Guild document not found." };
+            return {
+                passed: null,
+                code: -1,
+                reason: "Guild document not found.",
+            };
 
         const module = guildDocument.Settings?.Modules?.JoinGate?.AccountAge;
 
         if (!module)
             return {
                 passed: null,
+                code: -1,
                 reason: "Module not found.",
             };
 
         if (!module.Enabled)
-            return { passed: true, reason: "Module disabled." };
+            return { passed: true, code: -1, reason: "Module disabled." };
 
         const timeSinceCreated = Date.now() - member.user.createdTimestamp;
 
@@ -36,6 +43,7 @@ module.exports = {
         if (timeSinceCreated >= minimumAccountAge)
             return {
                 passed: true,
+                code: 0,
                 reason: "Account is equal to or older than minimum age.",
             };
 
@@ -51,7 +59,8 @@ module.exports = {
                         )
                         .setDescription(
                             `Your account must be older than **${module.MinimumAccountAge} days** to join this server.`
-                        );
+                        )
+                        .setColor(client.config.colors.failed);
 
                     await member
                         .send({
@@ -74,7 +83,8 @@ module.exports = {
                         )
                         .setDescription(
                             `Your account must be older than **${module.MinimumAccountAge} days** to join this server.`
-                        );
+                        )
+                        .setColor(client.config.colors.failed);
 
                     await member
                         .send({
@@ -96,6 +106,7 @@ module.exports = {
 
         return {
             passed: false,
+            code: 1,
             reason: "Account is younger than minimum age.",
             break: resultBreak, // example of a dynamic break
         };

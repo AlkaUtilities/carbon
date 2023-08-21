@@ -27,6 +27,9 @@ interface IconsInterface {
     /** Used to represent false */
     false: string;
 
+    /** Used to represent unknown values  */
+    unknown: string;
+
     bot: {
         /** Used as prefix for the username in [`/about user`](src/commands/misc/about/about.user.ts) if the user's id is included in `developersId` */
         developer: string;

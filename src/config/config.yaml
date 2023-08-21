@@ -37,6 +37,9 @@ icons:
     # Used to represent false
     false: "<:false:1010479954372349993>"
 
+    # Used to represent unknown values
+    unknown: "<:unknown:1143153276934684712>"
+
     bot:
         #  Used as prefix for the username in /about user (src/commands/misc/about/about.user.ts) if the user's id is included in `developersId`
         developer: "<a:developer:1010538744803233822>"
