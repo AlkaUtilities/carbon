@@ -4,8 +4,6 @@ import chalk from "chalk";
 
 const proGlob = promisify(glob);
 
-// Loads all file in ./${directory_name}/every-directories/every-file-that-ends-with.ts
-
 /**
  * Deletes selected file from require cache and returns a string of absolute path of file for all file in %cwd%\/{directory_name}\/\*\*\/\*.(ts | js)
  * @param directory_name

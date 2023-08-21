@@ -5,7 +5,7 @@ import MemberSchema from "../../../schemas/members";
 module.exports = {
     name: "guildMemberAdd",
     once: false,
-    friendlyName: "GuildMemberAddCreateDatabaseEntry",
+    friendlyName: "NewMemberDatabaseEntry",
     async execute(member: GuildMember, client: Client) {
         const memberDocument = await MemberSchema.create({
             UserID: member.user.id,

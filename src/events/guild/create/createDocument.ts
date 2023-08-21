@@ -5,7 +5,7 @@ import GuildSchema from "../../../schemas/guilds";
 module.exports = {
     name: "guildCreate",
     once: false,
-    friendlyName: "guildCreateCreateDatabaseEntry",
+    friendlyName: "NewGuildDatabaseEntry",
     async execute(guild: Guild, client: Client) {
         const guildDocument = await GuildSchema.create({
             GuildID: guild.id,
