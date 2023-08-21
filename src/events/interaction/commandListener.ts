@@ -4,7 +4,7 @@ module.exports = {
     name: "interactionCreate",
     friendlyName: "CommandListener",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
-        if (!interaction.isChatInputCommand) return;
+        if (!interaction.isChatInputCommand()) return;
 
         const command = client.commands.get(interaction.commandName);
 
