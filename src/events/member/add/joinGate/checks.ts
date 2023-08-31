@@ -1,12 +1,12 @@
 import { GuildMember, Client } from "discord.js";
-import { load_files } from "../../../functions/file_loader";
-import GuildSchema from "../../../schemas/guilds";
+import { load_files } from "../../../../functions/file_loader";
+import GuildSchema from "../../../../schemas/guilds";
 
 import {
     CheckFile,
     CheckResultNamed,
     CheckFlags,
-} from "../../../typings/checks.d";
+} from "../../../../typings/checks";
 
 module.exports = {
     name: "guildMemberAdd",
