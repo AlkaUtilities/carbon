@@ -6,7 +6,7 @@ import {
     CheckFile,
     CheckResultNamed,
     CheckFlags,
-} from "../../../../typings/checks";
+} from "../../../../typings/checks.d";
 
 module.exports = {
     name: "guildMemberAdd",
@@ -53,7 +53,6 @@ module.exports = {
         // console.log(checks);
 
         async function executeCheck(check: CheckFile) {
-            console.log(`${check.friendlyName || check.name}`);
             let args: any[] = [];
 
             if (check.flags?.includes(CheckFlags.ImportCheckResults)) {

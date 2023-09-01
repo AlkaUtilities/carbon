@@ -17,7 +17,7 @@ module.exports = {
         guildDocument: HydratedDocumentFromSchema<typeof schema>,
         args: any[]
     ) {
-        console.log(JSON.stringify(args, null, 2));
+        // console.log(JSON.stringify(args, null, 2));
         if (!guildDocument)
             return {
                 passed: null,
@@ -52,9 +52,12 @@ module.exports = {
                 reason: "Channel is not a text channel.",
             };
 
-        const checks = args[0] as CheckResultNamed[];
+        let checks = args[0] as CheckResultNamed[];
 
-        console.log(checks);
+        // filters disabled checks
+        checks = checks.filter((i) => i.code !== -1);
+
+        // console.log(checks);
 
         const checksEmbed = new EmbedBuilder()
             .setTitle(

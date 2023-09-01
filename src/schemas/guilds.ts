@@ -20,6 +20,10 @@ export const schema = new Schema({
                 CheckResult: {
                     Enabled: { type: Boolean, required: true, default: false },
                     ChannelID: { type: String, required: true, default: "000000000000000000" }
+                },
+                LogUser: {
+                    Enabled: { type: Boolean, required: true, default: false },
+                    ChannelID: { type: String, required: true, default: "000000000000000000" }
                 }
             },
         },
