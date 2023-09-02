@@ -1,7 +1,6 @@
 {
     "scripts": {
-        "js": "powershell -noexit \"&\"\".\\scripts\\build.ps1\\\"\"; cd dist; node --enable-source-maps index.js; cd ..\"",
-        "ts": "cd src\\ && ts-node --files . && cd ..",
+        "dev": "cd src\\ && ts-node --files . && cd ..",
         "build": "bash ./scripts/build.sh",
         "run": "cd dist/ && node --enable-source-maps index.js",
         "test": "cd dist/ && node --enable-source-maps index.js --test",

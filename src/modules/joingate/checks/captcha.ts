@@ -7,7 +7,7 @@ import {
 import { CaptchaGenerator } from "captcha-canvas";
 import { schema } from "../../../schemas/guilds";
 import { HydratedDocumentFromSchema } from "mongoose";
-import { CheckResult } from "../../../typings/checks.d";
+import { CheckResult } from "./checkTypes";
 
 module.exports = {
     name: "captcha",

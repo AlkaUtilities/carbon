@@ -17,6 +17,9 @@
         },
         "moduleResolution": "node"
     },
-    "include": ["src", "src/typings"],
-    "exclude": ["disabled"]
+    "include": ["src", "src/typings/**/*.d.ts"],
+    "exclude": ["disabled"],
+    "ts-node": {
+        "files": true
+    }
 }

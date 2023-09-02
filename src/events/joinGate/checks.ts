@@ -6,7 +6,7 @@ import {
     CheckFile,
     CheckResultNamed,
     CheckFlags,
-} from "../../typings/checks.d";
+} from "../../modules/joingate/checks/checkTypes";
 
 module.exports = {
     name: "guildMemberAdd",

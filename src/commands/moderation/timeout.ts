@@ -40,11 +40,10 @@ module.exports = {
         ),
     global: true,
     execute(interaction: ChatInputCommandInteraction, client: Client) {
-        const { options, member } = interaction;
-        const target = options.getMember("user") as GuildMember;
-        const duration = options.getString("duration", true);
-        const reason = options.getString("reason")
-            ? options.getString("reason", true)
+        const target = interaction.options.getMember("user") as GuildMember;
+        const duration = interaction.options.getString("duration", true);
+        const reason = interaction.options.getString("reason")
+            ? interaction.options.getString("reason", true)
             : "No reason provided.";
 
         if (!target)
@@ -67,8 +66,8 @@ module.exports = {
                     "Unable to take action on this user as this user isn't moderatable.",
             });
         if (
-            (member?.roles as GuildMemberRoleManager).highest.position <
-            target.roles.highest.position
+            (interaction.member?.roles as GuildMemberRoleManager).highest
+                .position < target.roles.highest.position
         )
             return interaction.reply({
                 content:

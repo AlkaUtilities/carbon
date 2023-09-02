@@ -74,6 +74,9 @@ interface ColorsInterface {
 
     /** Color to represent that something failed */
     failed: ColorResolvable;
+
+    /** Colors to represent that something bad happened (not failed) */
+    bad: ColorResolvable;
 }
 
 interface ConfigInterface {

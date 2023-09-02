@@ -1,7 +1,7 @@
 import { GuildMember, EmbedBuilder, Client } from "discord.js";
 import { schema } from "../../../schemas/guilds";
 import { HydratedDocumentFromSchema } from "mongoose";
-import { CheckResultNamed, CheckFlags } from "../../../typings/checks.d";
+import { CheckResultNamed, CheckFlags } from "./checkTypes";
 
 module.exports = {
     name: "checkResult",

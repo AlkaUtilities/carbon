@@ -17,7 +17,7 @@ module.exports = {
             "Check if a member is bannable, kickable, moderatable, and managable"
         )
         .setDMPermission(false)
-        .setDefaultMemberPermissions(PermissionFlagsBits.ModerateMembers)
+        .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
         .addUserOption((option) =>
             option
                 .setName("member")

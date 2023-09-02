@@ -76,6 +76,9 @@ colors:
     # Color to represent that something failed
     failed: "#d95f5f"
 
+    # Colors to represent that something bad happened (not failed)
+    bad: "#d95f5f"
+
 # OAuth2 settings
 oauth2:
     # Client ID

@@ -7,11 +7,20 @@ module.exports = {
     once: false,
     friendlyName: "NewMemberDatabaseEntry",
     async execute(member: GuildMember, client: Client) {
-        const memberDocument = await MemberSchema.create({
+        let memberDocument = await MemberSchema.findOne({
             UserID: member.user.id,
             GuildID: member.guild.id,
         });
 
+        if (memberDocument) return;
+
+        memberDocument = await MemberSchema.create({
+            Records: {
+                Warnings: [],
+                Kicks: [],
+                Bans: [],
+            },
+        });
         await memberDocument.save();
     },
 };

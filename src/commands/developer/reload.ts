@@ -31,7 +31,7 @@ module.exports = {
             case "commands":
                 {
                     const global =
-                        interaction.options.getBoolean("global") || false;
+                        interaction.options.getBoolean("global") || true;
                     await load_commands(client, global).then(async () => {
                         await interaction.followUp(
                             "Reloaded commands and subcommands."

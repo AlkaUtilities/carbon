@@ -1,5 +1,4 @@
 import { GuildMember, Client } from "discord.js";
-import { load_files } from "../../../functions/file_loader";
 import GuildSchema, { schema } from "../../../schemas/guilds";
 import { HydratedDocumentFromSchema } from "mongoose";
 
@@ -32,7 +31,7 @@ interface CheckFile {
      *
      * For example: 'NoReturn' will indicate that the check will not return anything
      */
-    flags?: Flags[] | undefined;
+    flags?: CheckFlags[] | undefined;
     execute: CheckFunction;
 }
 
@@ -40,7 +39,8 @@ interface CheckFunction {
     (
         member: GuildMember,
         client: Client,
-        guildDocument: HydratedDocumentFromSchema<typeof schema>,
+        // guildDocument: HydratedDocumentFromSchema<typeof schema>,
+        guildDocument: any,
         args?: any[]
     ): CheckResult;
 }

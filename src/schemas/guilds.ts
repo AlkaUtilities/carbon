@@ -11,29 +11,22 @@ export const schema = new Schema({
                 Captcha: {
                     Enabled: { type: Boolean, required: true, default: false },
                     MaxAttempts: { type: Number, required: true, default: 3 },
-                    required: true
                 },
                 AccountAge: {
                     Enabled: { type: Boolean, required: true, default: false },
                     MinimumAccountAge: { type: Number, required: true, default: 7 }, // in days
                     Action: { type: String, required: true, default: "nothing" },
-                    required: true
                 },
                 CheckResult: {
                     Enabled: { type: Boolean, required: true, default: false },
-                    ChannelID: { type: String, required: true, default: "000000000000000000" },
-                    required: true
+                    ChannelID: { type: String, required: true, default: "000000000000000000" }
                 },
                 LogUser: {
                     Enabled: { type: Boolean, required: true, default: false },
-                    ChannelID: { type: String, required: true, default: "000000000000000000" },
-                    required: true
-                },
-                required: true,
+                    ChannelID: { type: String, required: true, default: "000000000000000000" }
+                }
             },
-            required: true,
         },
-        required: true,
     },
 })
 
