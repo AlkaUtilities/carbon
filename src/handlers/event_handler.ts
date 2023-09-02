@@ -11,8 +11,8 @@ import chalk from "chalk";
  */
 async function load_events(client: Client) {
     const table = new Table({
-        head: ["#", "Event Name", "Status"],
-        colWidths: [4, 36, 11],
+        head: ["#", "Event Name", "Event", "Type", "Status"],
+        colWidths: [4, 36, 20, 6, 11],
         chars: {
             mid: "",
             "left-mid": "",
@@ -61,6 +61,8 @@ async function load_events(client: Client) {
                     : event.name
                     ? event.name
                     : file.split("/").pop(),
+                event.name,
+                event.once ? chalk.yellow("ONCE") : "ON",
                 client.config.cli.status_bad,
             ]);
             invalidEvents++;
@@ -88,6 +90,8 @@ async function load_events(client: Client) {
                 : event.name
                 ? event.name
                 : file.split("/").pop(),
+            event.name,
+            event.once ? chalk.yellow("ONCE") : "ON",
             client.config.cli.status_ok,
         ]);
     }
