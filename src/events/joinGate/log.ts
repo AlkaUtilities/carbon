@@ -6,12 +6,12 @@ import {
     ButtonBuilder,
     ButtonStyle,
 } from "discord.js";
-import GuildSchema from "../../../../schemas/guilds";
+import GuildSchema from "../../schemas/guilds";
 
 module.exports = {
     name: "guildMemberAdd",
     once: false,
-    friendlyName: "JoinGateLog",
+    friendlyName: "JoinGate.Log",
     async execute(member: GuildMember, client: Client) {
         const guild = await GuildSchema.findOne({ GuildID: member.guild.id });
 
