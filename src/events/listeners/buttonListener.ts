@@ -1,7 +1,7 @@
-import { ButtonInteraction, Client } from "discord.js";
+import { ButtonInteraction, Client, Events } from "discord.js";
 
 module.exports = {
-    name: "interactionCreate",
+    name: Events.InteractionCreate,
     friendlyName: "ButtonListener",
     async execute(interaction: ButtonInteraction, client: Client) {
         if (!interaction.isButton()) return;

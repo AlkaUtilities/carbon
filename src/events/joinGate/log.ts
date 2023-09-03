@@ -5,11 +5,12 @@ import {
     ActionRowBuilder,
     ButtonBuilder,
     ButtonStyle,
+    Events,
 } from "discord.js";
 import GuildSchema from "../../schemas/guilds";
 
 module.exports = {
-    name: "guildMemberAdd",
+    name: Events.GuildMemberAdd,
     once: false,
     friendlyName: "JoinGate.Log",
     async execute(member: GuildMember, client: Client) {

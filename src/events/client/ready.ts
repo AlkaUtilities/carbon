@@ -1,9 +1,9 @@
 import chalk from "chalk";
-import { Client } from "discord.js";
+import { Client, Events } from "discord.js";
 import { load_commands } from "../../handlers/command_handler";
 
 module.exports = {
-    name: "ready",
+    name: Events.ClientReady,
     once: true,
     execute(client: Client) {
         console.log(

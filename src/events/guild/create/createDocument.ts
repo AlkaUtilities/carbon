@@ -1,9 +1,9 @@
-import { Guild, Client } from "discord.js";
+import { Guild, Client, Events } from "discord.js";
 import GuildSchema from "../../../schemas/guilds";
 
 /** When the bot is invited to a guild, create a GuildSchema for said guild */
 module.exports = {
-    name: "guildCreate",
+    name: Events.GuildCreate,
     once: false,
     friendlyName: "NewGuildDatabaseEntry",
     async execute(guild: Guild, client: Client) {

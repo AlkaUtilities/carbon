@@ -1,4 +1,4 @@
-import { GuildMember, Client } from "discord.js";
+import { GuildMember, Client, Events } from "discord.js";
 import { load_files } from "../../functions/file_loader";
 import GuildSchema from "../../schemas/guilds";
 
@@ -9,7 +9,7 @@ import {
 } from "../../modules/joingate/checks/checkTypes";
 
 module.exports = {
-    name: "guildMemberAdd",
+    name: Events.GuildMemberAdd,
     once: false,
     friendlyName: "JoinGate.Checks",
     async execute(member: GuildMember, client: Client) {
