@@ -10,7 +10,7 @@ import {
 
 import { Types } from "mongoose";
 
-import MemberSchema from "../../../src/schemas/members";
+import MemberSchema from "../../schemas/members";
 
 module.exports = {
     // disabled: true,
