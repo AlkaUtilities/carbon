@@ -2,7 +2,11 @@
 
 ## User Management
 
--   [x] User Bans, Unbans, Kicks, and Timeouts
+-   [ ] User Bans, Unbans, Kicks, and Timeouts
+    -   [x] Records kicks
+    -   [x] Record bans
+    -   [ ] Record unbans
+    -   [ ] Record timeouts
 -   [ ] Warn and Auto Mod (based on warns)
 -   [x] Message Purge
 -   [x] Channel Slowmode
@@ -23,7 +27,7 @@
 
 -   [x] Verification System (CAPTCHA)
 -   [x] Join Logging
--   [ ] Rate Limiting (mass join, mass channel delete, mass role delete, etc.)
+-   [ ] [Rate Limiting](Rate%20Limits.md) (mass join, mass channel delete, mass role delete, etc.)
 
 ## User Statistics
 
