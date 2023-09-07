@@ -123,7 +123,7 @@ module.exports = {
             Time: time,
         };
 
-        targetDocument.Records?.Kicks.push(record);
+        targetDocument.Records.Kicks.push(record);
 
         await targetDocument.save();
 

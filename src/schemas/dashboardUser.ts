@@ -5,8 +5,11 @@ export default model(
     new Schema({
         UserID: { type: String, required: true },
         Preferences: {
-            Timezone: { type: String, required: true },
-            ShowDebugInfo: { type: Boolean, required: true },
+            required: true,
+            type: {
+                Timezone: { type: String, required: true },
+                ShowDebugInfo: { type: Boolean, required: true },
+            },
         },
         Role: { type: String, required: true },
     })

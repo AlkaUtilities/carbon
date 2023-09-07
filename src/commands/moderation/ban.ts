@@ -122,7 +122,7 @@ module.exports = {
             Time: time,
         };
 
-        targetDocument.Records?.Bans.push(record);
+        targetDocument.Records.Bans.push(record);
 
         await targetDocument.save();
 
