@@ -2,7 +2,10 @@ import {
     SlashCommandBuilder,
     ChatInputCommandInteraction,
     Client,
+    AttachmentBuilder,
 } from "discord.js";
+import { inspect } from "node:util";
+
 import GuildSchema from "../../schemas/guilds";
 
 module.exports = {
@@ -27,6 +30,13 @@ module.exports = {
                 .setName("delete")
                 .setDescription(
                     "Force delete guild document for current guild (if exist)"
+                )
+        )
+        .addSubcommand((sub) =>
+            sub
+                .setName("check")
+                .setDescription(
+                    "Shows the guild document content for current guild (if exist)"
                 )
         ),
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
@@ -54,22 +64,50 @@ module.exports = {
                 }
                 break;
 
-            case "delete": {
-                let guildDocument = await GuildSchema.findOne({
-                    GuildID: interaction.guildId,
-                });
-
-                if (!guildDocument)
-                    return interaction.reply({
-                        content: `Guild object does not already exists!`,
+            case "delete":
+                {
+                    let guildDocument = await GuildSchema.findOne({
+                        GuildID: interaction.guildId,
                     });
 
-                guildDocument.deleteOne();
+                    if (!guildDocument)
+                        return interaction.reply({
+                            content: `Guild object does not already exists!`,
+                        });
 
-                return interaction.reply({
-                    content: `Successfully deleted document!`,
-                });
-            }
+                    guildDocument.deleteOne();
+
+                    return interaction.reply({
+                        content: `Successfully deleted document!`,
+                    });
+                }
+                break;
+
+            case "check":
+                {
+                    let guildDocument = await GuildSchema.findOne({
+                        GuildID: interaction.guildId,
+                    });
+
+                    if (!guildDocument)
+                        return interaction.reply({
+                            content: `Guild object does not already exists!`,
+                        });
+
+                    const result = inspect(guildDocument, {
+                        depth: Infinity,
+                        colors: true,
+                    });
+
+                    return interaction.reply({
+                        files: [
+                            new AttachmentBuilder(Buffer.from(result), {
+                                name: "inspect.ansi",
+                            }),
+                        ],
+                    });
+                }
+                break;
         }
     },
 };
