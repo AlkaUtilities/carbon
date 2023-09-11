@@ -4,15 +4,21 @@ Event files in this project can be found in the [src/events/](../src/events/) di
 
 ## File Structure
 
-An event file follows this structure:
+In the event files, you can use the following properties to configure the behavior and attributes of each event:
+
+- **`name` (string):** The name of the event.
+- **`once` (boolean):** Indicates whether the event triggers only once.
+- **`friendlyName` (string, optional):** A user-friendly name for the event. If defined, it will be used as the event name in the result table with a blue foreground color.
+
+Here's an example of an event file:
 
 ```typescript
 import { Client, Events } from "discord.js";
 
 module.exports = {
-    name: Events.ClientReady, // Event name
-    once: true, // Is this event triggered only once?
-    friendlyName: "LogOnReady", // (optional) A more user-friendly name. If this variable is defined, it will be used to display the event name in a user-friendly way in the result table with a blue color
+    name: Events.ClientReady,
+    once: true,
+    friendlyName: "LogOnReady",
     execute(client: Client) {
         console.log("Client is ready");
     },
@@ -30,6 +36,7 @@ The line `[FILE LOADER] Loading E:/VSCode/carbon/src/events/**/*.+(ts|js)` indic
 The lines `[HANDLER] Loading event files: a/b (events/path/to/file.ts)` indicates that the event handler is currently loading the specified event file.
 
 Below the loading log, there is a table displaying information about the loaded events. The table includes the following columns:
+
 - **# (Number):** An index or number assigned to each loaded event.
 - **Event Name:** The name of the event, which can be either a user-defined "friendlyName" or the original event name.
 - **Event:** The actual event name that the Discord.js library recognizes.
