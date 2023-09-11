@@ -1,7 +1,7 @@
 import { ButtonInteraction, Client, EmbedBuilder } from "discord.js";
 
 module.exports = {
-    id: "joinGateLogBan",
+    id: "userBan",
     async execute(interaction: ButtonInteraction, client: Client, args: any[]) {
         const memberId = args[0];
 
@@ -47,7 +47,7 @@ module.exports = {
                     (interaction.user.discriminator !== "0"
                         ? ` #${interaction.user.discriminator}`
                         : "")
-                } (${interaction.user.id}) from the user join log.`,
+                } (${interaction.user.id})`,
             })
             .then((m) => {
                 const embed = new EmbedBuilder()
