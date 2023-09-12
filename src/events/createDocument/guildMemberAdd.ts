@@ -15,11 +15,8 @@ module.exports = {
         if (memberDocument) return;
 
         memberDocument = await MemberSchema.create({
-            Records: {
-                Warnings: [],
-                Kicks: [],
-                Bans: [],
-            },
+            UserID: member.user.id,
+            GuildID: member.guild.id,
         });
         await memberDocument.save();
     },
