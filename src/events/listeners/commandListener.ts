@@ -30,7 +30,7 @@ module.exports = {
 
         const subCommand = interaction.options.getSubcommand(false);
 
-        if (subCommand && command.hasESub) {
+        if (subCommand && command.hasExternalSubcommand) {
             const subCommandFile = client.subCommands.get(
                 `${interaction.command?.name}.${subCommand}`
             );
