@@ -54,6 +54,12 @@ export default model(
                     ],
                 }
             },
+            default: {
+                Warnings: [],
+                Kicks: [],
+                Bans: [],
+                Timeouts: [],
+            }
         },
     })
     .index({ GuildID: 1, UserID: 1 }, { unique: true })

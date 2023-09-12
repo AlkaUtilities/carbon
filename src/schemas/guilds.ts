@@ -6,14 +6,20 @@ export const schema = new Schema({
     Settings: {
         required: true,
         type: {
+            _id: false,
+
             // Role given to user when user passed verification, etc.
             MainRoleID: { type: String, required: true },
             Modules: {
                 required: true,
                 type: {
+                    _id: false,
+                    
                     JoinGate: {
                         required: true,
                         type: {
+                            _id: false,
+
                             Captcha: {
                                 Enabled: { type: Boolean, required: true },
                                 MaxAttempts: { type: Number, required: true, default: 3 },
@@ -38,9 +44,15 @@ export const schema = new Schema({
             RateLimits: {
                 required: true,
                 type: {
+                    _id: false,
+                    
+                    WarningChannelId: { type: String, required: true },
+
                     Global: {
                         required: true,
                         type: {
+                            _id: false,
+
                             Limit: { type: Number, required: true },
                             Window: { type: Number, required: true },
                         }
@@ -49,9 +61,13 @@ export const schema = new Schema({
                     Channel: {
                         required: true,
                         type: {
+                            _id: false,
+                            
                             Create: {
                                 required: true,
                                 type: {
+                                    _id: false,
+
                                     Limit: { type: Number, required: true },
                                     Window: { type: Number, required: true }
                                 }
@@ -88,6 +104,8 @@ export const schema = new Schema({
                 },
             },
             RateLimits: {
+                WarningChannelId: "000000000000000000",
+
                 Global: {
                     Limit: 5,
                     Window: 60
