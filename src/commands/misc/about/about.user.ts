@@ -117,27 +117,29 @@ module.exports = {
         //     userf.namePrefix = userf.namePrefix + ' ' + userData.namePrefix;
         // };
 
-        if (
-            client.config.developersId.includes(user.id) &&
-            !userf.namePrefix.includes(client.icon.bot.developer)
-        ) {
-            // check if developersId includes user.id, if true check if it doesnt have the badge on the prefix already, if not add one.
-            userf.namePrefix =
-                userf.namePrefix + " " + client.icon.bot.developer;
-        }
-        if (
-            user.bot &&
-            client.config.alka.bots.includes(user.id) &&
-            !userf.namePrefix.includes(client.icon.alka.bot)
-        ) {
-            // check if user is bot, if yes check if user.id is included in config.alka.bot, if true check if it doesnt have the badge on the prefix already, if not add one.
-            userf.namePrefix = userf.namePrefix + " " + client.icon.alka.bot;
-        }
-        if (user.id === interaction.guild?.ownerId) {
-            // check if user is server owner, if yes add server owner badge
-            userf.namePrefix =
-                userf.namePrefix + " " + client.icon.server.owner;
-        }
+        // if (
+        //     client.config.developersId.includes(user.id) &&
+        //     !userf.namePrefix.includes(client.icon.bot.developer)
+        // ) {
+        //     // check if developersId includes user.id, if true check if it doesnt have the badge on the prefix already, if not add one.
+        //     userf.namePrefix =
+        //         userf.namePrefix + " " + client.icon.bot.developer;
+        // }
+
+        // if (
+        //     user.bot &&
+        //     client.config.alka.bots.includes(user.id) &&
+        //     !userf.namePrefix.includes(client.icon.alka.bot)
+        // ) {
+        //     // check if user is bot, if yes check if user.id is included in config.alka.bot, if true check if it doesnt have the badge on the prefix already, if not add one.
+        //     userf.namePrefix = userf.namePrefix + " " + client.icon.alka.bot;
+        // }
+
+        // if (user.id === interaction.guild?.ownerId) {
+        //     // check if user is server owner, if yes add server owner badge
+        //     userf.namePrefix =
+        //         userf.namePrefix + " " + client.icon.server.owner;
+        // }
 
         /* Constructs the name suffix */
         // if (userData?.nameSuffix) {

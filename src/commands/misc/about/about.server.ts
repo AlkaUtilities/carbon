@@ -267,17 +267,7 @@ module.exports = {
         //     );
 
         const embed = new EmbedBuilder()
-            .setTitle(
-                `${
-                    interaction.guild.verified
-                        ? client.icon.server.verified + " "
-                        : ""
-                }${
-                    interaction.guild.partnered
-                        ? client.icon.server.partnered + " "
-                        : ""
-                } ${guild.name}`
-            )
+            .setTitle(`${guild.name}`)
             .setThumbnail(guild.iconURL({ size: 1024 }))
             .setImage(guild.bannerURL({ size: 1024 }))
             .setColor("#0390fc")
