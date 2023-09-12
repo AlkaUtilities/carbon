@@ -30,29 +30,13 @@ interface IconsInterface {
     /** Used to represent unknown values  */
     unknown: string;
 
-    bot: {
-        /** Used as prefix for the username in [`/about user`](src/commands/misc/about/about.user.ts) if the user's id is included in `developersId` */
-        developer: string;
+    /** Shield icons */
+    shield: {
+        checkmark: string;
+        cancel: string;
+        exclamation_yellow: string;
+        exclamation_red: string;
     };
-
-    server: {
-        /** Used as prefix for the username in [`/about user`](src/commands/misc/about/about.user.ts) if the user is the owner of the guild */
-        owner: string;
-        /** Used as prefix for the server name in [`/about server`](src/commands/misc/about/about.server.ts) if the server is verified */
-        verified: string;
-        /** Used as prefix for the server name in [`/about server`](src/commands/misc/about/about.server.ts) if the server is partnered */
-        partnered: string;
-    };
-
-    alka: {
-        /** Used as prefix for the username in in [`/about user`](src/commands/misc/about/about.user.ts) if the user is a custom bot made for Alka Hangout */
-        bot: string;
-    };
-}
-
-interface AlkaInterface {
-    /** The user ids of bots custom made for Alka Hangout (icons -> alka -> bot will be displayed as a prefix) */
-    bots: string[];
 }
 
 /** OAuth2 settings */
@@ -77,6 +61,9 @@ interface ColorsInterface {
 
     /** Colors to represent that something bad happened (not failed) */
     bad: ColorResolvable;
+
+    /** Colors to represent warnings */
+    warning: ColorResolvable;
 }
 
 interface ConfigInterface {
@@ -106,7 +93,6 @@ export {
     CLIInterface,
     LogInterface,
     IconsInterface,
-    AlkaInterface,
     OAuth2Interface,
     ConfigInterface,
 };

@@ -32,38 +32,19 @@ icons:
     sync: "<:sync:1042093144369537074>"
 
     # Used to represent true
-    true: "<:true:1010479956909891614>"
+    true: "<:indicator_true:1150381765828026428>"
 
     # Used to represent false
-    false: "<:false:1010479954372349993>"
+    false: "<:indicator_false:1150381760341880873>"
 
     # Used to represent unknown values
-    unknown: "<:unknown:1143153276934684712>"
+    unknown: "<:indicator_undefined:1150381784215863377>"
 
-    bot:
-        #  Used as prefix for the username in /about user (src/commands/misc/about/about.user.ts) if the user's id is included in `developersId`
-        developer: "<a:developer:1010538744803233822>"
-
-    server:
-        # Used as prefix for the username in /about user (src/commands/misc/about/about.user.ts) if the user is the owner of the guild
-        owner: "<:server_owner:1010487201810874470>"
-
-        # Used as prefix for the server name in /about server (src/commands/misc/about/about.server.ts) if the server is verified
-        verified: "<:server_verified:1010152556405739611>"
-
-        # Used as prefix for the server name in /about server (src/commands/misc/about/about.server.ts) if the server is partnered
-        partnered: "<:server_partnered:1010152578010579006>"
-
-    alka:
-        # Used as prefix for the username in in /about user (src/commands/misc/about/about.user.ts) if the user is a custom bot made for Alka Hangout
-        bot: "<:alka_bot:1010540470109225061>"
-
-alka:
-    # The user ids of bots custom made for Alka Hangout (icons -> alka -> bot will be displayed as a prefix)
-    bots:
-        - "1016267923985281024"
-        - "798420219005239326"
-        - "888023934207934505"
+    shield:
+        checkmark: "<:shield_good:1149673417839214662>"
+        cancel: "<:shield_bad:1149673413946908682>"
+        exclamation_yellow: "<:shield_exclamation_yellow:1150042656706146375>"
+        exclamation_red: "<:shield_exclamation_red:1150041407994740837>"
 
 # Colors used in embeds
 colors:
@@ -78,6 +59,9 @@ colors:
 
     # Colors to represent that something bad happened (not failed)
     bad: "#d95f5f"
+
+    # Colors to represent warnings
+    warning: "#d9cd5f"
 
 # OAuth2 settings
 oauth2:
