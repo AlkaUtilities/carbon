@@ -1,6 +1,6 @@
 # Events
 
-Event files in this project can be found in the [src/events/](../src/events/) directory. Events are organized into folders, and the folder structure can be as deep as needed. The project uses a glob selector, `events/**/*.+(ts|js)`, in the [file loader](../src/functions/file_loader.ts) module, which is called from the [event handler](../src/handlers/event_handler.ts), to collect all TypeScript and JavaScript files within the events directory.
+Event files in this project can be found in the [src/events/](../src/events/) directory. Events are organized into folders, and the folder structure can be as deep as needed. The project uses a glob selector, `events/**/*.+(ts|js)`, in the [file loader](../src/functions/file_loader.ts) module, which is called from the [event handler](../src/handlers/event_handler.ts), to collect all TypeScript and JavaScript files within the events directory. The event handler used is a modified version of Lyxcode's [event handler](https://www.youtube.com/watch?v=Mug61R0cxRw)
 
 ## File Structure
 
