@@ -10,7 +10,7 @@ import {
 module.exports = {
     name: "pfp",
     disabled: false, // is the command disabled?
-    hasESub: true, // does the command has an external sub command?
+    hasExternalSubcommand: true, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
     developer: false, // is command developer only?
     data: new SlashCommandBuilder()

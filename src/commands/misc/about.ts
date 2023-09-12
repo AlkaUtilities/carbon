@@ -1,7 +1,7 @@
 import { SlashCommandBuilder } from "discord.js";
 
 module.exports = {
-    hasESub: true,
+    hasExternalSubcommand: true,
     data: new SlashCommandBuilder()
         .setName("about")
         .setDescription("Shows information about something.")

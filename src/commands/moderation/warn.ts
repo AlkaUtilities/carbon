@@ -15,7 +15,7 @@ import MemberSchema from "../../schemas/members";
 module.exports = {
     name: "warn",
     disabled: false, // is the command disabled?
-    hasESub: false, // does the command has an external sub command?
+    hasExternalSubcommand: false, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
     developer: false, // is command developer only?
     data: new SlashCommandBuilder()

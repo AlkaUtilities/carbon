@@ -3,7 +3,7 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 
 module.exports = {
-    hasESub: true,
+    hasExternalSubcommand: true,
     global: true,
     data: new SlashCommandBuilder()
         .setName("purge")
