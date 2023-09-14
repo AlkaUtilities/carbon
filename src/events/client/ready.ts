@@ -2,7 +2,7 @@ import chalk from "chalk";
 import { Client, Events } from "discord.js";
 import { load_commands } from "../../handlers/command_handler";
 
-module.exports = {
+export const event = {
     name: Events.ClientReady,
     once: true,
     execute(client: Client) {

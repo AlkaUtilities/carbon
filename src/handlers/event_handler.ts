@@ -3,13 +3,28 @@ import { load_files } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
 
+export type EventExecute = (...args: [...any: any[], client: Client]) => void;
+
+export interface Event {
+    ignore?: boolean;
+    name: string;
+    rest?: boolean;
+    once?: boolean;
+    friendlyName?: string;
+    execute: EventExecute;
+}
+
+export interface EventFile {
+    event: Event;
+}
+
 /**
  * Loads events in directory ".\/events\/\*\*\/*.ts"
  *
  * Must be called **after** defining client.events
  * @param client
  */
-async function load_events(client: Client) {
+export async function load_events(client: Client) {
     const table = new Table({
         head: ["#", "Event Name", "Event", "Type", "Status"],
         colWidths: [4, 36, 20, 6, 11],
@@ -44,11 +59,15 @@ async function load_events(client: Client) {
                 chalk.yellow(`${i.toString()}/${files.length}`) +
                 chalk.green(` (${file.replace(cwd, "")})`)
         );
-        const event = require(file);
+        const eventFile: EventFile = require(file);
 
-        if (event.ignore) {
-            continue;
-        }
+        if (!eventFile.hasOwnProperty("event")) continue;
+
+        const { event } = eventFile;
+
+        // TODO: Check if imported file is commonjs, if not ignore. or just switch to es6 entirely
+
+        if (event.ignore) continue;
 
         if (!event.name) {
             // check if file has property "name"
@@ -60,7 +79,7 @@ async function load_events(client: Client) {
                         : chalk.blue(event.friendlyName)
                     : event.name
                     ? event.name
-                    : file.split("/").pop(),
+                    : file.split("/").pop() || "???",
                 event.name,
                 event.once ? chalk.yellow("ONCE") : "ON",
                 client.config.cli.status_bad,
@@ -89,7 +108,7 @@ async function load_events(client: Client) {
                     : chalk.blue(event.friendlyName)
                 : event.name
                 ? event.name
-                : file.split("/").pop(),
+                : file.split("/").pop() || "???",
             event.name,
             event.once ? chalk.yellow("ONCE") : "ON",
             client.config.cli.status_ok,
@@ -97,5 +116,3 @@ async function load_events(client: Client) {
     }
     console.log(table.toString());
 }
-
-export { load_events };

@@ -1,6 +1,6 @@
 import { ButtonInteraction, Client, Events } from "discord.js";
 
-module.exports = {
+export const event = {
     name: Events.InteractionCreate,
     friendlyName: "ButtonListener",
     async execute(interaction: ButtonInteraction, client: Client) {
