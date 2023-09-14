@@ -89,7 +89,7 @@ const maxDisplayRoles = (roles: Role[], maxFieldLength = 1024) => {
 
     return result.length;
 };
-module.exports = {
+export const command = {
     subCommand: "about.server",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;

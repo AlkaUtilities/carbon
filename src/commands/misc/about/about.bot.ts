@@ -12,7 +12,7 @@ import ms from "ms";
 //     url: string;
 // }
 
-module.exports = {
+export const command = {
     subCommand: "about.bot",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;

@@ -9,12 +9,12 @@ import {
 } from "discord.js";
 import ms from "ms";
 
-module.exports = {
+export const command = {
     name: "timeout",
     disabled: false, // is the command disabled?
     hasExternalSubcommand: false, // does the command has an external sub command?
     // initialReply: true, // does command execute with an initial reply?
-    developer: false, // is command developer only?
+    developerOnly: false, // is command developer only?
     data: new SlashCommandBuilder()
         .setName("timeout")
         .setDescription("Restricts a member's ability to communicate.")

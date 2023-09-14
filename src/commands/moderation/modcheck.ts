@@ -5,12 +5,12 @@ import {
     EmbedBuilder,
     PermissionFlagsBits,
 } from "discord.js";
-module.exports = {
+export const command = {
     name: "modcheck",
     disabled: false, // is the command disabled?
     hasExternalSubcommand: false, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
-    developer: false, // is command developer only?
+    developerOnly: false, // is command developer only?
     data: new SlashCommandBuilder()
         .setName("modcheck")
         .setDescription(

@@ -1,7 +1,7 @@
 import { ChannelType, ChatInputCommandInteraction, Client } from "discord.js";
 import ms from "ms";
 
-module.exports = {
+export const command = {
     subCommand: "slowmode.disable",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const { channel, options } = interaction;

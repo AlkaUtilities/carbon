@@ -61,7 +61,7 @@ const formatting = {
     },
 };
 
-module.exports = {
+export const command = {
     subCommand: "about.user",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const options = interaction.options;

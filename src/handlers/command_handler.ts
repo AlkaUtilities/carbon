@@ -1,7 +1,36 @@
-import { Client } from "discord.js";
+import { Client, SlashCommandSubcommandBuilder } from "discord.js";
 import { load_files } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
+
+export type CommandExecute = (...args: [...any: any[], client: Client]) => void;
+
+export interface Command {
+    ignore: boolean;
+    name: string;
+    subCommand?: string;
+    disabled?: boolean;
+    initialReply?: boolean;
+    hasExternalSubcommand?: boolean;
+    developerOnly?: boolean;
+    global?: boolean;
+    data: SlashCommandSubcommandBuilder;
+    execute: CommandExecute;
+}
+
+export interface SubCommand {
+    ignore: boolean;
+    subCommand: string;
+    disabled?: boolean;
+    initialReply?: boolean;
+    developerOnly?: boolean;
+    execute: CommandExecute;
+}
+
+export interface CommandFile {
+    // command?: Command | SubCommand;
+    command?: Command;
+}
 
 /**
  * Loads commands in directory ".\/events\/\*\*\/\*.ts"
@@ -9,7 +38,7 @@ import chalk from "chalk";
  * Must be called **after** defining client.commands
  * @param client
  */
-async function load_commands(client: Client, global: Boolean = false) {
+export async function load_commands(client: Client, global: Boolean = false) {
     const table = new Table({
         head: ["#", "Command Name", "Type", "Status"],
         colWidths: [4, 26, 8, 8],
@@ -56,11 +85,11 @@ async function load_commands(client: Client, global: Boolean = false) {
                 chalk.yellow(`${i.toString()}/${files.length}`) +
                 chalk.green(` (${file.replace(cwd, "")})`)
         );
-        const command = require(file);
+        const { command }: CommandFile = require(file);
 
-        if (command.ignore) {
-            continue;
-        }
+        if (!command) continue;
+
+        if (command.ignore) continue;
 
         if (!("data" in command) && !("subCommand" in command)) {
             table.push([
@@ -132,5 +161,3 @@ async function load_commands(client: Client, global: Boolean = false) {
         );
     });
 }
-
-export { load_commands };

@@ -12,7 +12,7 @@ import { Types } from "mongoose";
 
 import MemberSchema from "../../schemas/members";
 
-module.exports = {
+export const command = {
     // disabled: true,
     data: new SlashCommandBuilder()
         .setName("kick")

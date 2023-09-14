@@ -8,12 +8,12 @@ import { inspect } from "node:util";
 
 import GuildSchema from "../../schemas/guilds";
 
-module.exports = {
+export const command = {
     name: "db",
     disabled: false, // is the command disabled?
     hasExternalSubcommand: false, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
-    developer: true, // is command developer only?
+    developerOnly: true, // is command developer only?
     data: new SlashCommandBuilder()
         .setName("db")
         .setDescription("Manage guild database")

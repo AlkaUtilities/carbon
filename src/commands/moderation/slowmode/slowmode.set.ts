@@ -6,7 +6,7 @@ import {
 } from "discord.js";
 import ms from "ms";
 
-module.exports = {
+export const command = {
     subCommand: "slowmode.set",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         await interaction.deferReply();

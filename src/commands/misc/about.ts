@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 
-module.exports = {
+export const command = {
     hasExternalSubcommand: true,
     data: new SlashCommandBuilder()
         .setName("about")

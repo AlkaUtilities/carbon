@@ -12,12 +12,12 @@ import { Types } from "mongoose";
 
 import MemberSchema from "../../schemas/members";
 
-module.exports = {
+export const command = {
     name: "warn",
     disabled: false, // is the command disabled?
     hasExternalSubcommand: false, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
-    developer: false, // is command developer only?
+    developerOnly: false, // is command developer only?
     data: new SlashCommandBuilder()
         .setName("warn")
         .setDescription("Warns a user")

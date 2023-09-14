@@ -6,12 +6,12 @@ import {
     ButtonBuilder,
     ButtonStyle,
 } from "discord.js";
-module.exports = {
+export const command = {
     name: "test",
     disabled: false, // is the command disabled?
     hasExternalSubcommand: false, // does the command has an external sub command?
     initialReply: false, // does command execute with an initial reply?
-    developer: true, // is command developer only?
+    developerOnly: true, // is command developer only?
     data: new SlashCommandBuilder()
         .setName("test")
         .setDescription("test")

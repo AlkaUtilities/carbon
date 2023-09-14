@@ -1,7 +1,7 @@
 import { ChannelType, ChatInputCommandInteraction, Client } from "discord.js";
 import { results } from "./functions";
 
-module.exports = {
+export const command = {
     subCommand: "purge.user",
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         const user = interaction.options.getUser("user", true);

@@ -1,4 +1,5 @@
 import { ChatInputCommandInteraction, Client, Events } from "discord.js";
+import { Command, SubCommand } from "../../handlers/command_handler";
 
 export const event = {
     name: Events.InteractionCreate,
@@ -6,10 +7,10 @@ export const event = {
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         if (!interaction.isChatInputCommand()) return;
 
-        const command = client.commands.get(interaction.commandName);
+        const command: Command = client.commands.get(interaction.commandName);
 
         if (
-            command.developer &&
+            command.developerOnly &&
             !client.config.developersId.includes(interaction.user.id)
         )
             return await interaction.reply({
@@ -31,9 +32,10 @@ export const event = {
         const subCommand = interaction.options.getSubcommand(false);
 
         if (subCommand && command.hasExternalSubcommand) {
-            const subCommandFile = client.subCommands.get(
-                `${interaction.command?.name}.${subCommand}`
-            );
+            const subCommandFile: SubCommand | undefined =
+                client.subCommands.get(
+                    `${interaction.command?.name}.${subCommand}`
+                );
             if (!subCommandFile) {
                 return interaction.reply({
                     content: "This sub command is outdated.",

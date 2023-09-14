@@ -1,11 +1,11 @@
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 import ms from "ms";
-module.exports = {
+export const command = {
     name: "slowmode",
     disabled: false, // is the command disabled?
     hasExternalSubcommand: true, // does the command has an external sub command?
     // initialReply: false, // does command execute with an initial reply?
-    developer: false, // is command developer only?
+    developerOnly: false, // is command developer only?
     global: true,
     data: new SlashCommandBuilder()
         .setName("slowmode")

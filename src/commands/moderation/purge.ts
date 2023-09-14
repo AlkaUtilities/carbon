@@ -2,7 +2,7 @@
 
 import { SlashCommandBuilder, PermissionFlagsBits } from "discord.js";
 
-module.exports = {
+export const command = {
     hasExternalSubcommand: true,
     global: true,
     data: new SlashCommandBuilder()

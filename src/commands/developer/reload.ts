@@ -6,7 +6,7 @@ import {
 import { load_commands } from "../../handlers/command_handler";
 import { load_events } from "../../handlers/event_handler";
 
-module.exports = {
+export const command = {
     data: new SlashCommandBuilder()
         .setName("reload")
         .setDescription("Reloads the bot")
@@ -25,7 +25,7 @@ module.exports = {
             o.setName("events").setDescription("Reloads all events")
         ),
     initialReply: true,
-    developer: true,
+    developerOnly: true,
     async execute(interaction: ChatInputCommandInteraction, client: Client) {
         switch (interaction.options.getSubcommand()) {
             case "commands":

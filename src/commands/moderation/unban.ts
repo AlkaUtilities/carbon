@@ -7,7 +7,7 @@ import {
     EmbedBuilder,
 } from "discord.js";
 
-module.exports = {
+export const command = {
     // disabled: true,
     data: new SlashCommandBuilder()
         .setName("unban")
