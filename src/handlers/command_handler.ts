@@ -1,12 +1,14 @@
-import { Client, SlashCommandBuilder } from "discord.js";
+import {
+    Client,
+    SlashCommandBuilder,
+    SlashCommandSubcommandsOnlyBuilder,
+} from "discord.js";
 import { load_files } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
 
-export type CommandExecute = (...args: [...any: any[], client: Client]) => void;
-
 export interface Command {
-    ignore: boolean;
+    ignore?: boolean;
     name: string;
     subCommand?: string;
     disabled?: boolean;
@@ -14,17 +16,17 @@ export interface Command {
     hasExternalSubcommand?: boolean;
     developerOnly?: boolean;
     global?: boolean;
-    data: SlashCommandBuilder;
-    execute: CommandExecute;
+    data: SlashCommandBuilder | SlashCommandSubcommandsOnlyBuilder;
+    execute: CallableFunction;
 }
 
 export interface SubCommand {
-    ignore: boolean;
+    ignore?: boolean;
     subCommand: string;
     disabled?: boolean;
     initialReply?: boolean;
     developerOnly?: boolean;
-    execute: CommandExecute;
+    execute: CallableFunction;
 }
 
 export interface CommandFile {
