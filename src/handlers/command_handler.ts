@@ -1,4 +1,4 @@
-import { Client, SlashCommandSubcommandBuilder } from "discord.js";
+import { Client, SlashCommandBuilder } from "discord.js";
 import { load_files } from "../functions/file_loader";
 import Table from "cli-table";
 import chalk from "chalk";
@@ -14,7 +14,7 @@ export interface Command {
     hasExternalSubcommand?: boolean;
     developerOnly?: boolean;
     global?: boolean;
-    data: SlashCommandSubcommandBuilder;
+    data: SlashCommandBuilder;
     execute: CommandExecute;
 }
 
